@@ -1,0 +1,9 @@
+.footer {
+  background-color: #220000;
+  height: 50px;
+  color:#fff;
+  text-align: center;
+  width: 100%;
+  position: absolute;/*←絶対位置*/
+  bottom: 0; /*下に固定*/
+}
