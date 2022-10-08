@@ -1,15 +1,13 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import {Top, News} from "@/components/pages"
-
-
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Top, News } from '@/components/pages'
 
 export const Router = () => {
-  return(
+  return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Top/>}/>
-        <Route path="/news" element={<News/>}/>
+        <Route path="/" element={<Top />} />
+        <Route path="/news" element={<News />} />
       </Routes>
     </BrowserRouter>
-    )
+  )
 }

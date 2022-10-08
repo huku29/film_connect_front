@@ -1,8 +1,12 @@
-
 .header {
   background-color: #220000;
   height: 50px;
-  color:#fff;
+  color: #fff;
   text-align: center;
-  width:100%
+  width: 100%;
+}
+
+.login {
+  text-align: right;
+  padding-right:10px; 
 }
