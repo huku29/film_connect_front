@@ -1,12 +1,9 @@
-import "./Footer.css"
+import './Footer.css'
 
-export const  Footer = () => {
-  return(
+export const Footer = () => {
+  return (
     <>
-    <footer className = "footer" >
-      
-    </footer>
+      <footer className="footer"></footer>
     </>
   )
-
 }

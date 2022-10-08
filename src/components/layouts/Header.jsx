@@ -1,13 +1,10 @@
-import "./Header.css"
+import './Header.css'
 
-
-export const  Header = () => {
-  return(
+export const Header = () => {
+  return (
     <>
-    <header className = "header" >
-
-    </header>
+      <header className="header"></header>
+      <p className="login">ログイン</p>
     </>
   )
-
 }

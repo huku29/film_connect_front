@@ -1,0 +1,27 @@
+.twitterbtn {
+  /* border: solid;
+  border-color: black;
+  border-radius: 5px; */
+  background-color: maroon;
+  color: #ff9800;
+  position: absolute;
+  top: 70%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  padding: 5px;
+  cursor: pointer;
+}
+
+.guestbtn {
+  /* border: solid;
+  border-color: black;
+  border-radius: 5px; */
+  background-color: maroon;
+  color: #ff9800;
+  position: absolute;
+  top: 70%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  padding: 5px;
+  cursor: pointer;
+}

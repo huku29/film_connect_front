@@ -1,5 +1,3 @@
 export const News = () => {
-  return(
-    <p>Newsページ</p>
-  )
-};
+  return <p>Newsページ</p>
+}
