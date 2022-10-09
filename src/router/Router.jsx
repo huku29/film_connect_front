@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Top, News } from '@/components/pages'
+import { Top, Show } from '@/components/pages'
 
 export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Top />} />
-        <Route path="/news" element={<News />} />
+        <Route path="/show" element={<Show />} />
       </Routes>
     </BrowserRouter>
   )

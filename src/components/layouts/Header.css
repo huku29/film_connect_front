@@ -1,5 +1,5 @@
 .header {
-  background-color: #220000;
+  background-color: black;
   height: 50px;
   color: #fff;
   text-align: center;
@@ -8,5 +8,5 @@
 
 .login {
   text-align: right;
-  padding-right:10px; 
+  padding-right: 10px;
 }

@@ -1,2 +1,2 @@
 export { Top } from './Top'
-export { News } from './News'
+export { Show } from './Show'
