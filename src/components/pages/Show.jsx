@@ -1,11 +1,11 @@
-import Footer from '../layouts/Footer'
-import { Header } from '../layouts/Header'
+import { LoggedInLayout } from '@/components/layouts'
 
 export const Show = () => {
   return (
     <>
-      <Header />
-      <Footer />
+      <LoggedInLayout>
+        <p>showコンポーネント</p>
+      </LoggedInLayout>
     </>
   )
 }
