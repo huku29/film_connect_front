@@ -1,15 +1,11 @@
-import * as React from 'react'
-import Box from '@mui/material/Box'
-import BottomNavigation from '@mui/material/BottomNavigation'
-import BottomNavigationAction from '@mui/material/BottomNavigationAction'
-import SendIcon from '@mui/icons-material/Send'
-import EmailIcon from '@mui/icons-material/Email'
-import MovieIcon from '@mui/icons-material/Movie'
-import { Link} from 'react-router-dom';
+import { useState } from 'react'
+import { Box, BottomNavigation, BottomNavigationAction } from '@mui/material'
 
+import { Link } from 'react-router-dom'
 
-export default function Footer() {
-  const [value, setValue] = React.useState(0)
+export const Footer = (props) => {
+  const {menuList} = props
+  const [value, setValue] = useState(0)
 
   return (
     <Box
@@ -39,12 +35,21 @@ export default function Footer() {
           },
         ]}
       >
-        {/* このLinkタグの書き方がどういう意味なのかまだわかっていない */}
-        <BottomNavigationAction label="送る" icon={<SendIcon />}  component={Link}
-        to={"/"} />
-        <BottomNavigationAction label="受け取る" icon={<EmailIcon />} />
-        <BottomNavigationAction label="鑑賞済み" icon={<MovieIcon />} />
+        {
+          // このLinkタグの書き方がどういう意味なのかまだわかっていない
+          menuList.map((menu, index) => (
+            <BottomNavigationAction
+              key={index}
+              label={menu.label}
+              icon={menu.icon}
+              component={Link}
+              to={menu.nextPage}
+            />
+          ))
+        }
       </BottomNavigation>
     </Box>
   )
 }
+
+export default Footer
