@@ -1,4 +1,4 @@
-import { Header } from './Header'
+import Header from './Header';
 import { Footer } from './Footer'
 import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
