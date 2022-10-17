@@ -22,6 +22,7 @@ const FOOTER_MENU_LIST = [
   },
 ]
 
+
 export const BaseLayout = (props) => {
   const { children } = props
 
