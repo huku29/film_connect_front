@@ -13,7 +13,7 @@ const FOOTER_MENU_LIST = [
   {
     label: 'マイページ',
     icon: < RoofingIcon/>,
-    nextPage: '/',
+    nextPage: '/mypage',
     
   },
   {
