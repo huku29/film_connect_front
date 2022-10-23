@@ -86,7 +86,7 @@ export default function Header() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Movie Connect
+            Film Connect
           </Typography>
         </Toolbar>
       </AppBar>

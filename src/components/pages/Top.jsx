@@ -13,7 +13,7 @@ export const Top = () => {
           textAlign: 'center',
         }}
       >
-        <Typography variant="h4">Movie Connect</Typography>
+        <Typography variant="h4">Film Connect</Typography>
         <Typography variant="subtitle1">さあ、映画ライフを楽しもう</Typography>
         <Typography
           variant="subtitle1"
