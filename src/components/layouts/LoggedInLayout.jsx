@@ -8,7 +8,7 @@ const FOOTER_MENU_LIST = [
   {
     label: '送る',
     icon: <SendIcon />,
-    nextPage: '/',
+    nextPage: '/send',
   },
   {
     label: 'マイページ',
