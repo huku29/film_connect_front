@@ -19,7 +19,7 @@ const FOOTER_MENU_LIST = [
   {
     label: '受け取る',
     icon: <EmailIcon />,
-    nextPage: '/',
+    nextPage: '/receive',
   },
 ]
 
