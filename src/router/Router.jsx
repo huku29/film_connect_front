@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Top, Show, Login, MyPage, Send } from '@/components/pages'
+import { Top, Show, Login, MyPage, Send, Receive} from '@/components/pages'
 
 export const Router = () => {
   return (
@@ -10,6 +10,7 @@ export const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/send" element={<Send />} />
+        <Route path="/receive" element={<Receive />} />
       </Routes>
     </BrowserRouter>
   )
