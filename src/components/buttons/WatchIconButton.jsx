@@ -3,21 +3,11 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import Typography from '@mui/material/Typography'
 
-export function WatchIconButton() {
+export const WatchIconButton = () => {
   const [clicked, setClicked] = useState(false)
 
   return (
-    <Typography
-      variant="contained"
-      onClick={() => setClicked(!clicked)}
-      sx={{
-        position: 'absolute',
-        top: '90%',
-        left: '80%',
-        transform: 'translate(-0%, -20%)',
-        textAlign: 'center',
-      }}
-    >
+    <Typography variant="contained" onClick={() => setClicked(!clicked)}>
       {clicked ? (
         <RemoveRedEyeIcon color="black" />
       ) : (
@@ -26,5 +16,3 @@ export function WatchIconButton() {
     </Typography>
   )
 }
-
-export default WatchIconButton
