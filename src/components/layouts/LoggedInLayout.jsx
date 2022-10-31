@@ -2,7 +2,7 @@ import { LoggedInHeader } from './LoggedInHeader'
 import { Footer } from './Footer'
 import SendIcon from '@mui/icons-material/Send'
 import EmailIcon from '@mui/icons-material/Email'
-import RoofingIcon from '@mui/icons-material/Roofing';
+import RoofingIcon from '@mui/icons-material/Roofing'
 
 const FOOTER_MENU_LIST = [
   {
@@ -12,9 +12,8 @@ const FOOTER_MENU_LIST = [
   },
   {
     label: 'マイページ',
-    icon: < RoofingIcon/>,
+    icon: <RoofingIcon />,
     nextPage: '/mypage',
-    
   },
   {
     label: '受け取る',
@@ -30,7 +29,7 @@ export const LoggedInLayout = (props) => {
     <>
       <LoggedInHeader />
       {children}
-      <Footer menuList={FOOTER_MENU_LIST}/>
+      <Footer menuList={FOOTER_MENU_LIST} />
     </>
   )
 }

@@ -20,8 +20,6 @@ import { Link } from 'react-router-dom'
 
 const drawerWidth = 240
 
-
-
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
@@ -50,19 +48,16 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }))
 
-
-
-
 //exportしているコンポーネント
 export default function Header() {
   const theme = useTheme()
   const [open, setOpen] = useState(false)
 
-    /*ドロワーを開けるアニメーション*/
+  /*ドロワーを開けるアニメーション*/
   const handleDrawerOpen = () => {
     setOpen(true)
   }
-    /*ドロワーを閉めるアニメーション*/
+  /*ドロワーを閉めるアニメーション*/
   const handleDrawerClose = () => {
     setOpen(false)
   }
@@ -106,9 +101,9 @@ export default function Header() {
       >
         {/*横のスライドの矢印マーク*/}
         <DrawerHeader>
-          {/* /*矢印を押したら閉まる*/ }
+          {/* /*矢印を押したら閉まる*/}
           <IconButton onClick={handleDrawerClose}>
-          {/* themeのdirectionがltrの場合、左書きのげんとといういみ */}
+            {/* themeのdirectionがltrの場合、左書きのげんとといういみ */}
             {theme.direction === 'ltr' ? (
               <ChevronLeftIcon />
             ) : (
@@ -138,7 +133,7 @@ export default function Header() {
                 <ListItemIcon>
                   <LoginIcon />
                 </ListItemIcon>
-                <ListItemText primary="Login" sx={{color:'black'}}/>
+                <ListItemText primary="Login" sx={{ color: 'black' }} />
               </ListItemButton>
             </ListItem>
           </Link>

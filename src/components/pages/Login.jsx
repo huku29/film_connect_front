@@ -1,11 +1,10 @@
 import { BaseLayout } from '@/components/layouts'
 import { Stack, Typography, Button, Box } from '@mui/material'
-import TwitterIcon from '@mui/icons-material/Twitter';
+import TwitterIcon from '@mui/icons-material/Twitter'
 
 export const Login = () => {
   return (
-    <>
-      <BaseLayout>
+    <BaseLayout>
       <Box border={1} borderColor="primary.main">
         <Stack
           spacing={2}
@@ -20,7 +19,7 @@ export const Login = () => {
         >
           <Typography variant="h4">ログイン</Typography>
         </Stack>
-        
+
         <Stack
           sx={{
             position: 'absolute',
@@ -31,8 +30,17 @@ export const Login = () => {
             border: 'balck',
           }}
         >
-          <Button variant="contained" sx={{ backgroundColor: 'black ' ,color:'#ff9800', borderRadius:'5%',width: '300px',padding: '10px'}}>
-          <TwitterIcon/>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: 'black ',
+              color: '#ff9800',
+              borderRadius: '5%',
+              width: '300px',
+              padding: '10px',
+            }}
+          >
+            <TwitterIcon />
             Twitterログイン
           </Button>
         </Stack>
@@ -47,12 +55,20 @@ export const Login = () => {
             border: 'balck',
           }}
         >
-          <Button variant="contained" sx={{ backgroundColor: 'black ' ,color:'#ff9800', borderRadius:'5%', width: '300px',padding: '10px'}}>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: 'black ',
+              color: '#ff9800',
+              borderRadius: '5%',
+              width: '300px',
+              padding: '10px',
+            }}
+          >
             ゲストログイン
           </Button>
         </Stack>
       </Box>
-      </BaseLayout>
-    </>
+    </BaseLayout>
   )
 }

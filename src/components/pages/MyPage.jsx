@@ -10,27 +10,25 @@ export const MyPage = () => {
     setValue(newValue)
   }
   return (
-    <>
-      <LoggedInLayout>
-        <Box
-          sx={{
-            width: '100%',
-            bgcolor: 'background.default',
-            position: 'absolute',
-            top: '30%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            textAlign: 'center',
-            border: 'balck',
-          }}
-        >
-          <Tabs value={value} onChange={handleChange} centered>
-            <Tab label="送信済みレター" />
-            <Tab label="鑑賞済み映画" />
-            <Tab label="受け取ったレター" />
-          </Tabs>
-        </Box>
-      </LoggedInLayout>
-    </>
+    <LoggedInLayout>
+      <Box
+        sx={{
+          width: '100%',
+          bgcolor: 'background.default',
+          position: 'absolute',
+          top: '30%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          textAlign: 'center',
+          border: 'balck',
+        }}
+      >
+        <Tabs value={value} onChange={handleChange} centered>
+          <Tab label="送信済みレター" />
+          <Tab label="鑑賞済み映画" />
+          <Tab label="受け取ったレター" />
+        </Tabs>
+      </Box>
+    </LoggedInLayout>
   )
 }

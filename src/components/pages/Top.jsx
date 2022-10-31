@@ -1,7 +1,7 @@
 import { BaseLayout } from '@/components/layouts'
 import { Stack, Typography } from '@mui/material'
 
-export const Top = () => { 
+export const Top = () => {
   return (
     <BaseLayout>
       <Stack
