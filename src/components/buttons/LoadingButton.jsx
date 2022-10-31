@@ -1,19 +1,18 @@
-import { useState, useRef, useEffect } from 'react'
+import {  useRef, useEffect } from 'react'
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
 import { green } from '@mui/material/colors'
 import Button from '@mui/material/Button'
 
-export default function LoadingButton() {
+export const LoadingButton = (props) => {
   //useStateについて
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
+  // const [loading, setLoading] = useState(false)
+  // const [success, setSuccess] = useState(false)
   //userRefについて
   const timer = useRef()
-  console.log(timer)
 
   const buttonSx = {
-    ...(success && {
+    ...(props.success && {
       bgcolor: green[500],
       '&:hover': {
         bgcolor: green[300],
@@ -27,14 +26,14 @@ export default function LoadingButton() {
     }
   }, [])
 
-  const handleButtonClick = () => {
+  const handleSendButtonClick = () => {
     //びっくりマークがなければローディングしたままの状態になる
-    if (!loading) {
-      setSuccess(false)
-      setLoading(true)
+    if (!props.loading) {
+      props.setSuccess(false)
+      props.setLoading(true)
       timer.current = window.setTimeout(() => {
-        setSuccess(true)
-        setLoading(false)
+        props.setSuccess(true)
+        props.setLoading(false)
       }, 5000)
     }
   }
@@ -48,12 +47,12 @@ export default function LoadingButton() {
           <Button
             variant="contained"
             sx={buttonSx}
-            disabled={loading}
-            onClick={handleButtonClick}
+            disabled={ props.loading}
+            onClick={handleSendButtonClick}
           >
-            {loading ? '送信中' : '送信する'}
+            { props.loading ? '送信中' : '送信する'}
           </Button>
-          {loading && (
+          { props.loading && (
             <CircularProgress
               size={24}
               sx={{
@@ -63,6 +62,7 @@ export default function LoadingButton() {
                 left: '50%',
                 marginTop: '-12px',
                 marginLeft: '-12px',
+                
               }}
             />
           )}
