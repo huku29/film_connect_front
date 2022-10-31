@@ -20,49 +20,49 @@ import { Link } from 'react-router-dom'
 
 const drawerWidth = 240
 
-
-
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
-  transition: theme.transitions.create(['margin', 'width'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    //開いた時にMovieConnectという文字がずれるようにする
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: `${drawerWidth}px`,
+  sx:{
     transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
     }),
-  }),
+    ...(open && {
+      //開いた時にMovieConnectという文字がずれるようにする
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: `${drawerWidth}px`,
+      transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+
+  }
+  )},
 }))
 
 //矢印の位置を調整
 const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
+  sx:{
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+  }
 }))
 
-
-
-
 //exportしているコンポーネント
-export function LoggedInHeader() {
+export const LoggedInHeader = () => {
   const theme = useTheme()
   const [open, setOpen] = useState(false)
 
-    /*ドロワーを開けるアニメーション*/
+  /*ドロワーを開けるアニメーション*/
   const handleDrawerOpen = () => {
     setOpen(true)
   }
-    /*ドロワーを閉めるアニメーション*/
+  /*ドロワーを閉めるアニメーション*/
   const handleDrawerClose = () => {
     setOpen(false)
   }
@@ -106,9 +106,9 @@ export function LoggedInHeader() {
       >
         {/*横のスライドの矢印マーク*/}
         <DrawerHeader>
-          {/* /*矢印を押したら閉まる*/ }
+          {/* /*矢印を押したら閉まる*/}
           <IconButton onClick={handleDrawerClose}>
-          {/* themeのdirectionがltrの場合、左書きのげんとといういみ */}
+            {/* themeのdirectionがltrの場合、左書きのげんとといういみ */}
             {theme.direction === 'ltr' ? (
               <ChevronLeftIcon />
             ) : (
@@ -138,7 +138,7 @@ export function LoggedInHeader() {
                 <ListItemIcon>
                   <LoginIcon />
                 </ListItemIcon>
-                <ListItemText primary="Logout" sx={{color:'black'}}/>
+                <ListItemText primary="Logout" sx={{ color: 'black' }} />
               </ListItemButton>
             </ListItem>
           </Link>
@@ -148,4 +148,4 @@ export function LoggedInHeader() {
   )
 }
 
-export default LoggedInHeader
+

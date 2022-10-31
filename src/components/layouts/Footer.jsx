@@ -4,7 +4,7 @@ import { Box, BottomNavigation, BottomNavigationAction } from '@mui/material'
 import { Link } from 'react-router-dom'
 
 export const Footer = (props) => {
-  const {menuList} = props
+  const { menuList } = props
   const [value, setValue] = useState(0)
 
   return (

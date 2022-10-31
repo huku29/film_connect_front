@@ -1,8 +1,8 @@
-import Header from './Header';
+import Header from './Header'
 import { Footer } from './Footer'
-import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
-import TextSnippetIcon from '@mui/icons-material/TextSnippet';
-import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption'
+import TextSnippetIcon from '@mui/icons-material/TextSnippet'
+import SupportAgentIcon from '@mui/icons-material/SupportAgent'
 
 const FOOTER_MENU_LIST = [
   {
@@ -22,7 +22,6 @@ const FOOTER_MENU_LIST = [
   },
 ]
 
-
 export const BaseLayout = (props) => {
   const { children } = props
 
@@ -30,7 +29,7 @@ export const BaseLayout = (props) => {
     <>
       <Header />
       {children}
-      <Footer menuList={FOOTER_MENU_LIST}/>
+      <Footer menuList={FOOTER_MENU_LIST} />
     </>
   )
 }
