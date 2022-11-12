@@ -30,8 +30,9 @@ export const Footer = (props) => {
             color: '#fff',
             textAlign: 'center',
             width: 1,
-            position: 'absolute',
             bottom: 0,
+            position: 'fixed',
+            left: 0,
           },
         ]}
       >
