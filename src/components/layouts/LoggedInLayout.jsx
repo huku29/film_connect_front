@@ -1,8 +1,9 @@
 import { LoggedInHeader } from './LoggedInHeader'
-import { Footer } from './Footer'
+import { LoggedInFooter } from './LoggedInFooter'
 import SendIcon from '@mui/icons-material/Send'
 import EmailIcon from '@mui/icons-material/Email'
 import RoofingIcon from '@mui/icons-material/Roofing'
+import { Box } from '@mui/material'
 
 const FOOTER_MENU_LIST = [
   {
@@ -29,7 +30,7 @@ export const LoggedInLayout = (props) => {
     <>
       <LoggedInHeader />
       {children}
-      <Footer menuList={FOOTER_MENU_LIST} />
+      <LoggedInFooter menuList={FOOTER_MENU_LIST} />
     </>
   )
 }
