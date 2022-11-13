@@ -3,7 +3,7 @@ import { Box, BottomNavigation, BottomNavigationAction } from '@mui/material'
 
 import { Link } from 'react-router-dom'
 
-export const Footer = (props) => {
+export const LoggedInFooter = (props) => {
   const { menuList } = props
   const [value, setValue] = useState(0)
 
@@ -36,7 +36,7 @@ export const Footer = (props) => {
           },
         ]}
       >
-        {/* {
+        {
           // このLinkタグの書き方がどういう意味なのかまだわかっていない
           menuList.map((menu, index) => (
             <BottomNavigationAction
@@ -47,10 +47,10 @@ export const Footer = (props) => {
               to={menu.nextPage}
             />
           ))
-        } */}
+        }
       </BottomNavigation>
     </Box>
   )
 }
 
-export default Footer
+export default LoggedInFooter

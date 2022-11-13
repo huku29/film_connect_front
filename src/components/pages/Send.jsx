@@ -82,7 +82,6 @@ export const Send = () => {
           search_word: searchWord,
           //getMovieの関数が発火すれば1ページがはじめに出るようにする
           page: 1,
-          
         },
       })
       .then((res) => {
@@ -164,10 +163,7 @@ export const Send = () => {
                   <Box sx={{}}>{film.title}</Box>
                   <div key={index}>
                     <List>
-                      <img
-                        alt=""
-                        src={`${filmsimg}/${film.poster_path}`}
-                      ></img>
+                      <img alt="" src={`${filmsimg}/${film.poster_path}`}></img>
                     </List>
                   </div>
                 </Grid>

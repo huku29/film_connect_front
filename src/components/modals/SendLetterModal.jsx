@@ -59,7 +59,12 @@ export const SendLetterModal = (props) => {
         {/* <Button onClick={handleClose} sx={{ color: 'black' }}>
             レターを送信する
           </Button> */}
-        <LoadingButton loading={props.loading} setLoading={props.setLoading} success={props.success} setSuccess={props.setSuccess}/>
+        <LoadingButton
+          loading={props.loading}
+          setLoading={props.setLoading}
+          success={props.success}
+          setSuccess={props.setSuccess}
+        />
       </DialogActions>
     </Dialog>
   )

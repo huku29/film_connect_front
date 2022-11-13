@@ -14,12 +14,8 @@ export const Top = () => {
         }}
       >
         <Typography variant="h4">Film Connect</Typography>
-        <Typography variant="subtitle1">さあ、映画ライフを楽しもう</Typography>
-        <Typography
-          variant="subtitle1"
-          sx={{ padding: '5px', cursor: 'pointer' }}
-        >
-          アプリの説明
+        <Typography variant="subtitle1" sx={{ p: 1 }}>
+          映画ライフを楽しもう
         </Typography>
       </Stack>
     </BaseLayout>

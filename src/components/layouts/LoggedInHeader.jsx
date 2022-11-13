@@ -17,40 +17,36 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import LoginIcon from '@mui/icons-material/Login'
 import { Link } from 'react-router-dom'
+import LogoutIcon from '@mui/icons-material/Logout'
 
 const drawerWidth = 240
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
-  sx:{
+  transition: theme.transitions.create(['margin', 'width'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    //開いた時にMovieConnectという文字がずれるようにする
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: `${drawerWidth}px`,
     transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
     }),
-    ...(open && {
-      //開いた時にMovieConnectという文字がずれるようにする
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: `${drawerWidth}px`,
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-
-  }
-  )},
+  }),
 }))
 
 //矢印の位置を調整
 const DrawerHeader = styled('div')(({ theme }) => ({
-  sx:{
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-  }
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+  justifyContent: 'flex-end',
 }))
 
 //exportしているコンポーネント
@@ -90,6 +86,7 @@ export const LoggedInHeader = () => {
           </Typography>
         </Toolbar>
       </AppBar>
+
       <Drawer
         sx={{
           width: drawerWidth,
@@ -98,6 +95,7 @@ export const LoggedInHeader = () => {
             //ハンバーガメニューを押すと幅が変わる
             width: drawerWidth,
             boxSizing: 'border-box',
+            backgroundColor: 'black',
           },
         }}
         variant="persistent"
@@ -107,7 +105,10 @@ export const LoggedInHeader = () => {
         {/*横のスライドの矢印マーク*/}
         <DrawerHeader>
           {/* /*矢印を押したら閉まる*/}
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton
+            onClick={handleDrawerClose}
+            sx={{ color: 'text.primary' }}
+          >
             {/* themeのdirectionがltrの場合、左書きのげんとといういみ */}
             {theme.direction === 'ltr' ? (
               <ChevronLeftIcon />
@@ -120,32 +121,46 @@ export const LoggedInHeader = () => {
         <Divider />
 
         <List>
-          {/* <Link to='/show'>
-          {['Login', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? < LoginIcon Link to='/show'/> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-          </Link> */}
-          <Link to="/">
-            <ListItem>
-              <ListItemButton>
-                <ListItemIcon>
-                  <LoginIcon />
-                </ListItemIcon>
-                <ListItemText primary="Logout" sx={{ color: 'black' }} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
+          <ListItem>
+            <ListItemButton component={Link} to="/">
+              <ListItemIcon>
+                <LogoutIcon sx={{ color: 'text.primary' }} />
+              </ListItemIcon>
+              <ListItemText primary="Logout" sx={{ color: 'text.primary' }} />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem>
+            <ListItemButton component={Link} to="/send">
+              <ListItemIcon></ListItemIcon>
+              <ListItemText
+                primary="利用規約"
+                sx={{ color: 'text.primary' }}
+                to={'/mypage'}
+              />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem>
+            <ListItemButton component={Link} to="/send">
+              <ListItemIcon></ListItemIcon>
+              <ListItemText
+                primary="プライバシーポリシー"
+                sx={{ color: 'text.primary' }}
+              />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem>
+            <ListItemButton component={Link} to="/send">
+              <ListItemIcon></ListItemIcon>
+              <ListItemText primary="お問合せ" sx={{ color: 'text.primary' }} />
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
     </Box>
   )
 }
 
-
+export default LoggedInHeader

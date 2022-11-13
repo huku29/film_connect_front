@@ -49,7 +49,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }))
 
 //exportしているコンポーネント
-export default function Header() {
+export const Header = () => {
   const theme = useTheme()
   const [open, setOpen] = useState(false)
 
@@ -93,6 +93,7 @@ export default function Header() {
             //ハンバーガメニューを押すと幅が変わる
             width: drawerWidth,
             boxSizing: 'border-box',
+            backgroundColor: 'black',
           },
         }}
         variant="persistent"
@@ -102,7 +103,10 @@ export default function Header() {
         {/*横のスライドの矢印マーク*/}
         <DrawerHeader>
           {/* /*矢印を押したら閉まる*/}
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton
+            onClick={handleDrawerClose}
+            sx={{ color: 'text.primary' }}
+          >
             {/* themeのdirectionがltrの場合、左書きのげんとといういみ */}
             {theme.direction === 'ltr' ? (
               <ChevronLeftIcon />
@@ -115,30 +119,46 @@ export default function Header() {
         <Divider />
 
         <List>
-          {/* <Link to='/show'>
-          {['Login', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? < LoginIcon Link to='/show'/> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-          </Link> */}
-          <Link to="/login">
-            <ListItem>
-              <ListItemButton>
-                <ListItemIcon>
-                  <LoginIcon />
-                </ListItemIcon>
-                <ListItemText primary="Login" sx={{ color: 'black' }} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
+          <ListItem>
+            <ListItemButton component={Link} to="/mypage">
+              <ListItemIcon>
+                <LoginIcon sx={{ color: 'text.primary' }} />
+              </ListItemIcon>
+              <ListItemText primary="Login" sx={{ color: 'text.primary' }} />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem>
+            <ListItemButton component={Link} to="/send">
+              <ListItemIcon></ListItemIcon>
+              <ListItemText
+                primary="利用規約"
+                sx={{ color: 'text.primary' }}
+                to={'/mypage'}
+              />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem>
+            <ListItemButton component={Link} to="/send">
+              <ListItemIcon></ListItemIcon>
+              <ListItemText
+                primary="プライバシーポリシー"
+                sx={{ color: 'text.primary' }}
+              />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem>
+            <ListItemButton component={Link} to="/send">
+              <ListItemIcon></ListItemIcon>
+              <ListItemText primary="お問合せ" sx={{ color: 'text.primary' }} />
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
     </Box>
   )
 }
+
+export default Header
