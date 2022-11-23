@@ -120,7 +120,7 @@ export const Header = () => {
 
         <List>
           <ListItem>
-            <ListItemButton component={Link} to="/mypage">
+            <ListItemButton component={Link} to="/login">
               <ListItemIcon>
                 <LoginIcon sx={{ color: 'text.primary' }} />
               </ListItemIcon>
