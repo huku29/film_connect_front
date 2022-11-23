@@ -41,7 +41,7 @@ export const Send = () => {
   const loadMore = () => {
     console.log('loadMore')
     axios
-      .get(filmsCheck, {
+      .get(filmsSearch, {
         params: {
           search_word: searchWord,
           //getMovieApi関数を実行した段階でpageが1の状態だから、ロードしたら＋1しないと最初のスクロール時点では同じ1ページが表示されてしまう
@@ -73,11 +73,10 @@ export const Send = () => {
 
     event.preventDefault()
 
-    console.log(page)
-    console.log('getFilmApi')
+   
 
     axios
-    .get(filmsCheck, {
+    .get(filmsSearch, {
       params: {
         search_word: searchWord,
         //getMovieの関数が発火すれば1ページがはじめに出るようにする
@@ -89,7 +88,6 @@ export const Send = () => {
         setSearchFilm(res.data.results ? res.data.results : [])
         //setPageを1にすることでloadMoreの際にpageが1になるようにしている
         setPage(1)
-        console.log(res.data.results)
       })
   }
 
