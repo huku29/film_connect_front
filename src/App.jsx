@@ -8,6 +8,7 @@ import { auth } from "./firebase";
 
 //他のコンポーネントで渡したい値を定義
 export const MyContext = createContext("")
+export const MovieContext = createContext("")
 
 
 
@@ -18,6 +19,7 @@ export const App = () => {
   //どちらも読み込まれている値（user）をここで定義してあげる。その値をProviderタグのvalueにセットしてあげる
     // const [userData, setUserData] = useState();
     const [user, setUser] = useState({})
+    const [searchFilm,setSearchFilm] = useState([])
   
 
     const handleLogin = (user) => {
@@ -51,7 +53,11 @@ export const App = () => {
     <ThemeProvider theme={theme} >
       <CssBaseline />
       <MyContext.Provider value ={[user]}>
+      <MovieContext.Provider value = {[searchFilm,setSearchFilm]}>
+         {/* {console.log(searchFilm)} */}
+         {/* {console.log(searchFilm)} */}
       <Router />
+      </MovieContext.Provider>
       </MyContext.Provider>
     </ThemeProvider>
   )

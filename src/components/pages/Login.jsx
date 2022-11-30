@@ -1,17 +1,15 @@
 import { BaseLayout } from '@/components/layouts'
 import { Stack, Typography, Button, Box } from '@mui/material'
 import TwitterIcon from '@mui/icons-material/Twitter'
-import { getAuth, signInWithPopup, TwitterAuthProvider } from 'firebase/auth'
+import { signInWithPopup } from 'firebase/auth'
 import { provider } from '@/firebase'
 import { auth } from '@/firebase'
 import { useState } from 'react'
-import { useNavigate, useRouteLoaderData } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { loginCheck } from '@/urls'
 
 //Appで定義した読み込みたい値を取得するためにuseContextとMyContextをインポートしてあげる
-import { useContext } from 'react'
-import { MyContext } from '@/App'
 
 export const Login = () => {
   const [success, setSuccess] = useState('')
@@ -30,7 +28,7 @@ export const Login = () => {
         // const credential = TwitterAuthProvider.credentialFromResult(result)
         // const token = credential.accessToken
         // const secret = credential.secret
-        console.log(result)
+        // console.log(result)
 
         // const secret = credential.secret
 
@@ -40,11 +38,17 @@ export const Login = () => {
         const token = await user.getIdToken(true)
         const config = { headers: { authorization: `Bearer ${token}` } }
         //ユーザアカウント名
-        console.log(user)
-        console.log(user.reloadUserInfo.providerUserInfo[0].screenName)
-        
+        // console.log(user)
+        // console.log(user.reloadUserInfo.providerUserInfo[0].screenName)
+
         try {
-          axios.get(loginCheck, config)
+          axios.post(
+            loginCheck,
+            {
+              twitterUserName: userName,
+            },
+            config
+          )
           navigation('/mypage')
         } catch (error) {
           // console.log(error)
@@ -60,7 +64,7 @@ export const Login = () => {
 
         // The AuthCredential type that was used.
         // const credential = TwitterAuthProvider.credentialFromError(error)
-        console.log('失敗')
+        // console.log('失敗')
         // ...
         setSuccess('アカウントの作成に失敗しました')
       })
