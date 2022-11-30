@@ -1,34 +1,48 @@
 import { useState, useEffect } from 'react'
 import { LoggedInLayout } from '@/components/layouts'
-import { Typography, Stack } from '@mui/material'
-import { WatchIconButton } from '@/components/buttons/WatchIconButton'
 import { SendLetterModal } from '@/components/modals'
-import HistoryEduIcon from '@mui/icons-material/HistoryEdu'
-import Divider from '@mui/material/Divider'
-import Card from '@mui/material/Card'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
-import Button from '@mui/material/Button'
+
+import { Alert, Snackbar } from '@mui/material'
 
 import InputBase from '@mui/material/InputBase'
 import IconButton from '@mui/material/IconButton'
 import SearchIcon from '@mui/icons-material/Search'
 
 import axios from 'axios'
-import {filmsSearch, filmsimg, filmsCheck } from '@/urls'
+import { filmsSearch, filmsimg } from '@/urls'
 import InfiniteScroll from 'react-infinite-scroller'
 import List from '@mui/material/List'
+import { useNavigate, useLocation } from 'react-router-dom'
+
+import { useContext } from 'react'
+import { MovieContext } from '@/App'
+// import { MyContext } from '@/App'
 
 export const Send = () => {
   const [isOpenModal, setIsOpenmodal] = useState(false)
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
-  const [searchFilm, setSearchFilm] = useState([])
+  // const [searchFilm, setSearchFilm] = useState([])
   const [searchWord, setSearchWord] = useState('')
 
   const [hasMore, setHasMore] = useState(true)
   const [page, setPage] = useState(1)
+
+  const { state } = useLocation()
+  const alertOpen = state && state.alertOpen
+  // console.log(alertOpen)
+
+  const navigation = useNavigate()
+
+  const [indiFilm, setIndiFilm] = useState()
+
+  const [searchFilm, setSearchFilm] = useContext(MovieContext)
+
+  // const [open, setOpen] = useState(false)
+  // const [user] = useContext(MyContext)
 
   // const onClickLetterButton = () => {
   //   setIsOpenmodal((state) => !state)
@@ -73,23 +87,26 @@ export const Send = () => {
 
     event.preventDefault()
 
-   
-
     axios
-    .get(filmsSearch, {
-      params: {
-        search_word: searchWord,
-        //getMovieの関数が発火すれば1ページがはじめに出るようにする
-        page: 1,
-      },
-    })
-    .then((res) => {
-        console.log(res.data)
+      .get(filmsSearch, {
+        params: {
+          search_word: searchWord,
+          //getMovieの関数が発火すれば1ページがはじめに出るようにする
+          page: 1,
+        },
+      })
+      .then((res) => {
+        // console.log(res.data)
         setSearchFilm(res.data.results ? res.data.results : [])
         //setPageを1にすることでloadMoreの際にpageが1になるようにしている
         setPage(1)
       })
   }
+
+  //画面遷移時に検索結果を初期化する
+  useEffect(() => {
+    setSearchFilm([])
+  }, [setSearchFilm])
 
   const handleChange = (e) => {
     setSearchWord(e.target.value)
@@ -101,11 +118,52 @@ export const Send = () => {
     </div>
   )
 
+  const handleWriteLetter = (film) => {
+    // console.log(film)
+
+    const filmTitle = film.title
+    const filmImg = film.poster_path
+    const filmId = film.id
+    // console.log(filmTitle)
+    // console.log(filmId)
+
+    navigation('/writeletter', {
+      state: {
+        filmTitle: filmTitle,
+        filmImg: filmImg,
+        filmId: filmId,
+      },
+    })
+
+    // console.log(e.id)
+    // console.log(document.getElementById('target'))
+  }
+
   return (
     <LoggedInLayout>
       {/* <SearchForm/> */}
       {/* 映画の検索欄 */}
       {/* formだと画面遷移してしまいデータなくなるから、onSubmitとtypeをsubmitに指定すると画面遷移せずに情報を取ってくる。 */}
+
+      <Snackbar
+      //レター送信に成功したらalertで表示させる
+        open={alertOpen}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+        sx={{ height: '20%', maxWidth: '100%', position: 'absolute' }}
+      >
+        <Alert
+          // onClose={handleClose}
+          variant="filled"
+          severity="success"
+          sx={{}}
+        >
+          レターが送信されました！
+        </Alert>
+      </Snackbar>
+
       <Paper
         component="form"
         onSubmit={getFilmApi}
@@ -115,7 +173,7 @@ export const Send = () => {
           alignItems: 'center',
           width: 400,
           position: 'absolute',
-          top: '20%',
+          top: '22%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
           textAlign: 'center',
@@ -155,16 +213,23 @@ export const Send = () => {
             container
             spacing={{ xs: 2, md: 3 }}
             columns={{ xs: 4, sm: 8, md: 12 }}
+            // onClick={handleWriteLetter}
           >
             {searchFilm.map((film, index) =>
               film.poster_path ? (
                 <Grid item xs={2} sm={4} md={4} key={index}>
-                  <Box sx={{}}>{film.title}</Box>
-                  <div key={index}>
+                  <Box
+                    key={index}
+                    sx={{ textAligh: 'center' }}
+                    onClick={() => handleWriteLetter(film)}
+                  >
+                    <Box sx={{ textAligh: 'center' }}>{film.title}</Box>
+
                     <List>
                       <img alt="" src={`${filmsimg}/${film.poster_path}`}></img>
                     </List>
-                  </div>
+                    {/* {console.log(film)} */}
+                  </Box>
                 </Grid>
               ) : null
             )}

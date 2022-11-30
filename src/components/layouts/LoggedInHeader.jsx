@@ -15,11 +15,10 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import LoginIcon from '@mui/icons-material/Login'
 import { Link } from 'react-router-dom'
 import LogoutIcon from '@mui/icons-material/Logout'
-import { getAuth, signOut } from "firebase/auth";
-import { auth } from "@/firebase";
+import { signOut } from 'firebase/auth'
+import { auth } from '@/firebase'
 
 const drawerWidth = 240
 
@@ -65,17 +64,17 @@ export const LoggedInHeader = () => {
     setOpen(false)
   }
 
-
   const handleLogout = () => {
-signOut(auth).then(() => {
-  console.log("ログアウトしました");
-  // Sign-out successful.
-}).catch((error) => {
-  // An error happened.
-  console.log(error);
-});
+    signOut(auth)
+      .then(() => {
+        console.log('ログアウトしました')
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error)
+      })
   }
-
 
   return (
     <Box sx={{ display: 'flex' }}>
