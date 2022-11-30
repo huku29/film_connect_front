@@ -4,7 +4,6 @@ import Box from '@mui/material/Box'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Grid from '@mui/material/Grid'
-import List from '@mui/material/List'
 
 import { useContext } from 'react'
 import { MyContext } from '@/App'

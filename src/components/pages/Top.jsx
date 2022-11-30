@@ -1,19 +1,11 @@
 import { BaseLayout } from '@/components/layouts'
-import { Stack, Typography, Button } from '@mui/material'
-import TwitterIcon from '@mui/icons-material/Twitter'
-import { signInWithPopup, TwitterAuthProvider } from 'firebase/auth'
-import { provider } from '@/firebase'
-import { auth } from '@/firebase'
+import { Stack, Typography } from '@mui/material'
 import { useState } from 'react'
-import { useNavigate} from 'react-router-dom'
-import axios from "axios";
-import {loginCheck } from '@/urls'
+import { useNavigate } from 'react-router-dom'
 
 //Appで定義した読み込みたい値を取得するためにuseContextとMyContextをインポートしてあげる
 // import { useContext } from 'react'
 // import { MyContext } from '@/App'
-
-
 
 export const Top = () => {
   const [success, setSuccess] = useState('')
@@ -50,9 +42,9 @@ export const Top = () => {
   //       // const errorCode = error.code
   //       // const errorMessage = error.message
   //       // The email of the user's account used.
-        
+
   //       // The AuthCredential type that was used.
-       
+
   //       console.log("失敗")
   //       // ...
   //       setSuccess('アカウントの作成に失敗しました')
