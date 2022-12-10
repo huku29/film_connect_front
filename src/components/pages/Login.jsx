@@ -7,7 +7,7 @@ import { auth } from '@/firebase'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { loginCheck } from '@/urls'
+import { loginCheck,filmsLoginUrl } from '@/urls'
 
 //Appで定義した読み込みたい値を取得するためにuseContextとMyContextをインポートしてあげる
 
@@ -28,7 +28,7 @@ export const Login = () => {
         const config = { headers: { authorization: `Bearer ${token}` } }
 
         axios.post(
-          loginCheck,
+          filmsLoginUrl,
           {
             twitterUserName: userName,
           },
