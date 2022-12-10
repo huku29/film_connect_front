@@ -1,1 +1,1 @@
-export { SendLetterModal } from './SendLetterModal'
+export { RecommendPoint } from './RecommendPointModal'
