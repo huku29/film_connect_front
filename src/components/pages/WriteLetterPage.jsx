@@ -75,7 +75,7 @@ export const WriteLetterPage = () => {
 
     const params = { film_id: filmId, recommend_point: data.recommendPoint }
     const token = await user.getIdToken(true)
-    // console.log(token)
+
     const config = { headers: { authorization: `Bearer ${token}` } }
 
     axios
@@ -111,22 +111,6 @@ export const WriteLetterPage = () => {
       {/* <LoggedInHeader /> */}
       <Box sx={{ display: 'flex' }}>
         <LoggedInLayout>
-          {/* <Stack
-            sx={{
-              width: '100%',
-              position: 'absolute',
-              top: '8%',
-            }}
-          >
-            <Alert
-              // onClose={handleClose}
-              variant="filled"
-              severity="success"
-              sx={{}}
-            >
-              This is a success message!
-            </Alert>
-          </Stack> */}
           <Card
             sx={{
               width: 800,
@@ -157,8 +141,6 @@ export const WriteLetterPage = () => {
                 color: 'black',
                 position: 'absolute',
                 left: '34%',
-                // textAlign: 'left',
-                // position: 'fixed',
                 pl: 3,
               }}
             >
@@ -196,12 +178,6 @@ export const WriteLetterPage = () => {
                             position: 'fixed',
                             top: '55%',
                             left: '12%',
-                            // transform: 'translate(-20%, -50%)',
-                            // textAlign: 'center',
-                            // color: 'black',
-                            // '& .MuiInputBase-input': {
-                            //   color: 'black', // 入力文字の色
-                            // },
 
                             '& .MuiInputBase-input': {
                               color: 'black', // 入力文字の色
@@ -218,32 +194,6 @@ export const WriteLetterPage = () => {
                     />
                   </Box>
                 </Container>
-
-                {/* <Snackbar
-                  open={snackbarOpen}
-                  autoHideDuration={6000}
-                  sx={{
-                    width: '100%',
-                    top: '80%',
-                    left: '10%',
-                    transform: 'translate(-20%, -50%)',
-                  }}
-                  // onClose={handleClose}
-                >
-                  <Alert
-                    // onClose={handleClose}
-                    severity={status.type}
-                    sx={{
-                      width: '40%',
-                      position: 'fixed',
-                      top: '87%',
-                      left: '20%',
-                      transform: 'translate(-20%, -50%)',
-                    }}
-                  >
-                    {status.message}
-                  </Alert>
-                </Snackbar> */}
 
                 <Button
                   type="submit"

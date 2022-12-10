@@ -21,11 +21,10 @@ import { recieveMovieDataAtom } from '@/jotai/atoms'
 import { RecommendPoint } from '@/components/modals'
 
 export const Receive = () => {
-  const styles = { whiteSpace: 'pre-line' }
+  // const styles = { whiteSpace: 'pre-line' }
 
   const [movieData] = useAtom(recieveMovieDataAtom)
   const [openModal, setOpenModal] = useState(false)
-  
 
   const handleOpenModal = () => {
     setOpenModal(true)
@@ -34,8 +33,6 @@ export const Receive = () => {
   const handleCloseModal = () => {
     setOpenModal(false)
   }
-
-
 
   return (
     <>
@@ -76,33 +73,12 @@ export const Receive = () => {
               pl: 3,
             }}
           >
-            {/* <CardMedia
-              component="img"
-              image={`${filmsImgSmall}/${movieData.movieImg}`}
-              alt=""
-            /> */}
-
             <CardMedia
               component="img"
               image={`${filmsImgSmall}/${movieData.movieImg}`}
               alt=""
             />
           </Typography>
-
-          {/* <Typography
-            gutterBottom
-            variant="h5"
-            component="div"
-            sx={{
-              color: 'black',
-              position: 'absolute',
-              left: '33%',
-
-              pl: 3,
-            }}
-          >
-            <img alt="" src={`${filmsImgSmall}/${movieData.movieImg}`}></img>
-          </Typography> */}
 
           <Box
             sx={{
@@ -116,15 +92,6 @@ export const Receive = () => {
               whiteSpace: 'pre-wrap',
             }}
           >
-            {/* <CardContent>
-                <Typography gutterBottom variant="h6" component="div" sx={{}}>
-                  おすすめポイント
-                </Typography>
-                <Typography variant="body2">
-                {movieData.recommendPoint}
-                </Typography>
-              </CardContent> */}
-
             <CardContent>
               <Button
                 variant="contained"
@@ -135,34 +102,7 @@ export const Receive = () => {
                 おすすめポイントを見る
               </Button>
             </CardContent>
-
-            {/* <CardContent>
-              <Button variant="contained" disableElevation sx={{ mt: 5 }}>
-                おすすめポイントを見る
-              </Button>
-            </CardContent> */}
           </Box>
-
-          {/* <Box
-              component={Typography}
-              variant="subtitle1"
-              // style={styles}
-              sx={{
-                maxWidth: '710px',
-                my: 2,
-                p: 2,
-                height: '30%',
-                position: 'absolute',
-                top: '50%',
-                color: 'black',
-                whiteSpace: 'pre-wrap',
-                overflow: 'scroll',
-                // overflowX: 'hidden'
-              }}
-            >
-              {movieData.recommendPoint}
-            </Box>
-     */}
 
           <Box
             sx={{

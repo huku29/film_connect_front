@@ -22,30 +22,19 @@ export const Login = () => {
   const handleTwitterLogin = () => {
     signInWithPopup(auth, provider)
       .then(async (result) => {
-        
         const user = await result.user
         const userName = user.reloadUserInfo.providerUserInfo[0].screenName
         const token = await user.getIdToken(true)
         const config = { headers: { authorization: `Bearer ${token}` } }
-        //ユーザアカウント名
-        console.log(user)
-        console.log(token)
-        // console.log(user.reloadUserInfo.providerUserInfo[0].screenName)
 
-        try {
-          axios.post(
-            loginCheck,
-            {
-              twitterUserName: userName,
-            },
-            config
-          )
-          navigation('/mypage')
-        } catch (error) {
-          // console.log(error)
-        }
-        // console.log(user)
-        setSuccess('アカウントの作成に成功しました。')
+        axios.post(
+          loginCheck,
+          {
+            twitterUserName: userName,
+          },
+          config
+        )
+        navigation('/mypage')
       })
       .catch((error) => {
         setSuccess('アカウントの作成に失敗しました')
@@ -94,30 +83,6 @@ export const Login = () => {
             Twitterログイン
           </Button>
         </Stack>
-
-        {/* <Stack
-          sx={{
-            position: 'absolute',
-            top: '60%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            textAlign: 'center',
-            border: 'balck',
-          }}
-        >
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: 'black ',
-              color: '#ff9800',
-              borderRadius: '5%',
-              width: '300px',
-              padding: '10px',
-            }}
-          >
-            ゲストログイン
-          </Button>
-        </Stack> */}
       </Box>
     </BaseLayout>
   )

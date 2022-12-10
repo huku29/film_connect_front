@@ -18,13 +18,8 @@ import { useNavigate, useLocation } from 'react-router-dom'
 
 import { useContext } from 'react'
 import { MovieContext } from '@/App'
-// import { MyContext } from '@/App'
 
 export const Send = () => {
-  const [isOpenModal, setIsOpenmodal] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-  // const [searchFilm, setSearchFilm] = useState([])
   const [searchWord, setSearchWord] = useState('')
 
   const [hasMore, setHasMore] = useState(true)
@@ -32,27 +27,14 @@ export const Send = () => {
 
   const { state } = useLocation()
   const alertOpen = state && state.alertOpen
-  // console.log(alertOpen)
 
   const navigation = useNavigate()
 
-  const [indiFilm, setIndiFilm] = useState()
+  
 
   const [searchFilm, setSearchFilm] = useContext(MovieContext)
 
-  // const [open, setOpen] = useState(false)
-  // const [user] = useContext(MyContext)
-
-  // const onClickLetterButton = () => {
-  //   setIsOpenmodal((state) => !state)
-  // }
-
-  // const handleCloseModal = () => {
-  //   setIsOpenmodal(false)
-  // }
-
   const loadMore = () => {
-    console.log('loadMore')
     axios
       .get(filmsSearch, {
         params: {
@@ -62,8 +44,6 @@ export const Send = () => {
         },
       })
       .then((res) => {
-        // setSearchMovie(res.data.results ? res.data.results : [])
-
         setSearchFilm([
           ...searchFilm,
           ...(res.data.results ? res.data.results : []),
@@ -132,10 +112,6 @@ export const Send = () => {
 
   return (
     <LoggedInLayout>
-      {/* <SearchForm/> */}
-      {/* 映画の検索欄 */}
-      {/* formだと画面遷移してしまいデータなくなるから、onSubmitとtypeをsubmitに指定すると画面遷移せずに情報を取ってくる。 */}
-
       <Snackbar
         //レター送信に成功したらalertで表示させる
         open={alertOpen}
@@ -145,12 +121,7 @@ export const Send = () => {
         }}
         sx={{ height: '20%', maxWidth: '100%', position: 'absolute' }}
       >
-        <Alert
-          // onClose={handleClose}
-          variant="filled"
-          severity="success"
-          sx={{}}
-        >
+        <Alert variant="filled" severity="success" sx={{}}>
           レターが送信されました！
         </Alert>
       </Snackbar>
@@ -204,7 +175,6 @@ export const Send = () => {
             container
             spacing={{ xs: 2, md: 3 }}
             columns={{ xs: 4, sm: 8, md: 12 }}
-            // onClick={handleWriteLetter}
           >
             {searchFilm.map((film, index) =>
               film.poster_path ? (
@@ -226,15 +196,6 @@ export const Send = () => {
           </Grid>
         </InfiniteScroll>
       </Box>
-
-      {/* <SendLetterModal
-        open={isOpenModal}
-        onClose={handleCloseModal}
-        loading={loading}
-        setLoading={setLoading}
-        success={success}
-        setSuccess={setSuccess}
-      /> */}
     </LoggedInLayout>
   )
 }
