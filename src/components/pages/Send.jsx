@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { LoggedInLayout } from '@/components/layouts'
-import { SendLetterModal } from '@/components/modals'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
@@ -48,9 +47,9 @@ export const Send = () => {
   //   setIsOpenmodal((state) => !state)
   // }
 
-  const handleCloseModal = () => {
-    setIsOpenmodal(false)
-  }
+  // const handleCloseModal = () => {
+  //   setIsOpenmodal(false)
+  // }
 
   const loadMore = () => {
     console.log('loadMore')
@@ -96,7 +95,6 @@ export const Send = () => {
         },
       })
       .then((res) => {
-        // console.log(res.data)
         setSearchFilm(res.data.results ? res.data.results : [])
         //setPageを1にすることでloadMoreの際にpageが1になるようにしている
         setPage(1)
@@ -119,13 +117,9 @@ export const Send = () => {
   )
 
   const handleWriteLetter = (film) => {
-    // console.log(film)
-
     const filmTitle = film.title
     const filmImg = film.poster_path
     const filmId = film.id
-    // console.log(filmTitle)
-    // console.log(filmId)
 
     navigation('/writeletter', {
       state: {
@@ -134,9 +128,6 @@ export const Send = () => {
         filmId: filmId,
       },
     })
-
-    // console.log(e.id)
-    // console.log(document.getElementById('target'))
   }
 
   return (
@@ -146,7 +137,7 @@ export const Send = () => {
       {/* formだと画面遷移してしまいデータなくなるから、onSubmitとtypeをsubmitに指定すると画面遷移せずに情報を取ってくる。 */}
 
       <Snackbar
-      //レター送信に成功したらalertで表示させる
+        //レター送信に成功したらalertで表示させる
         open={alertOpen}
         anchorOrigin={{
           vertical: 'top',
@@ -228,7 +219,6 @@ export const Send = () => {
                     <List>
                       <img alt="" src={`${filmsimg}/${film.poster_path}`}></img>
                     </List>
-                    {/* {console.log(film)} */}
                   </Box>
                 </Grid>
               ) : null
@@ -237,14 +227,14 @@ export const Send = () => {
         </InfiniteScroll>
       </Box>
 
-      <SendLetterModal
+      {/* <SendLetterModal
         open={isOpenModal}
         onClose={handleCloseModal}
         loading={loading}
         setLoading={setLoading}
         success={success}
         setSuccess={setSuccess}
-      />
+      /> */}
     </LoggedInLayout>
   )
 }

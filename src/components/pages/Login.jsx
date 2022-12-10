@@ -22,23 +22,14 @@ export const Login = () => {
   const handleTwitterLogin = () => {
     signInWithPopup(auth, provider)
       .then(async (result) => {
-        // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
-        // You can use these server side with your app's credentials to access the Twitter API.
-
-        // const credential = TwitterAuthProvider.credentialFromResult(result)
-        // const token = credential.accessToken
-        // const secret = credential.secret
-        // console.log(result)
-
-        // const secret = credential.secret
-
-        // The signed-in user info.
+        
         const user = await result.user
         const userName = user.reloadUserInfo.providerUserInfo[0].screenName
         const token = await user.getIdToken(true)
         const config = { headers: { authorization: `Bearer ${token}` } }
         //ユーザアカウント名
-        // console.log(user)
+        console.log(user)
+        console.log(token)
         // console.log(user.reloadUserInfo.providerUserInfo[0].screenName)
 
         try {
@@ -57,15 +48,6 @@ export const Login = () => {
         setSuccess('アカウントの作成に成功しました。')
       })
       .catch((error) => {
-        // Handle Errors here.
-        // const errorCode = error.code
-        // const errorMessage = error.message
-        // The email of the user's account used.
-
-        // The AuthCredential type that was used.
-        // const credential = TwitterAuthProvider.credentialFromError(error)
-        // console.log('失敗')
-        // ...
         setSuccess('アカウントの作成に失敗しました')
       })
   }

@@ -18,7 +18,7 @@ import { useLocation } from 'react-router-dom'
 
 import { useNavigate } from 'react-router-dom'
 
-import { filmsimg } from '@/urls'
+import { filmsImgSmall } from '@/urls'
 
 import axios from 'axios'
 
@@ -30,6 +30,8 @@ import { sendLetter } from '@/urls'
 
 import { useContext } from 'react'
 import { MyContext } from '@/App'
+
+import Container from '@mui/material/Container'
 
 export const WriteLetterPage = () => {
   const { control, handleSubmit, register } = useForm()
@@ -59,17 +61,10 @@ export const WriteLetterPage = () => {
 
   const [recommendPoint, setRecommendPoint] = useState()
 
-  console.log(filmId)
   const [user] = useContext(MyContext)
-  console.log(user)
 
   const onSubmit = async (data, e) => {
-    // const recommendPoint = []
     e.preventDefault()
-
-    console.log(e.target.value)
-
-    console.log(data.recommendPoint)
 
     //ここ
     setOpen(!open)
@@ -78,7 +73,7 @@ export const WriteLetterPage = () => {
       setOpen(open)
     }, 5000)
 
-    const params = { movie_id: filmId, recommend_point: data.recommendPoint }
+    const params = { film_id: filmId, recommend_point: data.recommendPoint }
     const token = await user.getIdToken(true)
     // console.log(token)
     const config = { headers: { authorization: `Bearer ${token}` } }
@@ -147,7 +142,7 @@ export const WriteLetterPage = () => {
           >
             <Typography
               gutterBottom
-              variant="h4"
+              variant="h5"
               component="div"
               sx={{ color: 'black', textAlign: 'center', pt: 2 }}
             >
@@ -160,13 +155,14 @@ export const WriteLetterPage = () => {
               component="div"
               sx={{
                 color: 'black',
-                textAlign: 'left',
-                position: 'fixed',
+                position: 'absolute',
+                left: '34%',
+                // textAlign: 'left',
+                // position: 'fixed',
                 pl: 3,
               }}
             >
-              <img alt="" src={`${filmsimg}/${filmImg}`}></img>
-              {console.log(filmImg)}
+              <img alt="" src={`${filmsImgSmall}/${filmImg}`}></img>
             </Typography>
 
             <Stack
@@ -177,43 +173,51 @@ export const WriteLetterPage = () => {
               sx={{ textAlign: 'right' }}
             >
               <Box>
-                <Controller
-                  name="recommendPoint"
-                  control={control}
-                  rules={validationRules.recommendPoint}
-                  render={({ field, fieldState }) => (
-                    <TextField
-                      {...field}
-                      {...register('recommendPoint')}
-                      value={recommendPoint}
-                      onChange={(e) => setRecommendPoint(e.target.value)}
-                      type="text"
-                      label="おすすめポイント"
-                      error={fieldState.invalid}
-                      helperText={fieldState.error?.message}
-                      multiline
-                      rows={4}
-                      defaultValue=""
-                      sx={{
-                        position: 'fixed',
-                        top: '55%',
-                        left: '55%',
-                        transform: 'translate(-20%, -50%)',
-                        textAlign: 'center',
-                        color: 'black',
-                        '& .MuiInputBase-input': {
-                          color: 'black', // 入力文字の色
-                        },
-                      }}
-                      inputProps={{
-                        style: {
-                          width: '400px',
-                          height: '500px',
-                        },
-                      }}
+                <Container maxWidth="sm">
+                  <Box>
+                    <Controller
+                      name="recommendPoint"
+                      control={control}
+                      rules={validationRules.recommendPoint}
+                      render={({ field, fieldState }) => (
+                        <TextField
+                          {...field}
+                          {...register('recommendPoint')}
+                          value={recommendPoint}
+                          onChange={(e) => setRecommendPoint(e.target.value)}
+                          type="text"
+                          label="おすすめポイント"
+                          error={fieldState.invalid}
+                          helperText={fieldState.error?.message}
+                          multiline
+                          rows={4}
+                          defaultValue=""
+                          sx={{
+                            position: 'fixed',
+                            top: '55%',
+                            left: '12%',
+                            // transform: 'translate(-20%, -50%)',
+                            // textAlign: 'center',
+                            // color: 'black',
+                            // '& .MuiInputBase-input': {
+                            //   color: 'black', // 入力文字の色
+                            // },
+
+                            '& .MuiInputBase-input': {
+                              color: 'black', // 入力文字の色
+                            },
+                          }}
+                          inputProps={{
+                            style: {
+                              width: '600px',
+                              height: '200px',
+                            },
+                          }}
+                        />
+                      )}
                     />
-                  )}
-                />
+                  </Box>
+                </Container>
 
                 {/* <Snackbar
                   open={snackbarOpen}
