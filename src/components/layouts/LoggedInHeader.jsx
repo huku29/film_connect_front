@@ -67,12 +67,10 @@ export const LoggedInHeader = () => {
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        console.log('ログアウトしました')
         // Sign-out successful.
       })
       .catch((error) => {
         // An error happened.
-        console.log(error)
       })
   }
 
