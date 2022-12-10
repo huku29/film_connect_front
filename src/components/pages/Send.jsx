@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton'
 import SearchIcon from '@mui/icons-material/Search'
 
 import axios from 'axios'
-import { filmsSearch, filmsimg } from '@/urls'
+import { filmsSearch, filmsimg, filmsSearchUrl } from '@/urls'
 import InfiniteScroll from 'react-infinite-scroller'
 import List from '@mui/material/List'
 import { useNavigate, useLocation } from 'react-router-dom'
@@ -36,7 +36,7 @@ export const Send = () => {
 
   const loadMore = () => {
     axios
-      .get(filmsSearch, {
+      .get(filmsSearchUrl, {
         params: {
           search_word: searchWord,
           //getMovieApi関数を実行した段階でpageが1の状態だから、ロードしたら＋1しないと最初のスクロール時点では同じ1ページが表示されてしまう
@@ -67,7 +67,7 @@ export const Send = () => {
     event.preventDefault()
 
     axios
-      .get(filmsSearch, {
+      .get(filmsSearchUrl, {
         params: {
           search_word: searchWord,
           //getMovieの関数が発火すれば1ページがはじめに出るようにする

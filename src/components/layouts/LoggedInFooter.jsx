@@ -5,7 +5,7 @@ import EmailIcon from '@mui/icons-material/Email'
 import { Link } from 'react-router-dom'
 
 import axios from 'axios'
-import { getLetter } from '@/urls'
+import { getLetter, filmsRandomUrl } from '@/urls'
 
 import { useNavigate, useLocation } from 'react-router-dom'
 
@@ -35,7 +35,7 @@ export const LoggedInFooter = (props) => {
 
     
 
-    axios.get(getLetter, config).then(async (res) => {
+    axios.get(filmsRandomUrl, config).then(async (res) => {
       
 
       const json = res.data.detail

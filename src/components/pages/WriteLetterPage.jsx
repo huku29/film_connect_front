@@ -26,7 +26,7 @@ import { useState } from 'react'
 
 import { LoggedInLayout } from '@/components/layouts'
 
-import { sendLetter } from '@/urls'
+import { sendLetter, filmsLettersUrl } from '@/urls'
 
 import { useContext } from 'react'
 import { MyContext } from '@/App'
@@ -80,7 +80,7 @@ export const WriteLetterPage = () => {
 
     axios
       .post(
-        sendLetter,
+        filmsLettersUrl,
         {
           letter: params,
         },
