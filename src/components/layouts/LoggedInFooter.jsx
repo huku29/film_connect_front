@@ -7,43 +7,34 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { getLetter } from '@/urls'
 
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { useContext } from 'react'
 import { MyContext } from '@/App'
-import { MovieContext } from '@/App'
 
 //JOTAI
 import { useAtom } from 'jotai'
-import { recieveMovieDataAtom } from '@/jotai/atoms'
+import { recieveMovieDataAtom, handleFadeModal } from '@/jotai/atoms'
 
 export const LoggedInFooter = (props) => {
   const { menuList } = props
   const [value, setValue] = useState(0)
 
-  const { state } = useLocation()
   const navigation = useNavigate()
 
   const [user] = useContext(MyContext)
-  const [searchFilm, setSearchFilm] = useContext(MovieContext)
 
-  const [movieData, setMovieData] = useAtom(recieveMovieDataAtom)
+  const [, setMovieData] = useAtom(recieveMovieDataAtom)
+
+  const [, setOpen] = useAtom(handleFadeModal)
 
   const handleGetLetter = async () => {
     const token = await user.getIdToken(true)
     const config = { headers: { authorization: `Bearer ${token}` } }
 
-    
-
     axios.get(getLetter, config).then(async (res) => {
-      
-
       const json = res.data.detail
       const obj = JSON.parse(json)
-      
-
-      const movieId = res.data.letter.movie_id
-
 
       setMovieData({
         movieTitle: obj.title,
@@ -52,8 +43,11 @@ export const LoggedInFooter = (props) => {
         twitterUserName: res.data.user.name,
       })
 
+      setOpen(true)
+
       navigation('/receive')
     })
+    setOpen(false)
   }
 
   return (

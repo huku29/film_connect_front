@@ -7,3 +7,5 @@ export const recieveMovieDataAtom = atom({
   recommendPoint: '',
   twitterUserName: '',
 })
+
+export const handleFadeModal = atom(false)
