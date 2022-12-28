@@ -14,6 +14,12 @@ import Box from '@mui/material/Box'
 
 import { useForm, Controller } from 'react-hook-form'
 
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import DialogTitle from '@mui/material/DialogTitle'
+
 import { useLocation } from 'react-router-dom'
 
 import { useNavigate } from 'react-router-dom'
@@ -51,7 +57,11 @@ export const WriteLetterPage = () => {
 
   const [open, setOpen] = useState(false)
 
+  const [openModal, setOpenModal] = useState(false)
+
   const [snackbarOpen, setSnackbarOpen] = useState(false)
+
+  const [recommendData, setRecommendData] = useState('')
 
   const [status, setStatus] = useState({
     open: false,
@@ -63,20 +73,36 @@ export const WriteLetterPage = () => {
 
   const [user] = useContext(MyContext)
 
-  const onSubmit = async (data, e) => {
-    e.preventDefault()
+  const handleOpenConfirmModal = (data) => {
+    setRecommendData(data.recommendPoint)
 
-    //ここ
+    setOpenModal(true)
+  }
+
+
+  const handleCloseModal = () => {
+    setOpenModal(false)
+  }
+
+  const onSubmit = async (data) => {
+    // e.preventDefault()
+    setOpenModal(false)
+
     setOpen(!open)
 
     setTimeout(() => {
       setOpen(open)
     }, 5000)
 
-    const params = { film_id: filmId, recommend_point: data.recommendPoint }
+    const params = {
+      movie_id: filmId,
+      recommend_point: recommendData,
+    }
     const token = await user.getIdToken(true)
 
+
     const config = { headers: { authorization: `Bearer ${token}` } }
+  
 
     axios
       .post(
@@ -150,7 +176,7 @@ export const WriteLetterPage = () => {
             <Stack
               component="form"
               noValidate
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={handleSubmit(handleOpenConfirmModal)}
               spacing={2}
               sx={{ textAlign: 'right' }}
             >
@@ -203,6 +229,7 @@ export const WriteLetterPage = () => {
                 >
                   送信
                 </Button>
+
                 <Backdrop
                   sx={{
                     color: '#fff',
@@ -216,6 +243,36 @@ export const WriteLetterPage = () => {
             </Stack>
             {/* <LoggedInFooter /> */}
           </Card>
+          {/* <ConfirmationModal open={openModal} onClose={handleCloseModal}/> */}
+          <Box>
+            <Dialog
+              open={openModal}
+              // onClose={props.onClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title" sx={{ bgcolor: '#fff3e0' }}>
+                {'あなたのツイッターユーザー名を確認することができます！'}
+              </DialogTitle>
+              <DialogContent sx={{ bgcolor: '#fff3e0' }}>
+                <DialogContentText
+                  id="alert-dialog-description"
+                  sx={{ bgcolor: '#fff3e0' }}
+                >
+                  <p>
+                    このおすすめ映画を送信すると、受け取ったユーザーがあなたのツイッターユーザー名と一緒におすすめ映画をシェアできることができます。
+                  </p>
+                  <p>よろしいですか？</p>
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions sx={{ bgcolor: '#fff3e0' }}>
+                <Button onClick={handleCloseModal}>いいえ</Button>
+                <Button onClick={onSubmit} autoFocus>
+                  はい
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </Box>
         </LoggedInLayout>
       </Box>
     </>
