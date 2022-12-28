@@ -14,7 +14,7 @@ import { MyContext } from '@/App'
 
 //JOTAI
 import { useAtom } from 'jotai'
-import { recieveMovieDataAtom, handleFadeModal } from '@/jotai/atoms'
+import { recieveMovieDataAtom, handleFadeModal, handleGetErrorMessageAtom} from '@/jotai/atoms'
 
 export const LoggedInFooter = (props) => {
   const { menuList } = props
@@ -24,30 +24,50 @@ export const LoggedInFooter = (props) => {
 
   const [user] = useContext(MyContext)
 
+ 
+
   const [, setMovieData] = useAtom(recieveMovieDataAtom)
 
   const [, setOpen] = useAtom(handleFadeModal)
 
+  const [, setErrorMessage] = useAtom(handleGetErrorMessageAtom)
+
   const handleGetLetter = async () => {
+
     const token = await user.getIdToken(true)
     const config = { headers: { authorization: `Bearer ${token}` } }
 
     axios.get(getLetter, config).then(async (res) => {
+          
+      //受け取れるレターがなければ、メッセージを渡す
+      if (res.data.message){
+        setErrorMessage(res.data.message)
+        return navigation('/receive')
+
+      }
+      
       const json = res.data.detail
       const obj = JSON.parse(json)
+
+    
 
       setMovieData({
         movieTitle: obj.title,
         movieImg: obj.poster_path,
+        receiverId: res.data.current_user_id,
+        letterId: res.data.letter.id,
+        userId: res.data.letter.user_id,
         recommendPoint: res.data.letter.recommend_point,
         twitterUserName: res.data.user.name,
       })
 
       setOpen(true)
 
+      
       navigation('/receive')
     })
     setOpen(false)
+    
   }
 
   return (
@@ -74,6 +94,7 @@ export const LoggedInFooter = (props) => {
             textAlign: 'center',
             width: 1,
             bottom: 0,
+            zIndex: 5,
             position: 'fixed',
             left: 0,
           },

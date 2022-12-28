@@ -15,6 +15,7 @@ export const App = () => {
   // const [userData, setUserData] = useState();
   const [user, setUser] = useState({})
   const [searchFilm, setSearchFilm] = useState([])
+  const [mounted,setMounted] = useState(false)
 
   const handleLogin = (user) => {
     setUser(user)
@@ -26,13 +27,17 @@ export const App = () => {
 
   useEffect(() => {
     //auth(ユーザー情報)を監視している。authが(ユーザー情報を保持していれば、ログインの助湯体を保持できてログアウトすればhandleLogoutの処理になる。)
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribed = onAuthStateChanged(auth, (user) => {
       if (user) {
         handleLogin(user)
       } else {
         handleLogout()
       }
+      //リロードしたときに認証情報が表示するコンポーネント先に渡っているように挟む
+      setMounted(true)
     })
+    //クリーンアップ処理
+    return ()=> {unsubscribed();}
   }, [])
 
   return (
@@ -40,7 +45,12 @@ export const App = () => {
       <CssBaseline />
       <MyContext.Provider value={[user]}>
         <MovieContext.Provider value={[searchFilm, setSearchFilm]}>
-          <Router />
+          {
+            //mountedがtrueならコンポーネント表示
+            mounted && <Router />
+
+          }
+        
         </MovieContext.Provider>
       </MyContext.Provider>
     </ThemeProvider>

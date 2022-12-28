@@ -1,1 +1,1 @@
-export { RecommendPoint } from './RecommendPointModal'
+export { RecommendPointModal } from './RecommendPointModal'

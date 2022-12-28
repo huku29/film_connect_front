@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton'
 import SearchIcon from '@mui/icons-material/Search'
 
 import axios from 'axios'
-import { filmsSearch, filmsimg, } from '@/urls'
+import { filmsSearch, filmsimg } from '@/urls'
 import InfiniteScroll from 'react-infinite-scroller'
 import List from '@mui/material/List'
 import { useNavigate, useLocation } from 'react-router-dom'
@@ -29,8 +29,6 @@ export const Send = () => {
   const alertOpen = state && state.alertOpen
 
   const navigation = useNavigate()
-
-  
 
   const [searchFilm, setSearchFilm] = useContext(MovieContext)
 
