@@ -8,6 +8,8 @@ import DialogTitle from '@mui/material/DialogTitle'
 
 import Typography from '@mui/material/Typography'
 
+
+
 //JOTAI
 import { useAtom } from 'jotai'
 import { recieveMovieDataAtom } from '@/jotai/atoms'
@@ -33,12 +35,15 @@ function BootstrapDialogTitle(props) {
 
 BootstrapDialogTitle.propTypes = {
   children: PropTypes.node,
-  onClose: PropTypes.func.isRequired,
+  // onClose: PropTypes.func.isRequired,
 }
 
-export const RecommendPoint = (props) => {
+export const RecommendPointModal = (props) => {
   const [movieData] = useAtom(recieveMovieDataAtom)
 
+  const sendLetterNumber = props.index
+
+  
   return (
     <div>
       <BootstrapDialog
@@ -65,7 +70,16 @@ export const RecommendPoint = (props) => {
             bgcolor: '#fff3e0',
           }}
         >
-          <Typography gutterBottom>{movieData.recommendPoint}</Typography>
+          {/* <Typography gutterBottom>{props.recommendPoint}</Typography> */}
+
+          {props.recommendData ? (
+            
+            <Typography gutterBottom key={sendLetterNumber}>{props.recommendData}</Typography>
+          ) : (
+            <Typography gutterBottom>{movieData.recommendPoint}</Typography>
+          )}
+          {/* <Typography gutterBottom>{movieData.recommendPoint}</Typography> */}
+          {/* <Typography gutterBottom>{props.recommendPoint}</Typography> */}
         </DialogContent>
       </BootstrapDialog>
     </div>
