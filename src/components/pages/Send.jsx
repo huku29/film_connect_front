@@ -61,8 +61,9 @@ export const Send = () => {
 
   const getFilmApi = (event) => {
     //エンター押してもリロードされないようにする。標準の動きを止める
-
-    event.preventDefault()
+    if (event) {
+      event.preventDefault()
+    }
 
     axios
       .get(filmsSearch, {
@@ -88,11 +89,11 @@ export const Send = () => {
     setSearchWord(e.target.value)
   }
 
-  const loader = (
-    <div className="loader" key={0}>
-      Loading ...
-    </div>
-  )
+  // const loader = (
+  //   <div className="loader" key={0}>
+  //     Loading ...
+  //   </div>
+  // )
 
   const handleWriteLetter = (film) => {
     const filmTitle = film.title
@@ -107,6 +108,34 @@ export const Send = () => {
       },
     })
   }
+
+  function useDebounce(value, delay) {
+    
+    const [debouncedValue, setDebouncedValue] = useState(value)
+
+    useEffect(() => {
+      
+      const timer = setTimeout(() => {
+        setDebouncedValue(value)
+      }, delay)
+      
+      return () => {
+        clearTimeout(timer)
+      }
+      
+    }, [value, delay])
+
+    
+    return debouncedValue
+  }
+
+  const debouncedInputText = useDebounce(searchWord, 200)
+
+  useEffect(() => {
+    getFilmApi()
+  }, [debouncedInputText])
+
+  
 
   return (
     <LoggedInLayout>
@@ -153,7 +182,7 @@ export const Send = () => {
         </IconButton>
       </Paper>
 
-      {/* filterメソッドでも可能？でもまだ書き方が見出せない */}
+      
       <Box
         sx={{
           flexGrow: 1,
@@ -167,29 +196,43 @@ export const Send = () => {
           initialLoad={false}
           loadMore={loadMore} //項目を読み込む際に処理するコールバック関数
           hasMore={hasMore} //読み込みを行うかどうかの判定
-          loader={searchFilm.length > 1 ? loader : null}
+          // loader={searchFilm.length > 1 ? loader : null}
         >
           <Grid
             container
             spacing={{ xs: 2, md: 3 }}
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
-            {searchFilm.map((film, index) =>
-              film.poster_path ? (
-                <Grid item xs={2} sm={4} md={4} key={index}>
-                  <Box
-                    key={index}
-                    sx={{ textAligh: 'center' }}
-                    onClick={() => handleWriteLetter(film)}
-                  >
-                    <Box sx={{ textAligh: 'center' }}>{film.title}</Box>
-
-                    <List>
-                      <img alt="" src={`${filmsimg}/${film.poster_path}`}></img>
-                    </List>
-                  </Box>
-                </Grid>
-              ) : null
+            {searchFilm.length === 0 ? (
+              <Box
+                sx={{
+                  mt: 20,
+                  ml: 66,
+                  textAlign: 'center',
+                }}
+              >
+                検索結果がありません
+              </Box>
+            ) : (
+              searchFilm.map((film, index) =>
+                film.poster_path ? (
+                  <Grid item xs={2} sm={4} md={4} key={index}>
+                    <Box
+                      key={index}
+                      sx={{ textAligh: 'center' }}
+                      onClick={() => handleWriteLetter(film)}
+                    >
+                      <Box sx={{ textAligh: 'center' }}>{film.title}</Box>
+                      <List>
+                        <img
+                          alt=""
+                          src={`${filmsimg}/${film.poster_path}`}
+                        ></img>
+                      </List>
+                    </Box>
+                  </Grid>
+                ) : null
+              )
             )}
           </Grid>
         </InfiniteScroll>
