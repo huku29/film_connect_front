@@ -16,9 +16,6 @@ import InfiniteScroll from 'react-infinite-scroller'
 import List from '@mui/material/List'
 import { useNavigate, useLocation } from 'react-router-dom'
 
-import { useContext } from 'react'
-import { MovieContext } from '@/App'
-
 export const Send = () => {
   const [searchWord, setSearchWord] = useState('')
 
@@ -30,7 +27,8 @@ export const Send = () => {
 
   const navigation = useNavigate()
 
-  const [searchFilm, setSearchFilm] = useContext(MovieContext)
+  const [searchFilm, setSearchFilm] = useState([])
+
 
   const loadMore = () => {
     axios
@@ -110,22 +108,18 @@ export const Send = () => {
   }
 
   function useDebounce(value, delay) {
-    
     const [debouncedValue, setDebouncedValue] = useState(value)
 
     useEffect(() => {
-      
       const timer = setTimeout(() => {
         setDebouncedValue(value)
       }, delay)
-      
+
       return () => {
         clearTimeout(timer)
       }
-      
     }, [value, delay])
 
-    
     return debouncedValue
   }
 
@@ -134,8 +128,6 @@ export const Send = () => {
   useEffect(() => {
     getFilmApi()
   }, [debouncedInputText])
-
-  
 
   return (
     <LoggedInLayout>
@@ -182,7 +174,6 @@ export const Send = () => {
         </IconButton>
       </Paper>
 
-      
       <Box
         sx={{
           flexGrow: 1,

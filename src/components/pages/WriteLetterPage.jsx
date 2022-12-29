@@ -59,6 +59,8 @@ export const WriteLetterPage = () => {
 
   const [openModal, setOpenModal] = useState(false)
 
+  const [searchFilm, setSearchFilm] = useState([])
+
   const [snackbarOpen, setSnackbarOpen] = useState(false)
 
   const [recommendData, setRecommendData] = useState('')
@@ -78,7 +80,6 @@ export const WriteLetterPage = () => {
 
     setOpenModal(true)
   }
-
 
   const handleCloseModal = () => {
     setOpenModal(false)
@@ -100,9 +101,7 @@ export const WriteLetterPage = () => {
     }
     const token = await user.getIdToken(true)
 
-
     const config = { headers: { authorization: `Bearer ${token}` } }
-  
 
     axios
       .post(
@@ -126,6 +125,9 @@ export const WriteLetterPage = () => {
           type: 'error',
           message: `送信できませんでした`,
         })
+      })
+      .finally(() => {
+        setSearchFilm([])
       })
     setRecommendPoint('')
     setStatus('')
