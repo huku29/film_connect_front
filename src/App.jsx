@@ -7,22 +7,21 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './firebase'
 
 //他のコンポーネントで渡したい値を定義
-export const MyContext = createContext('')
-export const MovieContext = createContext('')
+export const MyContext = createContext()
 
 export const App = () => {
   //どちらも読み込まれている値（user）をここで定義してあげる。その値をProviderタグのvalueにセットしてあげる
   // const [userData, setUserData] = useState();
   const [user, setUser] = useState({})
-  const [searchFilm, setSearchFilm] = useState([])
-  const [mounted,setMounted] = useState(false)
+
+  const [mounted, setMounted] = useState(false)
 
   const handleLogin = (user) => {
     setUser(user)
   }
 
   const handleLogout = () => {
-    setUser({})
+    setUser()
   }
 
   useEffect(() => {
@@ -37,21 +36,19 @@ export const App = () => {
       setMounted(true)
     })
     //クリーンアップ処理
-    return ()=> {unsubscribed();}
+    return () => {
+      unsubscribed()
+    }
   }, [])
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <MyContext.Provider value={[user]}>
-        <MovieContext.Provider value={[searchFilm, setSearchFilm]}>
-          {
-            //mountedがtrueならコンポーネント表示
-            mounted && <Router />
-
-          }
-        
-        </MovieContext.Provider>
+        {
+          //mountedがtrueならコンポーネント表示
+          mounted && <Router />
+        }
       </MyContext.Provider>
     </ThemeProvider>
   )
