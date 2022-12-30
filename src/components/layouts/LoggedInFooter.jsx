@@ -14,7 +14,11 @@ import { MyContext } from '@/App'
 
 //JOTAI
 import { useAtom } from 'jotai'
-import { recieveMovieDataAtom, handleFadeModal, handleGetErrorMessageAtom} from '@/jotai/atoms'
+import {
+  recieveMovieDataAtom,
+  handleFadeModal,
+  handleGetErrorMessageAtom,
+} from '@/jotai/atoms'
 
 export const LoggedInFooter = (props) => {
   const { menuList } = props
@@ -24,8 +28,6 @@ export const LoggedInFooter = (props) => {
 
   const [user] = useContext(MyContext)
 
- 
-
   const [, setMovieData] = useAtom(recieveMovieDataAtom)
 
   const [, setOpen] = useAtom(handleFadeModal)
@@ -33,23 +35,21 @@ export const LoggedInFooter = (props) => {
   const [, setErrorMessage] = useAtom(handleGetErrorMessageAtom)
 
   const handleGetLetter = async () => {
-
     const token = await user.getIdToken(true)
     const config = { headers: { authorization: `Bearer ${token}` } }
 
-    axios.get(getLetter, config).then(async (res) => {
-          
+    axios.get(getLetter, config).then((res) => {
       //受け取れるレターがなければ、メッセージを渡す
-      if (res.data.message){
+      if (res.data.message) {
         setErrorMessage(res.data.message)
         return navigation('/receive')
-
+      } else {
+        //エラーメッセージがない場合は空にする
+        setErrorMessage('')
       }
-      
+
       const json = res.data.detail
       const obj = JSON.parse(json)
-
-    
 
       setMovieData({
         movieTitle: obj.title,
@@ -63,11 +63,9 @@ export const LoggedInFooter = (props) => {
 
       setOpen(true)
 
-      
       navigation('/receive')
     })
     setOpen(false)
-    
   }
 
   return (
