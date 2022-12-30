@@ -11,7 +11,6 @@ import {
   CardHeader,
   CardMedia,
   CardActions,
-  Typography,
   CircularProgress,
 } from '@mui/material'
 import { MyContext } from '@/App'
@@ -23,12 +22,15 @@ import {
   getReceivedLetters,
   getReceivedLettersData,
   filmsImgSmall,
+  getUsersName,
 } from '@/urls'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import { RecommendPointModal } from '../modals'
 import { useCallback } from 'react'
+
+import { TwitterShareButton, TwitterIcon } from 'react-share'
 
 // import Typography from '@mui/material/Typography'
 
@@ -64,11 +66,7 @@ export const MyPage = () => {
         id={index}
         aria-labelledby={index}
       >
-        {value === index && (
-          <Box sx={{ p: 3 }}>
-            {children}
-          </Box>
-        )}
+        {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
       </Box>
     )
   }
@@ -76,11 +74,11 @@ export const MyPage = () => {
   const handleOpenModal = useCallback((film) => {
     setRecommendData(film.recommend_point)
     setOpenModal(true)
-  },[])
+  }, [])
 
   const handleCloseModal = useCallback(() => {
     setOpenModal(false)
-  },[])
+  }, [])
 
   const [openModal, setOpenModal] = useState(false)
 
@@ -102,12 +100,12 @@ export const MyPage = () => {
       letters.map(async (letter) => {
         const result = await axios.get(getFilmsDetails, {
           params: {
-            film_id: letter.film_id,
+            movie_id: letter.movie_id,
           },
         })
         const { title, poster_path } = result.data
-        letter.filmTitle = title
-        letter.filmImage = poster_path
+        letter.MovieTitle = title
+        letter.MovieImage = poster_path
         return letter
       })
     )
@@ -141,30 +139,46 @@ export const MyPage = () => {
 
         const result = await axios.get(getFilmsDetails, {
           params: {
-            film_id: receivedLetterData.film_id,
+            movie_id: receivedLetterData.movie_id,
           },
         })
         const { title, poster_path } = result.data
-        receivedLetterData.filmTitle = title
-        receivedLetterData.filmImage = poster_path
+        receivedLetterData.movieTitle = title
+        receivedLetterData.movieImage = poster_path
         return receivedLetterData
       })
     )
-    setReceivedLetterDetails(newGetReceivedLetters)
+
+    const newGetReceivedLettersWithUserInfo = await Promise.all(
+      newGetReceivedLetters.map(async (receivedLetterDataWithUserInfo) => {
+        const newResult = await axios.get(getUsersName, {
+          params: {
+            user_id: receivedLetterDataWithUserInfo.user_id,
+          },
+        })
+        const { name } = newResult.data[0]
+        receivedLetterDataWithUserInfo.twitterName = name
+        return receivedLetterDataWithUserInfo
+      })
+    )
+
+    setReceivedLetterDetails(newGetReceivedLettersWithUserInfo)
     setIsLoading(false)
   }
 
   useEffect(() => {
     getSendLetters()
-    
   }, [])
 
   //タブを押すとアニメーションで動きをつける
-  const handleChange = useCallback((event, newValue) => {
-    setValue(newValue)
+  const handleChange = useCallback(
+    (event, newValue) => {
+      setValue(newValue)
 
-    swiper.slideTo(newValue)
-  }, [swiper] )
+      swiper.slideTo(newValue)
+    },
+    [swiper]
+  )
 
   return (
     <LoggedInLayout>
@@ -229,7 +243,7 @@ export const MyPage = () => {
           setSwiper(swiperInstance)
         }}
         //手動のスライドをなくす
-        allowTouchMove ={false}
+        allowTouchMove={false}
       >
         {/* sendLetter */}
 
@@ -267,7 +281,7 @@ export const MyPage = () => {
                   >
                     <CardHeader
                       title={sendLetter.filmTitle}
-                      titleTypographyProps = {{variant:"h5"}}
+                      titleTypographyProps={{ variant: 'h5' }}
                       sx={{ color: 'black', textAlign: 'center', pt: 2 }}
                       // title={
                       //   <Typography
@@ -340,8 +354,8 @@ export const MyPage = () => {
                     key={index}
                   >
                     <CardHeader
-                      title={receivedLetterDetail.filmTitle}
-                      titleTypographyProps = {{variant:"h5"}}
+                      title={receivedLetterDetail.movieTitle}
+                      titleTypographyProps={{ variant: 'h5' }}
                       sx={{ color: 'black', textAlign: 'center', pt: 2 }}
                       // title={
                       //   <Typography
@@ -357,7 +371,7 @@ export const MyPage = () => {
                       <CardMedia
                         height="400px"
                         component="img"
-                        image={`${filmsImgSmall}/${receivedLetterDetail.filmImage}`}
+                        image={`${filmsImgSmall}/${receivedLetterDetail.movieImage}`}
                         sx={{ objectFit: 'contain' }}
                         alt=""
                       />
@@ -372,7 +386,16 @@ export const MyPage = () => {
                         おすすめポイントを見る
                       </Button>
                     </CardActions>
-
+                    <CardActions sx={{ ml: 3, my: 1 }}>
+                      <TwitterShareButton
+                        title={`@${receivedLetterDetail.twitterName}さんからのおすすめ映画`}
+                        hashtags={['映画で人と繋がりたい']}
+                        url={'https://film-connect.web.app'}
+                        // via={"FilmConnect"}
+                      >
+                        <TwitterIcon size={'55px'} round />
+                      </TwitterShareButton>
+                    </CardActions>
                   </Card>
                 ))
               )}
