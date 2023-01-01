@@ -39,6 +39,15 @@ import { MyContext } from '@/App'
 
 import Container from '@mui/material/Container'
 
+import useMediaQuery from '@mui/material/useMediaQuery'
+
+import { useAtom } from 'jotai'
+import {
+  
+  handleSendFlashMessage
+
+} from '@/jotai/atoms'
+
 export const WriteLetterPage = () => {
   const { control, handleSubmit, register } = useForm()
 
@@ -55,7 +64,11 @@ export const WriteLetterPage = () => {
   const filmId = state && state.filmId
   const navigation = useNavigate()
 
+  //CircleProgresの状態管理
   const [open, setOpen] = useState(false)
+ 
+  //Flashメッセージの状態管理
+  const [openFlash, setOpenFlash] = useAtom( handleSendFlashMessage)
 
   const [openModal, setOpenModal] = useState(false)
 
@@ -113,11 +126,9 @@ export const WriteLetterPage = () => {
       )
       .then((res) => {
         setTimeout(() => {
-          navigation('/send', {
-            state: {
-              alertOpen: !open,
-            },
-          })
+          navigation('/send', 
+            setOpenFlash(true)
+          )
         }, 5000)
       })
       .catch((error) => {
@@ -133,30 +144,43 @@ export const WriteLetterPage = () => {
     setStatus('')
     setSnackbarOpen('')
   }
+  
+
+  const matches = useMediaQuery('(min-width:575px)')
 
   return (
-    <>
-      {/* <LoggedInHeader /> */}
-      <Box sx={{ display: 'flex' }}>
-        <LoggedInLayout>
+    <LoggedInLayout>
+      {matches ? (
+        <>
           <Card
             sx={{
-              width: 800,
+              mt:10,
+              ml:'auto',
+              mr:'auto',
+              width: 700,
               height: 700,
               bgcolor: '#fff3e0',
-              position: 'absolute',
-              top: '51%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
               textAlign: 'center',
               border: 'balck',
+              '@media screen and (max-width:820px)': {
+                textAligh: 'center',
+                mt: 25,
+                ml:'auto',
+                mr:'auto'
+              },
+              '@media screen and (width:912px)': {
+                textAligh: 'center',
+                mt: 40,
+                ml:'auto',
+                mr:'auto'
+              },
             }}
           >
             <Typography
               gutterBottom
               variant="h5"
               component="div"
-              sx={{ color: 'black', textAlign: 'center', pt: 2 }}
+              sx={{ color: 'black', textAlign: 'center', }}
             >
               {filmTitle}
             </Typography>
@@ -167,9 +191,8 @@ export const WriteLetterPage = () => {
               component="div"
               sx={{
                 color: 'black',
-                position: 'absolute',
-                left: '34%',
-                pl: 3,
+              
+              
               }}
             >
               <img alt="" src={`${filmsImgSmall}/${filmImg}`}></img>
@@ -203,17 +226,16 @@ export const WriteLetterPage = () => {
                           rows={4}
                           defaultValue=""
                           sx={{
-                            position: 'fixed',
-                            top: '55%',
-                            left: '12%',
-
+                            mt:3,
+                            
+                          
                             '& .MuiInputBase-input': {
                               color: 'black', // 入力文字の色
                             },
                           }}
                           inputProps={{
                             style: {
-                              width: '600px',
+                              width: '500px',
                               height: '200px',
                             },
                           }}
@@ -227,7 +249,7 @@ export const WriteLetterPage = () => {
                   type="submit"
                   variant="contained"
                   size="small"
-                  sx={{ position: 'fixed', right: '20px', bottom: '15px' }}
+                  sx={{mt:3,mr:2, mb:2}}
                 >
                   送信
                 </Button>
@@ -275,8 +297,161 @@ export const WriteLetterPage = () => {
               </DialogActions>
             </Dialog>
           </Box>
-        </LoggedInLayout>
-      </Box>
-    </>
+        </>
+      ) : (
+        <Box >
+          <Card
+            sx={{
+              mt:8,
+              ml:5,
+              mb:4,
+              width: 300,
+              height: 600,
+              bgcolor: '#fff3e0',
+              textAlign: 'center',
+              border: 'balck',
+              '@media screen and (min-width:400px)': {
+                textAligh: 'center',
+                mt: 10,
+                // ml: 7,
+                ml:'auto',
+                mr:'auto'
+              },
+              '@media screen and (max-width:281px)': {
+                textAligh: 'center',
+                mt: 6,
+                ml: 'auto',
+                mr: 'auto',
+              },
+              '@media screen and (width:540px)': {
+                textAligh: 'center',
+                mt: 8,
+                ml: 15,
+                mb:7,
+                mr: 'auto',
+                height: 640,
+              },
+            }}
+          >
+            <Typography
+              gutterBottom
+              variant="h7"
+              component="div"
+              sx={{ color: 'black', textAlign: 'center', pt: 2 }}
+            >
+              {filmTitle}
+            </Typography>
+
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              sx={{
+                color: 'black',
+              }}
+            >
+              <img alt="" src={`${filmsImgSmall}/${filmImg}`}></img>
+            </Typography>
+
+            <Stack
+              component="form"
+              noValidate
+              onSubmit={handleSubmit(handleOpenConfirmModal)}
+              spacing={2}
+              sx={{ textAlign: 'right' }}
+            >
+              <Box>
+                <Container maxWidth="sm">
+                  <Box>
+                    <Controller
+                      name="recommendPoint"
+                      control={control}
+                      rules={validationRules.recommendPoint}
+                      render={({ field, fieldState }) => (
+                        <TextField
+                          {...field}
+                          {...register('recommendPoint')}
+                          value={recommendPoint}
+                          onChange={(e) => setRecommendPoint(e.target.value)}
+                          type="text"
+                          label="おすすめポイント"
+                          error={fieldState.invalid}
+                          helperText={fieldState.error?.message}
+                          multiline
+                          rows={4}
+                          defaultValue=""
+                          sx={{
+                            '& .MuiInputBase-input': {
+                              color: 'black', // 入力文字の色
+                            },
+                            mr:3
+                          }}
+                          inputProps={{
+                            style: {
+                              width: '200px',
+                              height: '130px',
+                            },
+                          }}
+                        />
+                      )}
+                    />
+                  </Box>
+                </Container>
+
+                <Button
+                  type="submit"
+                  variant="contained"
+                  size="small"
+                  sx={{mt:2, mr:1}}
+                >
+                  送信
+                </Button>
+
+                <Backdrop
+                  sx={{
+                    color: '#fff',
+                    zIndex: (theme) => theme.zIndex.drawer + 1,
+                  }}
+                  open={open}
+                >
+                  <CircularProgress color="inherit" />
+                </Backdrop>
+              </Box>
+            </Stack>
+            {/* <LoggedInFooter /> */}
+          </Card>
+          {/* <ConfirmationModal open={openModal} onClose={handleCloseModal}/> */}
+          <Box>
+            <Dialog
+              open={openModal}
+              // onClose={props.onClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title" sx={{ bgcolor: '#fff3e0' }}>
+                {'あなたのツイッターユーザー名を確認することができます！'}
+              </DialogTitle>
+              <DialogContent sx={{ bgcolor: '#fff3e0' }}>
+                <DialogContentText
+                  id="alert-dialog-description"
+                  sx={{ bgcolor: '#fff3e0' }}
+                >
+                  <p>
+                    このおすすめ映画を送信すると、受け取ったユーザーがあなたのツイッターユーザー名と一緒におすすめ映画をシェアできることができます。
+                  </p>
+                  <p>よろしいですか？</p>
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions sx={{ bgcolor: '#fff3e0' }}>
+                <Button onClick={handleCloseModal}>いいえ</Button>
+                <Button onClick={onSubmit} autoFocus>
+                  はい
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </Box>
+        </Box>
+      )}
+    </LoggedInLayout>
   )
 }

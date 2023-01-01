@@ -17,4 +17,7 @@ export const madeLettersDataAtom = atom([])
 
 export const handleFlashMessageAtom = atom(false)
 
+export const handleSendFlashMessage = atom(false)
+
 export const handleGetErrorMessageAtom = atom('')
+

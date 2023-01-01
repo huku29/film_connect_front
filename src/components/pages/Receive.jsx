@@ -33,6 +33,8 @@ import axios from 'axios'
 
 import { Alert, Snackbar, CardHeader, CardActions } from '@mui/material'
 
+import useMediaQuery from '@mui/material/useMediaQuery'
+
 export const Receive = () => {
   const [movieData] = useAtom(recieveMovieDataAtom)
   const [open] = useAtom(handleFadeModal)
@@ -43,7 +45,6 @@ export const Receive = () => {
   const [user] = useContext(MyContext)
 
   const [errorMessage] = useAtom(handleGetErrorMessageAtom)
-
 
   const handleOpenModal = () => {
     setOpenModal(true)
@@ -79,79 +80,87 @@ export const Receive = () => {
     setOpenFlash(false)
   }, [movieData])
 
+  const matches = useMediaQuery('(min-width:575px)')
 
   return (
-    <>
-      <LoggedInLayout>
-        <Box mt={40} textAlign="center">
-          {/* 受け取るレターがなければメッセージを表示して、あればコンテンツを表示 */}
-          {errorMessage ? (
-            <Typography sx={{ color: '#ff9800' }}>{errorMessage}</Typography>
-          ) : (
-            <Fade in={open}>
-              <Card
-                sx={{
-                  width: 700,
-                  height: 680,
-                  textAlign: 'center',
-                  bgcolor: '#fff3e0',
-                  border: 'balck',
-                  my: -30,
-                  mx: 'auto',
-                }}
-              >
-                <CardHeader
-                  title={movieData.movieTitle}
-                  titleTypographyProps={{ variant: 'h5' }}
-                  sx={{ color: 'black', textAlign: 'center', pt: 2 }}
-                  // title={
-                  //   <Typography
-                  //     gutterBottom
-                  //     variant="h5"
-                  //     sx={{ color: 'black', textAlign: 'center', pt: 2 }}
-                  //   >
-                  //     {sendLetter.movieTitle}
-                  //   </Typography>
-                  // }
-                />
-                <CardContent>
-                  <CardMedia
-                    height="400px"
-                    component="img"
-                    image={`${filmsImgSmall}/${movieData.movieImg}`}
-                    sx={{ objectFit: 'contain' }}
-                    alt=""
+    <LoggedInLayout>
+      {matches ? (
+        <>
+          <Box mt={10} textAlign="center">
+            {/* 受け取るレターがなければメッセージを表示して、あればコンテンツを表示 */}
+            {errorMessage ? (
+              <Typography sx={{ color: '#ff9800' , mt:40}}>{errorMessage}</Typography>
+            ) : (
+              <Fade in={open}>
+                <Card
+                  sx={{
+                    width: 700,
+                    height: 680,
+                    // textAlign: 'center',
+                    bgcolor: '#fff3e0',
+                    border: 'balck',
+                    mt: 1,
+                    mr: 'auto',
+                    ml: 'auto',
+                    '@media screen and (max-width:915px)': {
+                      textAligh: 'center',
+                      mt: 25,
+                      
+                    },
+                  }}
+                >
+                  <CardHeader
+                    title={movieData.movieTitle}
+                    titleTypographyProps={{ variant: 'h5' }}
+                    sx={{ color: 'black', textAlign: 'center', pt: 2 }}
+                    // title={
+                    //   <Typography
+                    //     gutterBottom
+                    //     variant="h5"
+                    //     sx={{ color: 'black', textAlign: 'center', pt: 2 }}
+                    //   >
+                    //     {sendLetter.movieTitle}
+                    //   </Typography>
+                    // }
                   />
-                </CardContent>
-                <CardActions>
-                  <Button
-                    variant="contained"
-                    // disableElevation
-                    sx={{ mt: 3, mx: 'auto' }}
-                    onClick={handleOpenModal}
-                  >
-                    おすすめポイントを見る
-                  </Button>
-                </CardActions>
-                <CardActions>
-                  <Button
-                    variant="contained"
-                    sx={{ mt: 5, mx: 'auto', mr: 3 }}
-                    onClick={handleGetReceiveLetters}
-                  >
-                    受け取る
-                  </Button>
-                </CardActions>
-                <CardActions sx={{ml:3, my: -8, }}>
-                  <TwitterShareButton
-                    // url={}
-                    via={movieData.twitterUserName}
-                  >
-                    <TwitterIcon size={'55px'} round />
-                  </TwitterShareButton>
-                </CardActions>
+                  <CardContent>
+                    <CardMedia
+                      height="400px"
+                      component="img"
+                      image={`${filmsImgSmall}/${movieData.movieImg}`}
+                      sx={{ objectFit: 'contain' }}
+                      alt=""
+                    />
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      variant="contained"
+                      // disableElevation
+                      sx={{ mt: 3, mx: 'auto' }}
+                      onClick={handleOpenModal}
+                    >
+                      おすすめポイントを見る
+                    </Button>
+                  </CardActions>
+                  <CardActions>
+                    <Button
+                      variant="contained"
+                      sx={{ mx: 'auto', mr: 3 }}
+                      onClick={handleGetReceiveLetters}
+                    >
+                      受け取る
+                    </Button>
+                  </CardActions>
+                  <CardActions sx={{ ml: 3, my: -8 }}>
+                    <TwitterShareButton
+                      // url={}
+                      via={movieData.twitterUserName}
+                    >
+                      <TwitterIcon size={'55px'} round />
+                    </TwitterShareButton>
+                  </CardActions>
 
-                {/*                 
+                  {/*                 
                 <Box
                   variant="contained"
                   sx={{
@@ -163,34 +172,34 @@ export const Receive = () => {
                   </Button>
                 </Box> */}
 
-                <Box
-                  sx={{ position: 'absolute', right: '250px', top: '400px' }}
-                >
-                  <Snackbar
-                    //レター送信に成功したらalertで表示させる
-                    open={openFlash}
-                    anchorOrigin={{
-                      vertical: 'bottom',
-                      horizontal: 'center',
-                    }}
-                    sx={{
-                      height: '20%',
-                      maxWidth: '100%',
-                      bottom: { xs: 10, sm: 10 },
-                    }}
+                  <Box
+                    sx={{ position: 'absolute', right: '250px', top: '400px' }}
                   >
-                    <Alert
-                      variant="filled"
-                      severity="success"
-                      sx={{ positon: 'fixed', bottom: '700px' }}
+                    <Snackbar
+                      //レター送信に成功したらalertで表示させる
+                      open={openFlash}
+                      anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                      }}
+                      sx={{
+                        height: '20%',
+                        maxWidth: '100%',
+                        bottom: { xs: 10, sm: 10 },
+                      }}
                     >
-                      レターを受け取りました！
-                    </Alert>
-                  </Snackbar>
-                </Box>
+                      <Alert
+                        variant="filled"
+                        severity="success"
+                        sx={{ positon: 'fixed', bottom: '700px' }}
+                      >
+                        レターを受け取りました！
+                      </Alert>
+                    </Snackbar>
+                  </Box>
 
-                {/* シェアボタン */}
-                {/* <Box
+                  {/* シェアボタン */}
+                  {/* <Box
                   sx={{
                     position: 'fixed',
                     left: '20px',
@@ -205,16 +214,151 @@ export const Receive = () => {
                     <TwitterIcon size={'50px'} round />
                   </TwitterShareButton>
                 </Box> */}
-                {/* おすすめモーダル */}
-                <RecommendPointModal
-                  open={openModal}
-                  onClose={handleCloseModal}
-                />
-              </Card>
-            </Fade>
-          )}
-        </Box>
-      </LoggedInLayout>
-    </>
+                  {/* おすすめモーダル */}
+                  <RecommendPointModal
+                    open={openModal}
+                    onClose={handleCloseModal}
+                  />
+                </Card>
+              </Fade>
+            )}
+          </Box>
+        </>
+      ) : (
+        <>
+          <Box mt={40} textAlign="center">
+            {/* 受け取るレターがなければメッセージを表示して、あればコンテンツを表示 */}
+            {errorMessage ? (
+              <Typography sx={{ color: '#ff9800' }}>{errorMessage}</Typography>
+            ) : (
+              <Fade in={open}>
+                <Card
+                  sx={{
+                    width: 300,
+                    height: 680,
+                    textAlign: 'center',
+                    bgcolor: '#fff3e0',
+                    border: 'balck',
+                    my: -32,
+                    mx: 'auto',
+                  }}
+                >
+                  <CardHeader
+                    title={movieData.movieTitle}
+                    titleTypographyProps={{ variant: 'h7' }}
+                    sx={{ color: 'black', textAlign: 'center' }}
+                    // title={
+                    //   <Typography
+                    //     gutterBottom
+                    //     variant="h5"
+                    //     sx={{ color: 'black', textAlign: 'center', pt: 2 }}
+                    //   >
+                    //     {sendLetter.movieTitle}
+                    //   </Typography>
+                    // }
+                  />
+                  <CardContent>
+                    <CardMedia
+                      height="400px"
+                      component="img"
+                      image={`${filmsImgSmall}/${movieData.movieImg}`}
+                      sx={{ objectFit: 'contain' }}
+                      alt=""
+                    />
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      variant="contained"
+                      // disableElevation
+                      sx={{ mt: 5, mx: 'auto', my: 1 }}
+                      onClick={handleOpenModal}
+                    >
+                      おすすめポイントを見る
+                    </Button>
+                  </CardActions>
+                  <CardActions>
+                    <Button
+                      variant="contained"
+                      sx={{ mt: 5, mx: 'auto', mr: 3, my: 1 }}
+                      onClick={handleGetReceiveLetters}
+                    >
+                      受け取る
+                    </Button>
+                  </CardActions>
+                  <CardActions sx={{ ml: 3, my: -9 }}>
+                    <TwitterShareButton
+                      // url={}
+                      via={movieData.twitterUserName}
+                    >
+                      <TwitterIcon size={'55px'} round />
+                    </TwitterShareButton>
+                  </CardActions>
+
+                  {/*                 
+                <Box
+                  variant="contained"
+                  sx={{
+                    color: 'white',
+                  }}
+                >
+                  <Button variant="contained" onClick={handleGetReceiveLetters}>
+                    受け取る
+                  </Button>
+                </Box> */}
+
+                  <Box
+                    sx={{ position: 'absolute', right: '250px', top: '400px' }}
+                  >
+                    <Snackbar
+                      //レター送信に成功したらalertで表示させる
+                      open={openFlash}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                      }}
+                      sx={{
+                        height: '20%',
+                        maxWidth: '100%',
+                        bottom: { xs: 10, sm: 10 },
+                      }}
+                    >
+                      <Alert
+                        variant="filled"
+                        severity="success"
+                        sx={{ positon: 'fixed', bottom: '700px' }}
+                      >
+                        レターを受け取りました！
+                      </Alert>
+                    </Snackbar>
+                  </Box>
+
+                  {/* シェアボタン */}
+                  {/* <Box
+                  sx={{
+                    position: 'fixed',
+                    left: '20px',
+                    bottom: '15px',
+                    color: 'white',
+                  }}
+                >
+                  <TwitterShareButton
+                    // url={}
+                    via={movieData.twitterUserName}
+                  >
+                    <TwitterIcon size={'50px'} round />
+                  </TwitterShareButton>
+                </Box> */}
+                  {/* おすすめモーダル */}
+                  <RecommendPointModal
+                    open={openModal}
+                    onClose={handleCloseModal}
+                  />
+                </Card>
+              </Fade>
+            )}
+          </Box>
+        </>
+      )}
+    </LoggedInLayout>
   )
 }

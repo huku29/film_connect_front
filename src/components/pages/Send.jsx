@@ -16,6 +16,11 @@ import InfiniteScroll from 'react-infinite-scroller'
 import List from '@mui/material/List'
 import { useNavigate, useLocation } from 'react-router-dom'
 
+import useMediaQuery from '@mui/material/useMediaQuery'
+
+import { useAtom } from 'jotai'
+import { handleSendFlashMessage } from '@/jotai/atoms'
+
 export const Send = () => {
   const [searchWord, setSearchWord] = useState('')
 
@@ -23,12 +28,13 @@ export const Send = () => {
   const [page, setPage] = useState(1)
 
   const { state } = useLocation()
-  const alertOpen = state && state.alertOpen
+  // const alertOpen = state && state.alertOpen
+
+  const [open, setOpen] = useAtom(handleSendFlashMessage)
 
   const navigation = useNavigate()
 
   const [searchFilm, setSearchFilm] = useState([])
-
 
   const loadMore = () => {
     axios
@@ -84,7 +90,10 @@ export const Send = () => {
   }, [setSearchFilm])
 
   const handleChange = (e) => {
-    setSearchWord(e.target.value)
+    setOpen(false)
+    if (e) {
+      setSearchWord(e.target.value)
+    }
   }
 
   // const loader = (
@@ -129,105 +138,230 @@ export const Send = () => {
     getFilmApi()
   }, [debouncedInputText])
 
+  const matches = useMediaQuery('(min-width:575px)')
+
   return (
     <LoggedInLayout>
-      <Snackbar
-        //レター送信に成功したらalertで表示させる
-        open={alertOpen}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-        sx={{ height: '20%', maxWidth: '100%', position: 'absolute' }}
-      >
-        <Alert variant="filled" severity="success" sx={{}}>
-          レターが送信されました！
-        </Alert>
-      </Snackbar>
-
-      <Paper
-        component="form"
-        onSubmit={getFilmApi}
-        sx={{
-          p: '2px 4px',
-          display: 'flex',
-          alignItems: 'center',
-          width: 400,
-          position: 'absolute',
-          top: '22%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          textAlign: 'center',
-          border: 'balck',
-          backgroundColor: 'black',
-        }}
-      >
-        <InputBase
-          sx={{ ml: 1, flex: 1 }}
-          placeholder="映画検索"
-          type="text"
-          value={searchWord}
-          onChange={handleChange}
-        />
-        <IconButton type="submit" sx={{ p: '10px', color: 'text.primary' }}>
-          <SearchIcon />
-        </IconButton>
-      </Paper>
-
-      <Box
-        sx={{
-          flexGrow: 1,
-          position: 'absolute',
-          top: '30%',
-          left: '10%',
-          width: '80%',
-        }}
-      >
-        <InfiniteScroll
-          initialLoad={false}
-          loadMore={loadMore} //項目を読み込む際に処理するコールバック関数
-          hasMore={hasMore} //読み込みを行うかどうかの判定
-          // loader={searchFilm.length > 1 ? loader : null}
-        >
-          <Grid
-            container
-            spacing={{ xs: 2, md: 3 }}
-            columns={{ xs: 4, sm: 8, md: 12 }}
+      {matches ? (
+        <>
+          {/* <Snackbar
+            //レター送信に成功したらalertで表示させる
+            open={open}
+            
+            sx={{  textAlign:'center', position: 'relative',}}
           >
-            {searchFilm.length === 0 ? (
-              <Box
-                sx={{
-                  mt: 20,
-                  ml: 66,
-                  textAlign: 'center',
-                }}
+            <Alert variant="filled" severity="success" sx={{}}>
+              レターが送信されました！
+            </Alert>
+          </Snackbar> */}
+
+          <Paper
+            component="form"
+            onSubmit={getFilmApi}
+            sx={{
+              mt: 20,
+              ml: 'auto',
+              mr: 'auto',
+              width: 400,
+              textAlign: 'center',
+              border: 'balck',
+              backgroundColor: 'black',
+              position: 'relative',
+            }}
+          >
+            <InputBase
+              sx={{ ml: 1, flex: 1, width: 330 }}
+              placeholder="映画検索"
+              type="text"
+              value={searchWord}
+              onChange={handleChange}
+            />
+            <IconButton type="submit" sx={{ p: '10px', color: 'text.primary' }}>
+              <SearchIcon />
+            </IconButton>
+          </Paper>
+
+          <Box
+            sx={{
+              flexGrow: 1,
+              mt: '5%',
+              ml: 'auto',
+              mr: 'auto',
+              textAlign: 'center',
+              display: 'block',
+            }}
+          >
+            <InfiniteScroll
+              initialLoad={false}
+              loadMore={loadMore} //項目を読み込む際に処理するコールバック関数
+              hasMore={hasMore} //読み込みを行うかどうかの判定
+              // loader={searchFilm.length > 1 ? loader : null}
+            >
+              <Grid
+                container
+                spacing={{ xs: 2, md: 3 }}
+                columns={{ xs: 4, sm: 8, md: 12 }}
               >
-                検索結果がありません
-              </Box>
-            ) : (
-              searchFilm.map((film, index) =>
-                film.poster_path ? (
-                  <Grid item xs={2} sm={4} md={4} key={index}>
+                <Snackbar
+                  //レター送信に成功したらalertで表示させる
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                  }}
+                  open={open}
+                  sx={{ mb: 30, position: 'absolute' }}
+                >
+                  <Alert variant="filled" severity="success">
+                    レターが送信されました！
+                  </Alert>
+                </Snackbar>
+
+                {searchFilm.length === 0 ? (
+                  <>
                     <Box
-                      key={index}
-                      sx={{ textAligh: 'center' }}
-                      onClick={() => handleWriteLetter(film)}
+                      sx={{
+                        mt: 20,
+                        ml: 'auto',
+                        mr: 'auto',
+                        textAlign: 'center',
+                      }}
                     >
-                      <Box sx={{ textAligh: 'center' }}>{film.title}</Box>
-                      <List>
-                        <img
-                          alt=""
-                          src={`${filmsimg}/${film.poster_path}`}
-                        ></img>
-                      </List>
+                      検索結果がありません
                     </Box>
-                  </Grid>
-                ) : null
-              )
-            )}
-          </Grid>
-        </InfiniteScroll>
-      </Box>
+                  </>
+                ) : (
+                  searchFilm.map((film, index) =>
+                    film.poster_path ? (
+                      <Grid item xs={2} sm={4} md={4} key={index}>
+                        <Box
+                          key={index}
+                          sx={{ textAligh: 'center' }}
+                          onClick={() => handleWriteLetter(film)}
+                        >
+                          <Box sx={{ textAligh: 'center' }}>{film.title}</Box>
+                          <List>
+                            <img
+                              alt=""
+                              src={`${filmsimg}/${film.poster_path}`}
+                            ></img>
+                          </List>
+                        </Box>
+                      </Grid>
+                    ) : null
+                  )
+                )}
+              </Grid>
+            </InfiniteScroll>
+          </Box>
+        </>
+      ) : (
+        <>
+          <Snackbar
+            //レター送信に成功したらalertで表示させる
+            open={open}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            
+            }}
+            sx={{ top: '470px' }}
+          >
+            <Alert variant="filled" severity="success" sx={{}}>
+              レターが送信されました！
+            </Alert>
+          </Snackbar>
+
+          <Paper
+            component="form"
+            onSubmit={getFilmApi}
+            sx={{
+              mt: '40%',
+              ml: 'auto',
+              mr: 'auto',
+              width: 250,
+              textAlign: 'center',
+              border: 'balck',
+              backgroundColor: 'black',
+            }}
+          >
+            <InputBase
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="映画検索"
+              type="text"
+              value={searchWord}
+              onChange={handleChange}
+            />
+            <IconButton type="submit" sx={{ p: '10px', color: 'text.primary' }}>
+              <SearchIcon />
+            </IconButton>
+          </Paper>
+
+          <Box sx={{ flexGrow: 1, mt: '5%', ml: 'auto', mr: 'auto' }}>
+            <InfiniteScroll
+              initialLoad={false}
+              loadMore={loadMore} //項目を読み込む際に処理するコールバック関数
+              hasMore={hasMore} //読み込みを行うかどうかの判定
+              // loader={searchFilm.length > 1 ? loader : null}
+            >
+              <Grid container spacing={{ xs: 2, md: 3 }} columns={{}}>
+                {searchFilm.length === 0 ? (
+                  <Box
+                    sx={{
+                      mt: 20,
+                      ml: 'auto',
+                      mr: 'auto',
+                      textAlign: 'center',
+                    }}
+                  >
+                    検索結果がありません
+                  </Box>
+                ) : (
+                  searchFilm.map((film, index) =>
+                    film.poster_path ? (
+                      <Grid item xs={2} sm={4} md={4} key={index}>
+                        <Box
+                          key={index}
+                          sx={{
+                            textAligh: 'center',
+                            mt: 5,
+                            ml: 5,
+                            '@media screen and (min-width:400px)': {
+                              textAligh: 'center',
+                              mt: 5,
+                              ml: 7,
+                            },
+                            '@media screen and (max-width:281px)': {
+                              textAligh: 'center',
+                              mt: 5,
+                              ml: 'auto',
+                              mr: 'auto',
+                            },
+                            '@media screen and (width:540px)': {
+                              textAligh: 'center',
+                              mt: 5,
+                              ml: 15,
+                              mr: 'auto',
+                            },
+                          }}
+                          onClick={() => handleWriteLetter(film)}
+                        >
+                          <Box sx={{ textAligh: 'center' }}>{film.title}</Box>
+                          <List>
+                            <img
+                              alt=""
+                              src={`${filmsimg}/${film.poster_path}`}
+                            ></img>
+                          </List>
+                        </Box>
+                      </Grid>
+                    ) : null
+                  )
+                )}
+              </Grid>
+            </InfiniteScroll>
+          </Box>
+        </>
+      )}
     </LoggedInLayout>
   )
 }

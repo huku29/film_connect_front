@@ -23,12 +23,12 @@ import RoofingIcon from '@mui/icons-material/Roofing'
 
 const FOOTER_MENU_LIST = [
   {
-    label: '送る',
+    label: 'Send',
     icon: <SendIcon />,
     nextPage: '/send',
   },
   {
-    label: 'マイページ',
+    label: 'MyPage',
     icon: <RoofingIcon />,
     nextPage: '/mypage',
   },
