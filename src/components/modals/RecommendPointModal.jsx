@@ -50,6 +50,7 @@ export const RecommendPointModal = (props) => {
         aria-labelledby="customized-dialog-title"
         open={props.open}
         onClose={props.onClose}
+        
       >
         <BootstrapDialogTitle
           id="customized-dialog-title"
