@@ -18,6 +18,7 @@ import {
   recieveMovieDataAtom,
   handleFadeModal,
   handleGetErrorMessageAtom,
+  handleSendFlashMessage
 } from '@/jotai/atoms'
 
 export const LoggedInFooter = (props) => {
@@ -29,6 +30,8 @@ export const LoggedInFooter = (props) => {
   const [user] = useContext(MyContext)
 
   const [, setMovieData] = useAtom(recieveMovieDataAtom)
+
+  const [openFlash, setOpenFlash] = useAtom( handleSendFlashMessage)
 
   const [, setOpen] = useAtom(handleFadeModal)
 
@@ -66,6 +69,7 @@ export const LoggedInFooter = (props) => {
       navigation('/receive')
     })
     setOpen(false)
+    setOpenFlash(false)
   }
 
   return (
@@ -111,7 +115,7 @@ export const LoggedInFooter = (props) => {
           ))
         }
         <BottomNavigationAction
-          label="受け取る"
+          label="Random"
           icon={<EmailIcon />}
           onClick={handleGetLetter}
         />
