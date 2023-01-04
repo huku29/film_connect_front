@@ -11,7 +11,7 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 
-import { filmsImgSmall, registerReceivedLetter } from '@/urls'
+import { filmsImgSmall, registerReceivedLetter, getFilmDetail } from '@/urls'
 
 import { TwitterShareButton, TwitterIcon } from 'react-share'
 
@@ -31,7 +31,7 @@ import { MyContext } from '@/App'
 
 import axios from 'axios'
 
-import { Alert, Snackbar, CardHeader, CardActions } from '@mui/material'
+import { Alert, Snackbar, CardHeader, CardActions, Link } from '@mui/material'
 
 import useMediaQuery from '@mui/material/useMediaQuery'
 
@@ -82,6 +82,7 @@ export const Receive = () => {
 
   const matches = useMediaQuery('(min-width:575px)')
 
+
   return (
     <LoggedInLayout>
       {matches ? (
@@ -89,7 +90,9 @@ export const Receive = () => {
           <Box mt={10} textAlign="center">
             {/* 受け取るレターがなければメッセージを表示して、あればコンテンツを表示 */}
             {errorMessage ? (
-              <Typography sx={{ color: '#ff9800' , mt:40}}>{errorMessage}</Typography>
+              <Typography sx={{ color: '#ff9800', mt: 40 }}>
+                {errorMessage}
+              </Typography>
             ) : (
               <Fade in={open}>
                 <Card
@@ -105,7 +108,6 @@ export const Receive = () => {
                     '@media screen and (max-width:915px)': {
                       textAligh: 'center',
                       mt: 25,
-                      
                     },
                   }}
                 >
@@ -124,13 +126,20 @@ export const Receive = () => {
                     // }
                   />
                   <CardContent>
-                    <CardMedia
-                      height="400px"
-                      component="img"
-                      image={`${filmsImgSmall}/${movieData.movieImg}`}
-                      sx={{ objectFit: 'contain' }}
-                      alt=""
-                    />
+                    <Link
+                      target="_blank"
+                      rel="noopener"
+                      href={`${getFilmDetail}/${movieData.movieId}`}
+                      underline="hover"
+                    >
+                      <CardMedia
+                        height="400px"
+                        component="img"
+                        image={`${filmsImgSmall}/${movieData.movieImg}`}
+                        sx={{ objectFit: 'contain' }}
+                        alt=""
+                      />
+                    </Link>
                   </CardContent>
                   <CardActions>
                     <Button
@@ -186,6 +195,7 @@ export const Receive = () => {
                         height: '20%',
                         maxWidth: '100%',
                         bottom: { xs: 10, sm: 10 },
+                        mb: 5,
                       }}
                     >
                       <Alert
@@ -258,13 +268,20 @@ export const Receive = () => {
                     // }
                   />
                   <CardContent>
-                    <CardMedia
-                      height="400px"
-                      component="img"
-                      image={`${filmsImgSmall}/${movieData.movieImg}`}
-                      sx={{ objectFit: 'contain' }}
-                      alt=""
-                    />
+                    <Link
+                      target="_blank"
+                      rel="noopener"
+                      href={`${getFilmDetail}/${movieData.movieId}`}
+                      underline="hover"
+                    >
+                      <CardMedia
+                        height="400px"
+                        component="img"
+                        image={`${filmsImgSmall}/${movieData.movieImg}`}
+                        sx={{ objectFit: 'contain' }}
+                        alt=""
+                      />
+                    </Link>
                   </CardContent>
                   <CardActions>
                     <Button

@@ -4,14 +4,14 @@ import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
 
-import { Alert, Snackbar } from '@mui/material'
+import { Alert, Snackbar, Link, Button } from '@mui/material'
 
 import InputBase from '@mui/material/InputBase'
 import IconButton from '@mui/material/IconButton'
 import SearchIcon from '@mui/icons-material/Search'
 
 import axios from 'axios'
-import { filmsSearch, filmsimg } from '@/urls'
+import { filmsSearch, filmsimg, getFilmDetail } from '@/urls'
 import InfiniteScroll from 'react-infinite-scroller'
 import List from '@mui/material/List'
 import { useNavigate, useLocation } from 'react-router-dom'
@@ -140,6 +140,7 @@ export const Send = () => {
 
   const matches = useMediaQuery('(min-width:575px)')
 
+
   return (
     <LoggedInLayout>
       {matches ? (
@@ -233,19 +234,32 @@ export const Send = () => {
                   searchFilm.map((film, index) =>
                     film.poster_path ? (
                       <Grid item xs={2} sm={4} md={4} key={index}>
+                        <Box sx={{ textAligh: 'center', pt: 5 }}>
+                          {film.title}
+                        </Box>
                         <Box
                           key={index}
                           sx={{ textAligh: 'center' }}
                           onClick={() => handleWriteLetter(film)}
                         >
-                          <Box sx={{ textAligh: 'center' }}>{film.title}</Box>
                           <List>
-                            <img
-                              alt=""
-                              src={`${filmsimg}/${film.poster_path}`}
-                            ></img>
+                            <Button>
+                              <img
+                                alt=""
+                                src={`${filmsimg}/${film.poster_path}`}
+                              ></img>
+                            </Button>
                           </List>
                         </Box>
+
+                        <Link
+                          target="_blank"
+                          rel="noopener"
+                          href={`${getFilmDetail}/${film.id}`}
+                          underline="hover"
+                        >
+                          {`${film.title}の詳細を見る`}
+                        </Link>
                       </Grid>
                     ) : null
                   )
@@ -262,7 +276,6 @@ export const Send = () => {
             anchorOrigin={{
               vertical: 'top',
               horizontal: 'center',
-            
             }}
             sx={{ top: '470px' }}
           >
@@ -323,8 +336,9 @@ export const Send = () => {
                           key={index}
                           sx={{
                             textAligh: 'center',
-                            mt: 5,
-                            ml: 5,
+                            ml: 3,
+                            pt: 5,
+                            maxWidth: '340px',
                             '@media screen and (min-width:400px)': {
                               textAligh: 'center',
                               mt: 5,
@@ -347,11 +361,21 @@ export const Send = () => {
                         >
                           <Box sx={{ textAligh: 'center' }}>{film.title}</Box>
                           <List>
-                            <img
-                              alt=""
-                              src={`${filmsimg}/${film.poster_path}`}
-                            ></img>
+                            <Button>
+                              <img
+                                alt=""
+                                src={`${filmsimg}/${film.poster_path}`}
+                              ></img>
+                            </Button>
                           </List>
+                          <Link
+                            target="_blank"
+                            rel="noopener"
+                            href={`${getFilmDetail}/${film.id}`}
+                            underline="hover"
+                          >
+                            {`${film.title}の詳細を見る`}
+                          </Link>
                         </Box>
                       </Grid>
                     ) : null
