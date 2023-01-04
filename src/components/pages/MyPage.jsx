@@ -12,6 +12,7 @@ import {
   CardMedia,
   CardActions,
   CircularProgress,
+  Link,
 } from '@mui/material'
 import { MyContext } from '@/App'
 import axios from 'axios'
@@ -23,7 +24,7 @@ import {
   getReceivedLettersData,
   filmsImgSmall,
   getUsersName,
-
+  getFilmDetail,
 } from '@/urls'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -36,11 +37,7 @@ import { TwitterShareButton, TwitterIcon } from 'react-share'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
 import { useAtom } from 'jotai'
-import {
-  
-  handleSendFlashMessage
-
-} from '@/jotai/atoms'
+import { handleSendFlashMessage } from '@/jotai/atoms'
 
 // import Typography from '@mui/material/Typography'
 
@@ -48,7 +45,7 @@ export const MyPage = () => {
   const [swiper, setSwiper] = useState(null)
   const [value, setValue] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
-  const [openFlash, setOpenFlash] = useAtom( handleSendFlashMessage)
+  const [openFlash, setOpenFlash] = useAtom(handleSendFlashMessage)
 
   const slideChange = (index) => {
     setValue(index)
@@ -305,13 +302,20 @@ export const MyPage = () => {
                           // }
                         />
                         <CardContent>
-                          <CardMedia
-                            height="400px"
-                            component="img"
-                            image={`${filmsImgSmall}/${sendLetter.movieImage}`}
-                            sx={{ objectFit: 'contain' }}
-                            alt=""
-                          />
+                          <Link
+                            target="_blank"
+                            rel="noopener"
+                            href={`${getFilmDetail}/${sendLetter.movie_id}`}
+                            underline="hover"
+                          >
+                            <CardMedia
+                              height="400px"
+                              component="img"
+                              image={`${filmsImgSmall}/${sendLetter.movieImage}`}
+                              sx={{ objectFit: 'contain' }}
+                              alt=""
+                            />
+                          </Link>
                         </CardContent>
                         <CardActions>
                           <Button
@@ -377,6 +381,12 @@ export const MyPage = () => {
                           // }
                         />
                         <CardContent>
+                        <Link
+                            target="_blank"
+                            rel="noopener"
+                            href={`${getFilmDetail}/${receivedLetterDetail.movie_id}`}
+                            underline="hover"
+                          >
                           <CardMedia
                             height="400px"
                             component="img"
@@ -384,6 +394,7 @@ export const MyPage = () => {
                             sx={{ objectFit: 'contain' }}
                             alt=""
                           />
+                          </Link>
                         </CardContent>
                         <CardActions>
                           <Button
@@ -514,7 +525,6 @@ export const MyPage = () => {
                           '@media screen and (max-width:280px)': {
                             my: 6,
                             mx: -4,
-                            
                           },
                         }}
                         key={index}
@@ -534,6 +544,12 @@ export const MyPage = () => {
                           // }
                         />
                         <CardContent>
+                        <Link
+                            target="_blank"
+                            rel="noopener"
+                            href={`${getFilmDetail}/${sendLetter.movie_id}`}
+                            underline="hover"
+                          >
                           <CardMedia
                             height="400px"
                             component="img"
@@ -541,6 +557,7 @@ export const MyPage = () => {
                             sx={{ objectFit: 'contain' }}
                             alt=""
                           />
+                          </Link>
                         </CardContent>
                         <CardActions>
                           <Button
@@ -591,7 +608,6 @@ export const MyPage = () => {
                           '@media screen and (max-width:280px)': {
                             my: 6,
                             mx: -4,
-                            
                           },
                         }}
                         key={index}
@@ -611,6 +627,12 @@ export const MyPage = () => {
                           // }
                         />
                         <CardContent>
+                        <Link
+                            target="_blank"
+                            rel="noopener"
+                            href={`${getFilmDetail}/${receivedLetterDetail.movie_id}`}
+                            underline="hover"
+                          >
                           <CardMedia
                             height="400px"
                             component="img"
@@ -618,12 +640,13 @@ export const MyPage = () => {
                             sx={{ objectFit: 'contain' }}
                             alt=""
                           />
+                          </Link>
                         </CardContent>
                         <CardActions>
                           <Button
                             variant="contained"
                             disableElevation
-                            sx={{ mt:1, mx: 'auto', width:'200px' }}
+                            sx={{ mt: 1, mx: 'auto', width: '200px' }}
                             onClick={() =>
                               handleOpenModal(receivedLetterDetail)
                             }

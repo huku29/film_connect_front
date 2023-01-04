@@ -4,6 +4,7 @@ import {
   Stack,
   Backdrop,
   CircularProgress,
+  Link,
 } from '@mui/material'
 
 import Card from '@mui/material/Card'
@@ -24,7 +25,7 @@ import { useLocation } from 'react-router-dom'
 
 import { useNavigate } from 'react-router-dom'
 
-import { filmsImgSmall } from '@/urls'
+import { filmsImgSmall, getFilmDetail } from '@/urls'
 
 import axios from 'axios'
 
@@ -42,11 +43,7 @@ import Container from '@mui/material/Container'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
 import { useAtom } from 'jotai'
-import {
-  
-  handleSendFlashMessage
-
-} from '@/jotai/atoms'
+import { handleSendFlashMessage } from '@/jotai/atoms'
 
 export const WriteLetterPage = () => {
   const { control, handleSubmit, register } = useForm()
@@ -66,9 +63,9 @@ export const WriteLetterPage = () => {
 
   //CircleProgresの状態管理
   const [open, setOpen] = useState(false)
- 
+
   //Flashメッセージの状態管理
-  const [openFlash, setOpenFlash] = useAtom( handleSendFlashMessage)
+  const [openFlash, setOpenFlash] = useAtom(handleSendFlashMessage)
 
   const [openModal, setOpenModal] = useState(false)
 
@@ -126,9 +123,7 @@ export const WriteLetterPage = () => {
       )
       .then((res) => {
         setTimeout(() => {
-          navigation('/send', 
-            setOpenFlash(true)
-          )
+          navigation('/send', setOpenFlash(true))
         }, 5000)
       })
       .catch((error) => {
@@ -144,7 +139,6 @@ export const WriteLetterPage = () => {
     setStatus('')
     setSnackbarOpen('')
   }
-  
 
   const matches = useMediaQuery('(min-width:575px)')
 
@@ -154,9 +148,9 @@ export const WriteLetterPage = () => {
         <>
           <Card
             sx={{
-              mt:10,
-              ml:'auto',
-              mr:'auto',
+              mt: 10,
+              ml: 'auto',
+              mr: 'auto',
               width: 700,
               height: 700,
               bgcolor: '#fff3e0',
@@ -165,14 +159,14 @@ export const WriteLetterPage = () => {
               '@media screen and (max-width:820px)': {
                 textAligh: 'center',
                 mt: 25,
-                ml:'auto',
-                mr:'auto'
+                ml: 'auto',
+                mr: 'auto',
               },
               '@media screen and (width:912px)': {
                 textAligh: 'center',
                 mt: 40,
-                ml:'auto',
-                mr:'auto'
+                ml: 'auto',
+                mr: 'auto',
               },
             }}
           >
@@ -180,7 +174,7 @@ export const WriteLetterPage = () => {
               gutterBottom
               variant="h5"
               component="div"
-              sx={{ color: 'black', textAlign: 'center', }}
+              sx={{ color: 'black', textAlign: 'center' }}
             >
               {filmTitle}
             </Typography>
@@ -191,11 +185,16 @@ export const WriteLetterPage = () => {
               component="div"
               sx={{
                 color: 'black',
-              
-              
               }}
             >
-              <img alt="" src={`${filmsImgSmall}/${filmImg}`}></img>
+              <Link
+                target="_blank"
+                rel="noopener"
+                href={`${getFilmDetail}/${filmId}`}
+                underline="hover"
+              >
+                <img alt="" src={`${filmsImgSmall}/${filmImg}`}></img>
+              </Link>
             </Typography>
 
             <Stack
@@ -226,9 +225,8 @@ export const WriteLetterPage = () => {
                           rows={4}
                           defaultValue=""
                           sx={{
-                            mt:3,
-                            
-                          
+                            mt: 3,
+
                             '& .MuiInputBase-input': {
                               color: 'black', // 入力文字の色
                             },
@@ -249,7 +247,7 @@ export const WriteLetterPage = () => {
                   type="submit"
                   variant="contained"
                   size="small"
-                  sx={{mt:3,mr:2, mb:2}}
+                  sx={{ mt: 3, mr: 2, mb: 2 }}
                 >
                   送信
                 </Button>
@@ -299,12 +297,12 @@ export const WriteLetterPage = () => {
           </Box>
         </>
       ) : (
-        <Box >
+        <Box>
           <Card
             sx={{
-              mt:8,
-              ml:5,
-              mb:4,
+              mt: 8,
+              ml: 5,
+              mb: 4,
               width: 300,
               height: 600,
               bgcolor: '#fff3e0',
@@ -314,8 +312,8 @@ export const WriteLetterPage = () => {
                 textAligh: 'center',
                 mt: 10,
                 // ml: 7,
-                ml:'auto',
-                mr:'auto'
+                ml: 'auto',
+                mr: 'auto',
               },
               '@media screen and (max-width:281px)': {
                 textAligh: 'center',
@@ -327,7 +325,7 @@ export const WriteLetterPage = () => {
                 textAligh: 'center',
                 mt: 8,
                 ml: 15,
-                mb:7,
+                mb: 7,
                 mr: 'auto',
                 height: 640,
               },
@@ -350,7 +348,14 @@ export const WriteLetterPage = () => {
                 color: 'black',
               }}
             >
-              <img alt="" src={`${filmsImgSmall}/${filmImg}`}></img>
+              <Link
+                target="_blank"
+                rel="noopener"
+                href={`${getFilmDetail}/${filmId}`}
+                underline="hover"
+              >
+                <img alt="" src={`${filmsImgSmall}/${filmImg}`}></img>
+              </Link>
             </Typography>
 
             <Stack
@@ -384,7 +389,7 @@ export const WriteLetterPage = () => {
                             '& .MuiInputBase-input': {
                               color: 'black', // 入力文字の色
                             },
-                            mr:3
+                            mr: 3,
                           }}
                           inputProps={{
                             style: {
@@ -402,7 +407,7 @@ export const WriteLetterPage = () => {
                   type="submit"
                   variant="contained"
                   size="small"
-                  sx={{mt:2, mr:1}}
+                  sx={{ mt: 2, mr: 1 }}
                 >
                   送信
                 </Button>

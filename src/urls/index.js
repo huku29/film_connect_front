@@ -9,5 +9,7 @@ export const registerReceivedLetter = `${import.meta.env.VITE_DEFAULT_API_URL}/a
 export const getReceivedLetters = `${import.meta.env.VITE_DEFAULT_API_URL}/api/v1/received_letters`;
 export const getReceivedLettersData = `${import.meta.env.VITE_DEFAULT_API_URL}/api/v1/received_letters/info`;
 
+export const getFilmDetail = `${import.meta.env.VITE_FILM_DETAIL_URL}`;
 export const filmsimg = `${import.meta.env.VITE_FILM_IMG_URL}`;
 export const filmsImgSmall = `${import.meta.env.VITE_FILM_IMG_URL_SMALL}`;
+

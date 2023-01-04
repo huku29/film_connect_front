@@ -54,9 +54,11 @@ export const LoggedInFooter = (props) => {
       const json = res.data.detail
       const obj = JSON.parse(json)
 
+
       setMovieData({
         movieTitle: obj.title,
         movieImg: obj.poster_path,
+        movieId: obj.id,
         receiverId: res.data.current_user_id,
         letterId: res.data.letter.id,
         userId: res.data.letter.user_id,
