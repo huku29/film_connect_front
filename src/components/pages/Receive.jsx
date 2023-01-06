@@ -11,7 +11,12 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 
-import { filmsImgSmall, registerReceivedLetter, getFilmDetail } from '@/urls'
+import {
+  filmsImgSmall,
+  registerReceivedLetter,
+  getFilmDetail,
+  registerFirstSawFilm,
+} from '@/urls'
 
 import { TwitterShareButton, TwitterIcon } from 'react-share'
 
@@ -22,6 +27,8 @@ import {
   handleFadeModal,
   handleFlashMessageAtom,
   handleGetErrorMessageAtom,
+  handleRegistNotWatchFilmAtom,
+  handleGetFirstSawFilmLettersIdAtom,
 } from '@/jotai/atoms'
 
 import { RecommendPointModal } from '@/components/modals'
@@ -46,6 +53,14 @@ export const Receive = () => {
 
   const [errorMessage] = useAtom(handleGetErrorMessageAtom)
 
+  const [getFirstSawFilmLettersId, setGetFirstSawFilmLettersId] = useAtom(
+    handleGetFirstSawFilmLettersIdAtom
+  )
+
+  const match_first_saw_letter_id = getFirstSawFilmLettersId.find(
+    (getFirstSawFilmLetterId) => getFirstSawFilmLetterId === movieData.letterId
+  )
+
   const handleOpenModal = () => {
     setOpenModal(true)
   }
@@ -57,6 +72,7 @@ export const Receive = () => {
   const handleGetReceiveLetters = async () => {
     const params = { letter_id: movieData.letterId }
     const token = await user.getIdToken(true)
+
     const config = { headers: { authorization: `Bearer ${token}` } }
 
     axios
@@ -80,8 +96,42 @@ export const Receive = () => {
     setOpenFlash(false)
   }, [movieData])
 
+  //レスポンシブ
   const matches = useMediaQuery('(min-width:575px)')
 
+  const [registNotWatchFilm, setRegistNotWatchFilm] = useAtom(
+    handleRegistNotWatchFilmAtom
+  )
+  const [openFlashAlert, setOpenFlashAlert] = useState(false)
+  const [disable, setDisable] = useState(false)
+
+  const handleRegistNotWatchMovie = async () => {
+    const params = { letter_id: movieData.letterId }
+    const token = await user.getIdToken(true)
+    const config = { headers: { authorization: `Bearer ${token}` } }
+
+    await axios
+      .post(
+        registerFirstSawFilm,
+        {
+          first_saw_movie: params,
+        },
+        config
+      )
+      .then((res) => {
+        //驚きの顔文字
+        setRegistNotWatchFilm(true)
+        //アラートが表示
+        setOpenFlashAlert(true)
+        setTimeout(() => {
+          setOpenFlashAlert(false)
+        }, 2000)
+      })
+      .catch((error) => {})
+      .finally(() => {
+        setRegistNotWatchFilm(false)
+      })
+  }
 
   return (
     <LoggedInLayout>
@@ -115,15 +165,6 @@ export const Receive = () => {
                     title={movieData.movieTitle}
                     titleTypographyProps={{ variant: 'h5' }}
                     sx={{ color: 'black', textAlign: 'center', pt: 2 }}
-                    // title={
-                    //   <Typography
-                    //     gutterBottom
-                    //     variant="h5"
-                    //     sx={{ color: 'black', textAlign: 'center', pt: 2 }}
-                    //   >
-                    //     {sendLetter.movieTitle}
-                    //   </Typography>
-                    // }
                   />
                   <CardContent>
                     <Link
@@ -168,18 +209,30 @@ export const Receive = () => {
                       <TwitterIcon size={'55px'} round />
                     </TwitterShareButton>
                   </CardActions>
+                  <CardActions sx={{ ml: 12, my: -9.5 }}>
+                    {
+                      match_first_saw_letter_id ===
+                      movieData.letterId ? //   <FontAwesomeIcon icon={faFaceSurprise} size="3x" /> // <Button onClick={handleChangeFaceIcon}>
+                      // </Button>
+                      null : registNotWatchFilm ? (
+                        <Button
+                          variant="contained"
+                          sx={{ mt: 3, ml: 23 }}
+                          onClick={handleRegistNotWatchMovie}
+                        >
+                          観たことない
+                        </Button>
+                      ) : null
 
-                  {/*                 
-                <Box
-                  variant="contained"
-                  sx={{
-                    color: 'white',
-                  }}
-                >
-                  <Button variant="contained" onClick={handleGetReceiveLetters}>
-                    受け取る
-                  </Button>
-                </Box> */}
+                      // <Button onClick={handleChangeFaceIcon}>
+                      //   <FontAwesomeIcon icon={faFaceMehBlank} size="3x" />
+                      // </Button>
+                      // <Button  variant="contained"
+                      // sx={{mt: 3, ml:15}}>
+                      //   観たことない映画に追加されました
+                      // </Button>
+                    }
+                  </CardActions>
 
                   <Box
                     sx={{ position: 'absolute', right: '250px', top: '400px' }}
@@ -206,25 +259,29 @@ export const Receive = () => {
                         レターを受け取りました！
                       </Alert>
                     </Snackbar>
+                    <Snackbar
+                      //レター送信に成功したらalertで表示させる
+                      open={openFlashAlert}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                      }}
+                      sx={{
+                        height: '20%',
+                        maxWidth: '100%',
+                        bottom: { xs: 10, sm: 10 },
+                      }}
+                    >
+                      <Alert
+                        variant="filled"
+                        severity="success"
+                        sx={{ positon: 'fixed', bottom: '700px' }}
+                      >
+                        観たことないリストに追加されました
+                      </Alert>
+                    </Snackbar>
                   </Box>
 
-                  {/* シェアボタン */}
-                  {/* <Box
-                  sx={{
-                    position: 'fixed',
-                    left: '20px',
-                    bottom: '15px',
-                    color: 'white',
-                  }}
-                >
-                  <TwitterShareButton
-                    // url={}
-                    via={movieData.twitterUserName}
-                  >
-                    <TwitterIcon size={'50px'} round />
-                  </TwitterShareButton>
-                </Box> */}
-                  {/* おすすめモーダル */}
                   <RecommendPointModal
                     open={openModal}
                     onClose={handleCloseModal}
@@ -251,21 +308,13 @@ export const Receive = () => {
                     border: 'balck',
                     my: -32,
                     mx: 'auto',
+                    mb: 8,
                   }}
                 >
                   <CardHeader
                     title={movieData.movieTitle}
                     titleTypographyProps={{ variant: 'h7' }}
                     sx={{ color: 'black', textAlign: 'center' }}
-                    // title={
-                    //   <Typography
-                    //     gutterBottom
-                    //     variant="h5"
-                    //     sx={{ color: 'black', textAlign: 'center', pt: 2 }}
-                    //   >
-                    //     {sendLetter.movieTitle}
-                    //   </Typography>
-                    // }
                   />
                   <CardContent>
                     <Link
@@ -287,84 +336,42 @@ export const Receive = () => {
                     <Button
                       variant="contained"
                       // disableElevation
-                      sx={{ mt: 5, mx: 'auto', my: 1 }}
+                      sx={{ ml: 5 }}
                       onClick={handleOpenModal}
                     >
                       おすすめポイントを見る
                     </Button>
                   </CardActions>
-                  <CardActions>
-                    <Button
-                      variant="contained"
-                      sx={{ mt: 5, mx: 'auto', mr: 3, my: 1 }}
-                      onClick={handleGetReceiveLetters}
-                    >
-                      受け取る
-                    </Button>
+                  <CardActions sx={{}}>
+                    {match_first_saw_letter_id ===
+                    movieData.letterId ? null : registNotWatchFilm ? (
+                      <Button
+                        variant="contained"
+                        sx={{ ml: 5, textAlign: 'center', width: '250px' }}
+                        onClick={handleRegistNotWatchMovie}
+                      >
+                        観たことない
+                      </Button>
+                    ) : null}
+                    <CardActions sx={{ mb: -16 }}>
+                      <Button
+                        variant="contained"
+                        sx={{}}
+                        onClick={handleGetReceiveLetters}
+                      >
+                        受け取る
+                      </Button>
+                    </CardActions>
                   </CardActions>
-                  <CardActions sx={{ ml: 3, my: -9 }}>
+                  <CardActions sx={{ mb: 2 }}>
                     <TwitterShareButton
                       // url={}
                       via={movieData.twitterUserName}
                     >
-                      <TwitterIcon size={'55px'} round />
+                      <TwitterIcon size={'50px'} round />
                     </TwitterShareButton>
                   </CardActions>
 
-                  {/*                 
-                <Box
-                  variant="contained"
-                  sx={{
-                    color: 'white',
-                  }}
-                >
-                  <Button variant="contained" onClick={handleGetReceiveLetters}>
-                    受け取る
-                  </Button>
-                </Box> */}
-
-                  <Box
-                    sx={{ position: 'absolute', right: '250px', top: '400px' }}
-                  >
-                    <Snackbar
-                      //レター送信に成功したらalertで表示させる
-                      open={openFlash}
-                      anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
-                      }}
-                      sx={{
-                        height: '20%',
-                        maxWidth: '100%',
-                        bottom: { xs: 10, sm: 10 },
-                      }}
-                    >
-                      <Alert
-                        variant="filled"
-                        severity="success"
-                        sx={{ positon: 'fixed', bottom: '700px' }}
-                      >
-                        レターを受け取りました！
-                      </Alert>
-                    </Snackbar>
-                  </Box>
-
-                  {/* シェアボタン */}
-                  {/* <Box
-                  sx={{
-                    position: 'fixed',
-                    left: '20px',
-                    bottom: '15px',
-                    color: 'white',
-                  }}
-                >
-                  <TwitterShareButton
-                    // url={}
-                    via={movieData.twitterUserName}
-                  >
-                    <TwitterIcon size={'50px'} round />
-                  </TwitterShareButton>
-                </Box> */}
                   {/* おすすめモーダル */}
                   <RecommendPointModal
                     open={openModal}
