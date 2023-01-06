@@ -21,3 +21,10 @@ export const handleSendFlashMessage = atom(false)
 
 export const handleGetErrorMessageAtom = atom('')
 
+export const handleGetCreatedLettersRankingAtom = atom([])
+
+export const handleGetFirstSawFilmsRankingAtom = atom([])
+
+export const handleRegistNotWatchFilmAtom = atom(true)
+
+export const handleGetFirstSawFilmLettersIdAtom = atom([])

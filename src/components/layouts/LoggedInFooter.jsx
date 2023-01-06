@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { Box, BottomNavigation, BottomNavigationAction } from '@mui/material'
 import EmailIcon from '@mui/icons-material/Email'
+import EqualizerIcon from '@mui/icons-material/Equalizer'
 
 import { Link } from 'react-router-dom'
 
 import axios from 'axios'
-import { getLetter } from '@/urls'
+import { getLetter, getSawFilmLettersData } from '@/urls'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -18,7 +19,9 @@ import {
   recieveMovieDataAtom,
   handleFadeModal,
   handleGetErrorMessageAtom,
-  handleSendFlashMessage
+  handleSendFlashMessage,
+  handleRegistNotWatchFilmAtom,
+  handleGetFirstSawFilmLettersIdAtom,
 } from '@/jotai/atoms'
 
 export const LoggedInFooter = (props) => {
@@ -31,17 +34,25 @@ export const LoggedInFooter = (props) => {
 
   const [, setMovieData] = useAtom(recieveMovieDataAtom)
 
-  const [openFlash, setOpenFlash] = useAtom( handleSendFlashMessage)
+  const [openFlash, setOpenFlash] = useAtom(handleSendFlashMessage)
 
   const [, setOpen] = useAtom(handleFadeModal)
 
   const [, setErrorMessage] = useAtom(handleGetErrorMessageAtom)
 
+  const [registNotWatchFilm, setRegistNotWatchFilm] = useAtom(
+    handleRegistNotWatchFilmAtom
+  )
+
+  const [getFirstSawFilmLettersId, setGetFirstSawFilmLettersId] = useAtom(
+    handleGetFirstSawFilmLettersIdAtom
+  )
+
   const handleGetLetter = async () => {
     const token = await user.getIdToken(true)
     const config = { headers: { authorization: `Bearer ${token}` } }
 
-    axios.get(getLetter, config).then((res) => {
+    axios.get(getLetter, config).then(async (res) => {
       //受け取れるレターがなければ、メッセージを渡す
       if (res.data.message) {
         setErrorMessage(res.data.message)
@@ -54,7 +65,6 @@ export const LoggedInFooter = (props) => {
       const json = res.data.detail
       const obj = JSON.parse(json)
 
-
       setMovieData({
         movieTitle: obj.title,
         movieImg: obj.poster_path,
@@ -66,12 +76,18 @@ export const LoggedInFooter = (props) => {
         twitterUserName: res.data.user.name,
       })
 
+      const resSawFilmLetters = await axios.get(getSawFilmLettersData, config)
+
+      setGetFirstSawFilmLettersId(resSawFilmLetters.data)
+
       setOpen(true)
 
       navigation('/receive')
     })
+
     setOpen(false)
     setOpenFlash(false)
+    setRegistNotWatchFilm(true)
   }
 
   return (
@@ -120,6 +136,12 @@ export const LoggedInFooter = (props) => {
           label="Random"
           icon={<EmailIcon />}
           onClick={handleGetLetter}
+        />
+        <BottomNavigationAction
+          label="Ranking"
+          icon={<EqualizerIcon />}
+          component={Link}
+          to={'/ranking'}
         />
       </BottomNavigation>
     </Box>

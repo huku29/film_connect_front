@@ -7,13 +7,13 @@ import {
   Send,
   Receive,
   WriteLetterPage,
+  Ranking,
 } from '@/components/pages'
 import { MyContext } from '@/App'
 import { useContext } from 'react'
 
 export const Router = () => {
   const [user] = useContext(MyContext)
-
 
   const Private = (props) => {
     if (user) {
@@ -36,6 +36,7 @@ export const Router = () => {
           path="/writeletter"
           element={<Private component={<WriteLetterPage />} />}
         />
+        <Route path="/ranking" element={<Private component={<Ranking />} />} />
       </Routes>
     </BrowserRouter>
   )
