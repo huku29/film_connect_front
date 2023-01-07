@@ -164,6 +164,7 @@ export const Receive = () => {
                     mt: 1,
                     mr: 'auto',
                     ml: 'auto',
+                    mb: 5,
                     '@media screen and (max-width:915px)': {
                       textAligh: 'center',
                       mt: 25,
