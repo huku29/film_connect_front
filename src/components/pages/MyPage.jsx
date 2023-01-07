@@ -25,6 +25,8 @@ import {
   filmsImgSmall,
   getUsersName,
   getFilmDetail,
+  getNotWatchFilmLetters,
+  getNotWatchFilmLetterDetails,
 } from '@/urls'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -57,7 +59,11 @@ export const MyPage = () => {
 
   const [receivedLetterDetails, setReceivedLetterDetails] = useState([])
 
+  const [notWatchfilmLetterDetails, setNotWatchfilmLetterDetails] = useState([])
+
   const matches = useMediaQuery('(min-width:575px)')
+
+  const matchLowWidth = useMediaQuery('(max-width:280px)')
 
   // const [open] = useAtom(handleFadeModal)
   // const [movieData] = useAtom(recieveMovieDataAtom)
@@ -176,8 +182,66 @@ export const MyPage = () => {
     setIsLoading(false)
   }
 
+  const handleGetNotWatchFilmLetters = async () => {
+    if (notWatchfilmLetterDetails.length !== 0) return
+    setIsLoading(true)
+
+    const token = await user.getIdToken(true)
+    const config = { headers: { authorization: `Bearer ${token}` } }
+
+    const res = await axios.get(getNotWatchFilmLetters, config)
+
+    const resNotWatchFilmLetterDatas = res.data.not_watch_movies
+    const notWatchFilmLetterDatas = await Promise.all(
+      resNotWatchFilmLetterDatas.map(async (notWatchFilmLetterData) => {
+        const notWatchFilmDetails = await axios.get(
+          getNotWatchFilmLetterDetails,
+          {
+            params: {
+              letter_id: notWatchFilmLetterData.letter_id,
+            },
+          }
+        )
+
+        return notWatchFilmDetails.data.not_watch_movie_details[0]
+      })
+    )
+
+    const getNotWatchFilmDatas = await Promise.all(
+      notWatchFilmLetterDatas.map(async (notWatchFilmData) => {
+        //これを一つの配列にまとめたい
+
+        const result = await axios.get(getFilmsDetails, {
+          params: {
+            movie_id: notWatchFilmData.movie_id,
+          },
+        })
+        const { title, poster_path } = result.data
+        notWatchFilmData.movieTitle = title
+        notWatchFilmData.movieImage = poster_path
+        return notWatchFilmData
+      })
+    )
+
+    const getNotWatchFilmLetterDatasWithUserInfo = await Promise.all(
+      getNotWatchFilmDatas.map(async (receivedLetterDataWithUserInfo) => {
+        const newResult = await axios.get(getUsersName, {
+          params: {
+            user_id: receivedLetterDataWithUserInfo.user_id,
+          },
+        })
+        const { name } = newResult.data[0]
+        receivedLetterDataWithUserInfo.twitterName = name
+        return receivedLetterDataWithUserInfo
+      })
+    )
+    setNotWatchfilmLetterDetails(getNotWatchFilmLetterDatasWithUserInfo)
+    setIsLoading(false)
+  }
+
   useEffect(() => {
     getSendLetters()
+    // handleGetNotWatchFilmLetters ()
     setOpenFlash(false)
   }, [])
 
@@ -221,7 +285,12 @@ export const MyPage = () => {
               border: 'balck',
             }}
           >
-            <Tabs value={value} onChange={handleChange} centered>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              centered
+              sx={{ ml: 10 }}
+            >
               <Tab
                 label="送信済みレター"
                 sx={{ color: '#ff9800' }}
@@ -234,6 +303,12 @@ export const MyPage = () => {
                 sx={{ color: '#ff9800' }}
                 onClick={handleGetReceivedLetters}
                 value={1}
+              />
+              <Tab
+                label="観たことない映画レター"
+                sx={{ color: '#ff9800' }}
+                onClick={handleGetNotWatchFilmLetters}
+                value={2}
               />
             </Tabs>
           </Box>
@@ -381,19 +456,19 @@ export const MyPage = () => {
                           // }
                         />
                         <CardContent>
-                        <Link
+                          <Link
                             target="_blank"
                             rel="noopener"
                             href={`${getFilmDetail}/${receivedLetterDetail.movie_id}`}
                             underline="hover"
                           >
-                          <CardMedia
-                            height="400px"
-                            component="img"
-                            image={`${filmsImgSmall}/${receivedLetterDetail.movieImage}`}
-                            sx={{ objectFit: 'contain' }}
-                            alt=""
-                          />
+                            <CardMedia
+                              height="400px"
+                              component="img"
+                              image={`${filmsImgSmall}/${receivedLetterDetail.movieImage}`}
+                              sx={{ objectFit: 'contain' }}
+                              alt=""
+                            />
                           </Link>
                         </CardContent>
                         <CardActions>
@@ -420,6 +495,100 @@ export const MyPage = () => {
                         </CardActions>
                       </Card>
                     ))
+                  )}
+                </Grid>
+              </TabPanel>
+            </SwiperSlide>
+
+            {/* 観たことない映画レター一覧 */}
+            <SwiperSlide>
+              <TabPanel value={value} index={2}>
+                <Grid columns={{ xs: 4, sm: 8, md: 12 }}>
+                  {isLoading && (
+                    <Box sx={{ textAlign: 'center', mt: 10 }}>
+                      <CircularProgress />
+                    </Box>
+                  )}
+
+                  {!isLoading && notWatchfilmLetterDetails.length === 0 ? (
+                    <Box
+                      sx={{
+                        mt: 4,
+                        textAlign: 'center',
+                      }}
+                    >
+                      観たことない映画レターはありません
+                    </Box>
+                  ) : (
+                    notWatchfilmLetterDetails.map(
+                      (notWatchfilmLetterDetail, index) => (
+                        <Card
+                          sx={{
+                            width: 700,
+                            height: 700,
+                            bgcolor: '#fff3e0',
+                            textAlign: 'center',
+                            border: 'balck',
+                            my: 6,
+                            mx: 'auto',
+                          }}
+                          key={index}
+                        >
+                          <CardHeader
+                            title={notWatchfilmLetterDetail.movieTitle}
+                            titleTypographyProps={{ variant: 'h5' }}
+                            sx={{ color: 'black', textAlign: 'center', pt: 2 }}
+                            // title={
+                            //   <Typography
+                            //     gutterBottom
+                            //     variant="h5"
+                            //     sx={{ color: 'black', textAlign: 'center', pt: 2 }}
+                            //   >
+                            //     {sendLetter.movieTitle}
+                            //   </Typography>
+                            // }
+                          />
+                          <CardContent>
+                            <Link
+                              target="_blank"
+                              rel="noopener"
+                              href={`${getFilmDetail}/${notWatchfilmLetterDetail.movie_id}`}
+                              underline="hover"
+                            >
+                              <CardMedia
+                                height="400px"
+                                component="img"
+                                image={`${filmsImgSmall}/${notWatchfilmLetterDetail.movieImage}`}
+                                sx={{ objectFit: 'contain' }}
+                                alt=""
+                              />
+                            </Link>
+                          </CardContent>
+                          <CardActions>
+                            <Button
+                              variant="contained"
+                              disableElevation
+                              sx={{ mt: 5, mx: 'auto' }}
+                              onClick={() =>
+                                handleOpenModal(notWatchfilmLetterDetail)
+                              }
+                            >
+                              おすすめポイントを見る
+                            </Button>
+                          </CardActions>
+                          <CardActions sx={{ ml: 3, my: 1 }}>
+                            <TwitterShareButton
+                              title={`@${notWatchfilmLetterDetail.twitterName}さんからのおすすめ映画`}
+                              hashtags={['映画で人と繋がりたい']}
+                              url={'https://film-connect.web.app'}
+                              // via={"FilmConnect"}
+                            >
+                              <TwitterIcon size={'55px'} round />
+                            </TwitterShareButton>
+                          </CardActions>
+                        </Card>
+                      )
+                    )
                   )}
                 </Grid>
               </TabPanel>
@@ -459,21 +628,69 @@ export const MyPage = () => {
               border: 'balck',
             }}
           >
-            <Tabs value={value} onChange={handleChange} centered>
-              <Tab
-                label="送信済みレター"
-                sx={{ color: '#ff9800' }}
-                onClick={getSendLetters}
-                value={0}
-              />
+            {matchLowWidth ? (
+              <Tabs value={value} onChange={handleChange}>
+                <Tab
+                  label="送信済みレター"
+                  sx={{
+                    color: '#ff9800',
+                    fontSize: '11px',
+                    '@media screen and (width:280px)': {
+                      fontSize: '1px',
+                    },
+                  }}
+                  onClick={getSendLetters}
+                  value={0}
+                />
 
-              <Tab
-                label="受け取ったレター"
-                sx={{ color: '#ff9800' }}
-                onClick={handleGetReceivedLetters}
-                value={1}
-              />
-            </Tabs>
+                <Tab
+                  label="受け取ったレター"
+                  sx={{
+                    color: '#ff9800',
+                    fontSize: '11px',
+                    '@media screen and (width:280px)': {
+                      fontSize: '1px',
+                    },
+                  }}
+                  onClick={handleGetReceivedLetters}
+                  value={1}
+                />
+                <Tab
+                  label="観たことない映画レター"
+                  sx={{
+                    color: '#ff9800',
+                    fontSize: '11px',
+                    '@media screen and (width:280px)': {
+                      fontSize: '0.5px',
+                    },
+                  }}
+                  onClick={handleGetNotWatchFilmLetters}
+                  value={2}
+                />
+              </Tabs>
+            ) : (
+              <Tabs value={value} onChange={handleChange} centered>
+                <Tab
+                  label="送信済みレター"
+                  sx={{ color: '#ff9800', fontSize: '11px' }}
+                  onClick={getSendLetters}
+                  value={0}
+                />
+
+                <Tab
+                  label="受け取ったレター"
+                  sx={{ color: '#ff9800', fontSize: '11px' }}
+                  onClick={handleGetReceivedLetters}
+                  value={1}
+                />
+                <Tab
+                  label="観たことない映画レター"
+                  sx={{ color: '#ff9800', fontSize: '11px' }}
+                  onClick={handleGetNotWatchFilmLetters}
+                  value={2}
+                />
+              </Tabs>
+            )}
           </Box>
 
           <Swiper
@@ -544,19 +761,19 @@ export const MyPage = () => {
                           // }
                         />
                         <CardContent>
-                        <Link
+                          <Link
                             target="_blank"
                             rel="noopener"
                             href={`${getFilmDetail}/${sendLetter.movie_id}`}
                             underline="hover"
                           >
-                          <CardMedia
-                            height="400px"
-                            component="img"
-                            image={`${filmsImgSmall}/${sendLetter.movieImage}`}
-                            sx={{ objectFit: 'contain' }}
-                            alt=""
-                          />
+                            <CardMedia
+                              height="400px"
+                              component="img"
+                              image={`${filmsImgSmall}/${sendLetter.movieImage}`}
+                              sx={{ objectFit: 'contain' }}
+                              alt=""
+                            />
                           </Link>
                         </CardContent>
                         <CardActions>
@@ -627,19 +844,19 @@ export const MyPage = () => {
                           // }
                         />
                         <CardContent>
-                        <Link
+                          <Link
                             target="_blank"
                             rel="noopener"
                             href={`${getFilmDetail}/${receivedLetterDetail.movie_id}`}
                             underline="hover"
                           >
-                          <CardMedia
-                            height="400px"
-                            component="img"
-                            image={`${filmsImgSmall}/${receivedLetterDetail.movieImage}`}
-                            sx={{ objectFit: 'contain' }}
-                            alt=""
-                          />
+                            <CardMedia
+                              height="400px"
+                              component="img"
+                              image={`${filmsImgSmall}/${receivedLetterDetail.movieImage}`}
+                              sx={{ objectFit: 'contain' }}
+                              alt=""
+                            />
                           </Link>
                         </CardContent>
                         <CardActions>
@@ -666,6 +883,102 @@ export const MyPage = () => {
                         </CardActions>
                       </Card>
                     ))
+                  )}
+                </Grid>
+              </TabPanel>
+            </SwiperSlide>
+            <SwiperSlide>
+              <TabPanel value={value} index={2}>
+                <Grid columns={{ xs: 4, sm: 8, md: 12 }}>
+                  {isLoading && (
+                    <Box sx={{ textAlign: 'center', mt: 10 }}>
+                      <CircularProgress />
+                    </Box>
+                  )}
+
+                  {!isLoading && notWatchfilmLetterDetails.length === 0 ? (
+                    <Box
+                      sx={{
+                        mt: 4,
+                        textAlign: 'center',
+                      }}
+                    >
+                      観たことない映画レターはありません
+                    </Box>
+                  ) : (
+                    notWatchfilmLetterDetails.map(
+                      (notWatchfilmLetterDetail, index) => (
+                        <Card
+                          sx={{
+                            width: 300,
+                            height: 700,
+                            bgcolor: '#fff3e0',
+                            textAlign: 'center',
+                            border: 'balck',
+                            my: 6,
+                            mx: 'auto',
+                            '@media screen and (max-width:280px)': {
+                              my: 6,
+                              mx: -4,
+                            },
+                          }}
+                          key={index}
+                        >
+                          <CardHeader
+                            title={notWatchfilmLetterDetail.movieTitle}
+                            titleTypographyProps={{ variant: 'h5' }}
+                            sx={{ color: 'black', textAlign: 'center', pt: 2 }}
+                            // title={
+                            //   <Typography
+                            //     gutterBottom
+                            //     variant="h5"
+                            //     sx={{ color: 'black', textAlign: 'center', pt: 2 }}
+                            //   >
+                            //     {sendLetter.movieTitle}
+                            //   </Typography>
+                            // }
+                          />
+                          <CardContent>
+                            <Link
+                              target="_blank"
+                              rel="noopener"
+                              href={`${getFilmDetail}/${notWatchfilmLetterDetail.movie_id}`}
+                              underline="hover"
+                            >
+                              <CardMedia
+                                height="400px"
+                                component="img"
+                                image={`${filmsImgSmall}/${notWatchfilmLetterDetail.movieImage}`}
+                                sx={{ objectFit: 'contain' }}
+                                alt=""
+                              />
+                            </Link>
+                          </CardContent>
+                          <CardActions>
+                            <Button
+                              variant="contained"
+                              disableElevation
+                              sx={{ mt: 1, mx: 'auto' }}
+                              onClick={() =>
+                                handleOpenModal(notWatchfilmLetterDetail)
+                              }
+                            >
+                              おすすめポイントを見る
+                            </Button>
+                          </CardActions>
+                          <CardActions sx={{ my: 1 }}>
+                            <TwitterShareButton
+                              title={`@${notWatchfilmLetterDetail.twitterName}さんからのおすすめ映画`}
+                              hashtags={['映画で人と繋がりたい']}
+                              url={'https://film-connect.web.app'}
+                              // via={"FilmConnect"}
+                            >
+                              <TwitterIcon size={'55px'} round />
+                            </TwitterShareButton>
+                          </CardActions>
+                        </Card>
+                      )
+                    )
                   )}
                 </Grid>
               </TabPanel>
