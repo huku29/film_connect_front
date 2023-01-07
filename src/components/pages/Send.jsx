@@ -186,6 +186,7 @@ export const Send = () => {
             sx={{
               flexGrow: 1,
               mt: '5%',
+              mb: '5%',
               ml: 'auto',
               mr: 'auto',
               textAlign: 'center',
@@ -309,7 +310,7 @@ export const Send = () => {
             </IconButton>
           </Paper>
 
-          <Box sx={{ flexGrow: 1, mt: '5%', ml: 'auto', mr: 'auto' }}>
+          <Box sx={{ flexGrow: 1, mt: '5%', ml: 'auto', mr: 'auto'}}>
             <InfiniteScroll
               initialLoad={false}
               loadMore={loadMore} //項目を読み込む際に処理するコールバック関数
@@ -338,6 +339,7 @@ export const Send = () => {
                             textAligh: 'center',
                             ml: 3,
                             pt: 5,
+                            mb: '18%',
                             maxWidth: '340px',
                             '@media screen and (min-width:400px)': {
                               textAligh: 'center',
