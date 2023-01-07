@@ -168,133 +168,102 @@ export const Ranking = () => {
             >
               <SwiperSlide>
                 <TabPanel value={value} index={0}>
-                  {filmRank.map((film, index) =>
-                    film.poster_path ? (
-                      <Grid
-                        item
-                        xs={2}
-                        sm={4}
-                        md={4}
-                        key={index}
-                        sx={{ textAlign: 'center' }}
+                  <Grid item xs={2} sm={4} md={4} sx={{ textAlign: 'center' }}>
+                    {isLoading && (
+                      <Box sx={{ textAlign: 'center', mt: 10 }}>
+                        <CircularProgress />
+                      </Box>
+                    )}
+
+                    {!isLoading && filmRank.length === 0 ? (
+                      <Box
+                        sx={{
+                          mt: 4,
+                          textAlign: 'center',
+                        }}
                       >
-                        {isLoading && (
-                          <Box sx={{ textAlign: 'center', mt: 6 }}>
-                            <CircularProgress />
-                          </Box>
-                        )}
-                        {!isLoading && film.length === 0 ? (
+                        作成された映画ランキングはありません
+                      </Box>
+                    ) : (
+                      filmRank.map((film, index) => (
+                        <Box key={index}>
+                          <Typography variant="h4" sx={{ textAlign: 'center' }}>
+                            {`--${index + 1}位--`}
+                          </Typography>
                           <Box
                             sx={{
-                              mt: 4,
-                              textAlign: 'center',
+                              textAligh: 'center',
                             }}
                           >
-                            作成された映画ランキングがありません
+                            <List>
+                              <Link
+                                target="_blank"
+                                rel="noopener"
+                                href={`${getFilmDetail}/${film.id}`}
+                                underline="hover"
+                              >
+                                <img
+                                  alt=""
+                                  src={`${filmsimg}/${film.poster_path}`}
+                                ></img>
+                              </Link>
+                            </List>
+                            <Box sx={{ mb: 7 }}>{film.title}</Box>
                           </Box>
-                        ) : (
-                          <>
-                            <Typography
-                              variant="h4"
-                              sx={{ textAlign: 'center' }}
-                            >
-                              {`--${index + 1}位--`}
-                            </Typography>
-                            <Box
-                              key={index}
-                              sx={{
-                                textAligh: 'center',
-                              }}
-                            >
-                              <List>
-                                <Link
-                                  target="_blank"
-                                  rel="noopener"
-                                  href={`${getFilmDetail}/${film.id}`}
-                                  underline="hover"
-                                >
-                                  <img
-                                    alt=""
-                                    src={`${filmsimg}/${film.poster_path}`}
-                                  ></img>
-                                </Link>
-                              </List>
-                              <Box sx={{ mb: 7 }}>{film.title}</Box>
-                            </Box>
-                          </>
-                        )}
-                      </Grid>
-                    ) : null
-                  )}
+                        </Box>
+                      ))
+                    )}
+                  </Grid>
                 </TabPanel>
               </SwiperSlide>
               <SwiperSlide>
                 <TabPanel value={value} index={1}>
-                  {sawFilmRank.map((film, index) =>
-                    film.poster_path ? (
-                      <Grid
-                        item
-                        xs={2}
-                        sm={4}
-                        md={4}
-                        key={index}
-                        sx={{ textAlign: 'center' }}
-                      >
-                        {isLoading && (
-                          <Box sx={{ textAlign: 'center', mt: 10 }}>
-                            <CircularProgress />
-                          </Box>
-                        )}
+                  <Grid item xs={2} sm={4} md={4} sx={{ textAlign: 'center' }}>
+                    {isLoading && (
+                      <Box sx={{ textAlign: 'center', mt: 10 }}>
+                        <CircularProgress />
+                      </Box>
+                    )}
 
-                        {!isLoading && film.length === 0 ? (
+                    {!isLoading && sawFilmRank.length === 0 ? (
+                      <Box
+                        sx={{
+                          mt: 4,
+                          textAlign: 'center',
+                        }}
+                      >
+                        観たことない映画ランキングはありません
+                      </Box>
+                    ) : (
+                      sawFilmRank.map((film, index) => (
+                        <Box key={index}>
+                          <Typography variant="h4" sx={{ textAlign: 'center' }}>
+                            {`--${index + 1}位--`}
+                          </Typography>
                           <Box
                             sx={{
-                              mt: 4,
-                              textAlign: 'center',
+                              textAligh: 'center',
                             }}
                           >
-                            観たことない映画ランキングはありません
-                          </Box>
-                        ) : (
-                          <>
-                            <Typography
-                              variant="h4"
-                              sx={{ textAlign: 'center' }}
-                            >
-                              {`--${index + 1}位--`}
-                            </Typography>
-                            <Box
-                              key={index}
-                              sx={{
-                                textAligh: 'center',
-                              }}
-                            >
-                              <List
-                                sx={{
-                                  '@media screen and (width:280px)': {
-                                    textAligh: 'center',
-                                  },
-                                }}
+                            <List>
+                              <Link
+                                target="_blank"
+                                rel="noopener"
+                                href={`${getFilmDetail}/${film.id}`}
+                                underline="hover"
                               >
-                                <Link
-                                  target="_blank"
-                                  rel="noopener"
-                                  href={`${getFilmDetail}/${film.id}`}
-                                  underline="hover"
-                                >
-                                  <img
-                                    alt=""
-                                    src={`${filmsimg}/${film.poster_path}`}
-                                  ></img>
-                                </Link>
-                              </List>
-                              <Box sx={{ mb: 7 }}>{film.title}</Box>
-                            </Box>
-                          </>
-                        )}
-                      </Grid>
-                    ) : null
-                  )}
+                                <img
+                                  alt=""
+                                  src={`${filmsimg}/${film.poster_path}`}
+                                ></img>
+                              </Link>
+                            </List>
+                            <Box sx={{ mb: 7 }}>{film.title}</Box>
+                          </Box>
+                        </Box>
+                      ))
+                    )}
+                  </Grid>
                 </TabPanel>
               </SwiperSlide>
             </Swiper>
@@ -362,142 +331,116 @@ export const Ranking = () => {
             >
               <SwiperSlide>
                 <TabPanel value={value} index={0}>
-                  {filmRank.map((film, index) =>
-                    film.poster_path ? (
-                      <Grid
-                        columns={{ xs: 4, sm: 8, md: 12 }}
-                        item
-                        key={index}
-                        sx={{ textAlign: 'center' }}
+                  <Grid item xs={2} sm={4} md={4} sx={{ textAlign: 'center' }}>
+                    {isLoading && (
+                      <Box sx={{ textAlign: 'center', mt: 10 }}>
+                        <CircularProgress />
+                      </Box>
+                    )}
+
+                    {!isLoading && filmRank.length === 0 ? (
+                      <Box
+                        sx={{
+                          mt: 4,
+                          textAlign: 'center',
+                        }}
                       >
-                        {isLoading && (
-                          <Box sx={{ textAlign: 'center', mt: 6 }}>
-                            <CircularProgress />
-                          </Box>
-                        )}
-                        {!isLoading && film.length === 0 ? (
+                        作成された映画ランキングはありません
+                      </Box>
+                    ) : (
+                      filmRank.map((film, index) => (
+                        <Box key={index}>
+                          <Typography variant="h4" sx={{ textAlign: 'center' }}>
+                            {`--${index + 1}位--`}
+                          </Typography>
                           <Box
                             sx={{
-                              mt: 4,
-                              textAlign: 'center',
+                              textAligh: 'center',
                             }}
                           >
-                            作成された映画レターランキングがありません
-                          </Box>
-                        ) : (
-                          <>
-                            <Typography
-                              variant="h4"
-                              sx={{ textAlign: 'center' }}
-                            >
-                              {`--${index + 1}位--`}
-                            </Typography>
-                            <Box
-                              key={index}
+                            <List
                               sx={{
-                                textAligh: 'center',
+                                '@media screen and (width:280px)': {
+                                  ml: -4,
+                                  width: '100%',
+                                },
                               }}
                             >
-                              <List
-                                sx={{
-                                  textAlign: 'center',
-                                  '@media screen and (width:280px)': {
-                                    ml: -4,
-                                    width: '100%',
-                                  },
-                                }}
+                              <Link
+                                target="_blank"
+                                rel="noopener"
+                                href={`${getFilmDetail}/${film.id}`}
+                                underline="hover"
                               >
-                                <Link
-                                  target="_blank"
-                                  rel="noopener"
-                                  href={`${getFilmDetail}/${film.id}`}
-                                  underline="hover"
-                                >
-                                  <img
-                                    alt=""
-                                    src={`${filmsimg}/${film.poster_path}`}
-                                  ></img>
-                                </Link>
-                              </List>
-                              <Box sx={{ mb: 7 }}>{film.title}</Box>
-                            </Box>
-                          </>
-                        )}
-                      </Grid>
-                    ) : null
-                  )}
+                                <img
+                                  alt=""
+                                  src={`${filmsimg}/${film.poster_path}`}
+                                ></img>
+                              </Link>
+                            </List>
+                            <Box sx={{ mb: 7 }}>{film.title}</Box>
+                          </Box>
+                        </Box>
+                      ))
+                    )}
+                  </Grid>
                 </TabPanel>
               </SwiperSlide>
               <SwiperSlide>
                 <TabPanel value={value} index={1}>
-                  {sawFilmRank.map((film, index) =>
-                    film.poster_path ? (
-                      <Grid item key={index} sx={{ textAlign: 'center' }}>
-                        {isLoading && (
-                          <Box sx={{ textAlign: 'center', mt: 10 }}>
-                            <CircularProgress />
-                          </Box>
-                        )}
+                  <Grid item xs={2} sm={4} md={4} sx={{ textAlign: 'center' }}>
+                    {isLoading && (
+                      <Box sx={{ textAlign: 'center', mt: 10 }}>
+                        <CircularProgress />
+                      </Box>
+                    )}
 
-                        {!isLoading && film.length === 0 ? (
+                    {!isLoading && sawFilmRank.length === 0 ? (
+                      <Box
+                        sx={{
+                          mt: 4,
+                          textAlign: 'center',
+                        }}
+                      >
+                        観たことない映画ランキングはありません
+                      </Box>
+                    ) : (
+                      sawFilmRank.map((film, index) => (
+                        <Box key={index}>
+                          <Typography variant="h4" sx={{ textAlign: 'center' }}>
+                            {`--${index + 1}位--`}
+                          </Typography>
                           <Box
                             sx={{
-                              mt: 4,
-                              textAlign: 'center',
+                              textAligh: 'center',
                             }}
                           >
-                            観たことない映画ランキングがありません
-                          </Box>
-                        ) : (
-                          <Box
-                            sx={{
-                              textAlign: 'center',
-                              '@media screen and (width:280px)': {
-                                width: '100%',
-                              },
-                            }}
-                          >
-                            <Typography
-                              variant="h4"
-                              sx={{ textAlign: 'center' }}
-                            >
-                              {`--${index + 1}位--`}
-                            </Typography>
-                            <Box
-                              key={index}
+                            <List
                               sx={{
-                                textAligh: 'center',
+                                '@media screen and (width:280px)': {
+                                  ml: -4,
+                                  width: '100%',
+                                },
                               }}
                             >
-                              <List
-                                sx={{
-                                  textAlign: 'center',
-                                  '@media screen and (width:280px)': {
-                                    ml: -4,
-                                    width: '100%',
-                                  },
-                                }}
+                              <Link
+                                target="_blank"
+                                rel="noopener"
+                                href={`${getFilmDetail}/${film.id}`}
+                                underline="hover"
                               >
-                                <Link
-                                  target="_blank"
-                                  rel="noopener"
-                                  href={`${getFilmDetail}/${film.id}`}
-                                  underline="hover"
-                                >
-                                  <img
-                                    alt=""
-                                    src={`${filmsimg}/${film.poster_path}`}
-                                  ></img>
-                                </Link>
-                              </List>
-
-                              <Box sx={{ mb: 7 }}>{film.title}</Box>
-                            </Box>
+                                <img
+                                  alt=""
+                                  src={`${filmsimg}/${film.poster_path}`}
+                                ></img>
+                              </Link>
+                            </List>
+                            <Box sx={{ mb: 7 }}>{film.title}</Box>
                           </Box>
-                        )}
-                      </Grid>
-                    ) : null
-                  )}
+                        </Box>
+                      ))
+                    )}
+                  </Grid>
                 </TabPanel>
               </SwiperSlide>
             </Swiper>
