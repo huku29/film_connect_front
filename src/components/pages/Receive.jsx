@@ -76,23 +76,30 @@ export const Receive = () => {
     const config = { headers: { authorization: `Bearer ${token}` } }
 
     axios
-      .post(
-        registerReceivedLetter,
-        {
-          received_letter: params,
-        },
-        config
+    .post(
+      registerReceivedLetter,
+      {
+        received_letter: params,
+      },
+      config
       )
       .then((res) => {
         setOpenFlash(true)
+        setTimeout(() => {
+          setOpenFlash(false)
+
+        }, 2000)
       })
       .catch(() => {})
-
+      
+      
+      setDisable(true)
     setOpenFlash(false)
   }
 
   //受け取るボタンを押すとフラッシュメッセージを消す
   useEffect(() => {
+    setDisable(false)
     setOpenFlash(false)
   }, [movieData])
 
@@ -125,6 +132,8 @@ export const Receive = () => {
         setOpenFlashAlert(true)
         setTimeout(() => {
           setOpenFlashAlert(false)
+          setOpenFlash(false)
+
         }, 2000)
       })
       .catch((error) => {})
@@ -197,6 +206,7 @@ export const Receive = () => {
                       variant="contained"
                       sx={{ mx: 'auto', mr: 3 }}
                       onClick={handleGetReceiveLetters}
+                      disabled={disable}
                     >
                       受け取る
                     </Button>
@@ -347,23 +357,24 @@ export const Receive = () => {
                     movieData.letterId ? null : registNotWatchFilm ? (
                       <Button
                         variant="contained"
-                        sx={{ ml: 5, textAlign: 'center', width: '250px' }}
+                        sx={{ ml: 5, textAlign: 'center', width: '190px' }}
                         onClick={handleRegistNotWatchMovie}
                       >
                         観たことない
                       </Button>
                     ) : null}
-                    <CardActions sx={{ mb: -16 }}>
+                  </CardActions>
+                    <CardActions sx={{ mb: -7, ml:20 }}>
                       <Button
                         variant="contained"
                         sx={{}}
                         onClick={handleGetReceiveLetters}
+                        disabled={disable}
                       >
                         受け取る
                       </Button>
                     </CardActions>
-                  </CardActions>
-                  <CardActions sx={{ mb: 2 }}>
+                  <CardActions sx={{ml:5 }}>
                     <TwitterShareButton
                       // url={}
                       via={movieData.twitterUserName}
@@ -371,6 +382,55 @@ export const Receive = () => {
                       <TwitterIcon size={'50px'} round />
                     </TwitterShareButton>
                   </CardActions>
+                  <Box
+                    sx={{ position: 'absolute', right: '250px', top: '400px' }}
+                  >
+                    <Snackbar
+                      //レター送信に成功したらalertで表示させる
+                      open={openFlash}
+                      anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                      }}
+                      sx={{
+                        top: 80,
+                        height: '20%',
+                        maxWidth: '100%',
+                        bottom: { xs: 10, sm: 10 },
+                        mb: 5,
+                      }}
+                    >
+                      <Alert
+                        variant="filled"
+                        severity="success"
+                        sx={{ positon: 'fixed', bottom: '700px' }}
+                      >
+                        レターを受け取りました！
+                      </Alert>
+                    </Snackbar>
+                    <Snackbar
+                      //レター送信に成功したらalertで表示させる
+                      open={openFlashAlert}
+                      anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                      }}
+                      sx={{
+                        top: 50,
+                        height: '20%',
+                        maxWidth: '100%',
+                        bottom: { xs: 10, sm: 10 },
+                      }}
+                    >
+                      <Alert
+                        variant="filled"
+                        severity="success"
+                        sx={{ positon: 'fixed', bottom: '700px' }}
+                      >
+                        観たことないリストに追加されました
+                      </Alert>
+                    </Snackbar>
+                  </Box>
 
                   {/* おすすめモーダル */}
                   <RecommendPointModal
