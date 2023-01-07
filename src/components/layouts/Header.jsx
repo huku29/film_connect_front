@@ -65,204 +65,226 @@ export const Header = () => {
   }
 
   return (
-
     <Box sx={{ display: 'flex' }}>
-    {matches ? (
-      <>
-        <CssBaseline />
-        <AppBar
-          position="fixed"
-          open={open}
-          sx={{ backgroundColor: 'black', color: '#ff9800' }}
-        >
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={{ mr: 2, ...(open && { display: 'none' }), right: 0 }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              Film Connect
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          sx={{
-            width: drawerWidth,
-            flexShrink: 0,
-            '& .MuiDrawer-paper': {
-              //ハンバーガメニューを押すと幅が変わる
+      {matches ? (
+        <>
+          <CssBaseline />
+          <AppBar
+            position="fixed"
+            open={open}
+            sx={{ backgroundColor: 'black', color: '#ff9800' }}
+          >
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                sx={{ mr: 2, ...(open && { display: 'none' }), right: 0 }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" noWrap component="div" sx={{ pt: 1 }}>
+                <img
+                  src="https://film-connect.web.app/logo.png"
+                  className="header-logo"
+                  alt="header-logo"
+                  width="200"
+                  height="40"
+                />
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            sx={{
               width: drawerWidth,
-              boxSizing: 'border-box',
-              backgroundColor: 'black',
-            },
-          }}
-          variant="persistent"
-          anchor="left"
-          open={open}
-        >
-          {/*横のスライドの矢印マーク*/}
-          <DrawerHeader>
-            {/* /*矢印を押したら閉まる*/}
-            <IconButton
-              onClick={handleDrawerClose}
-              sx={{ color: 'text.primary' }}
-            >
-              {/* themeのdirectionがltrの場合、左書きのげんとといういみ */}
-              {theme.direction === 'ltr' ? (
-                <ChevronLeftIcon />
-              ) : (
-                <ChevronRightIcon />
-              )}
-            </IconButton>
-          </DrawerHeader>
-  
-          <Divider />
-  
-          <List>
-            <ListItem>
-              <ListItemButton component={Link} to="/login">
-                <ListItemIcon>
-                  <LoginIcon sx={{ color: 'text.primary' }} />
-                </ListItemIcon>
-                <ListItemText primary="Login" sx={{ color: 'text.primary' }} />
-              </ListItemButton>
-            </ListItem>
-  
-            <ListItem>
-              <ListItemButton component={Link} to="/send">
-                <ListItemIcon></ListItemIcon>
-                <ListItemText
-                  primary="利用規約"
-                  sx={{ color: 'text.primary' }}
-                  to={'/mypage'}
-                />
-              </ListItemButton>
-            </ListItem>
-  
-            <ListItem>
-              <ListItemButton component={Link} to="/send">
-                <ListItemIcon></ListItemIcon>
-                <ListItemText
-                  primary="プライバシーポリシー"
-                  sx={{ color: 'text.primary' }}
-                />
-              </ListItemButton>
-            </ListItem>
-  
-            <ListItem>
-              <ListItemButton component={Link} to="/send">
-                <ListItemIcon></ListItemIcon>
-                <ListItemText primary="お問合せ" sx={{ color: 'text.primary' }} />
-              </ListItemButton>
-            </ListItem>
-          </List>
-        </Drawer>
+              flexShrink: 0,
+              '& .MuiDrawer-paper': {
+                //ハンバーガメニューを押すと幅が変わる
+                width: drawerWidth,
+                boxSizing: 'border-box',
+                backgroundColor: 'black',
+              },
+            }}
+            variant="persistent"
+            anchor="left"
+            open={open}
+          >
+            {/*横のスライドの矢印マーク*/}
+            <DrawerHeader>
+              {/* /*矢印を押したら閉まる*/}
+              <IconButton
+                onClick={handleDrawerClose}
+                sx={{ color: 'text.primary' }}
+              >
+                {/* themeのdirectionがltrの場合、左書きのげんとといういみ */}
+                {theme.direction === 'ltr' ? (
+                  <ChevronLeftIcon />
+                ) : (
+                  <ChevronRightIcon />
+                )}
+              </IconButton>
+            </DrawerHeader>
+
+            <Divider />
+
+            <List>
+              <ListItem>
+                <ListItemButton component={Link} to="/login">
+                  <ListItemIcon>
+                    <LoginIcon sx={{ color: 'text.primary' }} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Login"
+                    sx={{ color: 'text.primary' }}
+                  />
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem>
+                <ListItemButton component={Link} to="/send">
+                  <ListItemIcon></ListItemIcon>
+                  <ListItemText
+                    primary="利用規約"
+                    sx={{ color: 'text.primary' }}
+                    to={'/mypage'}
+                  />
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem>
+                <ListItemButton component={Link} to="/send">
+                  <ListItemIcon></ListItemIcon>
+                  <ListItemText
+                    primary="プライバシーポリシー"
+                    sx={{ color: 'text.primary' }}
+                  />
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem>
+                <ListItemButton component={Link} to="/send">
+                  <ListItemIcon></ListItemIcon>
+                  <ListItemText
+                    primary="お問合せ"
+                    sx={{ color: 'text.primary' }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </List>
+          </Drawer>
         </>
-    ):(
-      <>
-        <CssBaseline />
-        <AppBar
-          position="fixed"
-          open={open}
-          sx={{ backgroundColor: 'black', color: '#ff9800', height:'50px'  }}
-        >
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={{ mr: 2, ...(open && { display: 'none' }), right: 0}}
-            >
-              <MenuIcon  sx={{fontSize: 20}}/>
-            </IconButton>
-            <Typography variant="h5" noWrap component="div">
-              Film Connect
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          sx={{
-            width: drawerWidth,
-            flexShrink: 0,
-            '& .MuiDrawer-paper': {
-              //ハンバーガメニューを押すと幅が変わる
+      ) : (
+        <>
+          <CssBaseline />
+          <AppBar
+            position="fixed"
+            open={open}
+            sx={{ backgroundColor: 'black', color: '#ff9800', height: '50px' }}
+          >
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                sx={{ mr: 2, ...(open && { display: 'none' }), right: 0 }}
+              >
+                <MenuIcon sx={{ fontSize: 20 }} />
+              </IconButton>
+              <Typography variant="h6" noWrap component="div" sx={{ pt: 1 }}>
+                <img
+                  src="https://film-connect.web.app/logo.png"
+                  className="header-logo"
+                  alt="header-logo"
+                  width="200"
+                  height="40"
+                />
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            sx={{
               width: drawerWidth,
-              boxSizing: 'border-box',
-              backgroundColor: 'black',
-            },
-          }}
-          variant="persistent"
-          anchor="left"
-          open={open}
-        >
-          {/*横のスライドの矢印マーク*/}
-          <DrawerHeader>
-            {/* /*矢印を押したら閉まる*/}
-            <IconButton
-              onClick={handleDrawerClose}
-              sx={{ color: 'text.primary' }}
-            >
-              {/* themeのdirectionがltrの場合、左書きのげんとといういみ */}
-              {theme.direction === 'ltr' ? (
-                <ChevronLeftIcon />
-              ) : (
-                <ChevronRightIcon />
-              )}
-            </IconButton>
-          </DrawerHeader>
-  
-          <Divider />
-  
-          <List>
-            <ListItem>
-              <ListItemButton component={Link} to="/login">
-                <ListItemIcon>
-                  <LoginIcon sx={{ color: 'text.primary' }} />
-                </ListItemIcon>
-                <ListItemText primary="Login" sx={{ color: 'text.primary' }} />
-              </ListItemButton>
-            </ListItem>
-  
-            <ListItem>
-              <ListItemButton component={Link} to="/send">
-                <ListItemIcon></ListItemIcon>
-                <ListItemText
-                  primary="利用規約"
-                  sx={{ color: 'text.primary' }}
-                  to={'/mypage'}
-                />
-              </ListItemButton>
-            </ListItem>
-  
-            <ListItem>
-              <ListItemButton component={Link} to="/send">
-                <ListItemIcon></ListItemIcon>
-                <ListItemText
-                  primary="プライバシーポリシー"
-                  sx={{ color: 'text.primary' }}
-                />
-              </ListItemButton>
-            </ListItem>
-  
-            <ListItem>
-              <ListItemButton component={Link} to="/send">
-                <ListItemIcon></ListItemIcon>
-                <ListItemText primary="お問合せ" sx={{ color: 'text.primary' }} />
-              </ListItemButton>
-            </ListItem>
-          </List>
-        </Drawer>
+              flexShrink: 0,
+              '& .MuiDrawer-paper': {
+                //ハンバーガメニューを押すと幅が変わる
+                width: drawerWidth,
+                boxSizing: 'border-box',
+                backgroundColor: 'black',
+              },
+            }}
+            variant="persistent"
+            anchor="left"
+            open={open}
+          >
+            {/*横のスライドの矢印マーク*/}
+            <DrawerHeader>
+              {/* /*矢印を押したら閉まる*/}
+              <IconButton
+                onClick={handleDrawerClose}
+                sx={{ color: 'text.primary' }}
+              >
+                {/* themeのdirectionがltrの場合、左書きのげんとといういみ */}
+                {theme.direction === 'ltr' ? (
+                  <ChevronLeftIcon />
+                ) : (
+                  <ChevronRightIcon />
+                )}
+              </IconButton>
+            </DrawerHeader>
+
+            <Divider />
+
+            <List>
+              <ListItem>
+                <ListItemButton component={Link} to="/login">
+                  <ListItemIcon>
+                    <LoginIcon sx={{ color: 'text.primary' }} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Login"
+                    sx={{ color: 'text.primary' }}
+                  />
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem>
+                <ListItemButton component={Link} to="/send">
+                  <ListItemIcon></ListItemIcon>
+                  <ListItemText
+                    primary="利用規約"
+                    sx={{ color: 'text.primary' }}
+                    to={'/mypage'}
+                  />
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem>
+                <ListItemButton component={Link} to="/send">
+                  <ListItemIcon></ListItemIcon>
+                  <ListItemText
+                    primary="プライバシーポリシー"
+                    sx={{ color: 'text.primary' }}
+                  />
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem>
+                <ListItemButton component={Link} to="/send">
+                  <ListItemIcon></ListItemIcon>
+                  <ListItemText
+                    primary="お問合せ"
+                    sx={{ color: 'text.primary' }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </List>
+          </Drawer>
         </>
       )}
-      </Box>
+    </Box>
   )
 }
 
 export default Header
-
