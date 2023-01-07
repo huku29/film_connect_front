@@ -93,7 +93,16 @@ export const LoggedInHeader = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Film Connect
+          <Typography variant="h6" noWrap component="div" sx={{pt:1}}>
+            <img
+                src="https://film-connect.web.app/logo.png"
+                className="header-logo"
+                alt="header-logo"
+                width="200"
+                height="40"
+                
+              />
+            </Typography>
           </Typography>
         </Toolbar>
       </AppBar>
