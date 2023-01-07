@@ -150,13 +150,33 @@ export const LoggedInHeader = () => {
             </ListItemButton>
           </ListItem>
 
+          
+          <ListItem>
+            <ListItemButton component={Link} to="/mypage">
+              <ListItemIcon></ListItemIcon>
+              <ListItemText
+                primary="マイページ"
+                sx={{ color: 'text.primary' }}
+              />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem>
+            <ListItemButton component={Link} to="/">
+              <ListItemIcon></ListItemIcon>
+              <ListItemText
+                primary="トップページ"
+                sx={{ color: 'text.primary' }}
+              />
+            </ListItemButton>
+          </ListItem>
+
           <ListItem>
             <ListItemButton component={Link} to="/send">
               <ListItemIcon></ListItemIcon>
               <ListItemText
                 primary="利用規約"
                 sx={{ color: 'text.primary' }}
-                to={'/mypage'}
               />
             </ListItemButton>
           </ListItem>

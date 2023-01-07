@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { styled, useTheme } from '@mui/material/styles'
 import { Box, Drawer } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -14,10 +14,14 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
+import LogoutIcon from '@mui/icons-material/Logout'
 import ListItemText from '@mui/material/ListItemText'
 import LoginIcon from '@mui/icons-material/Login'
 import { Link } from 'react-router-dom'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import { MyContext } from '@/App'
+import { signOut } from 'firebase/auth'
+import { auth } from '@/firebase'
 
 const drawerWidth = 240
 
@@ -63,6 +67,20 @@ export const Header = () => {
   const handleDrawerClose = () => {
     setOpen(false)
   }
+
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      })
+  }
+
+  const [user] = useContext(MyContext)
+
+
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -129,17 +147,57 @@ export const Header = () => {
             <Divider />
 
             <List>
+              {user ? (
+                <ListItem>
+                  <ListItemButton
+                    component={Link}
+                    to="/"
+                    onClick={handleLogout}
+                  >
+                    <ListItemIcon>
+                      <LogoutIcon sx={{ color: 'text.primary' }} />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Logout"
+                      sx={{ color: 'text.primary' }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              ) : (
+                <ListItem>
+                  <ListItemButton component={Link} to="/login">
+                    <ListItemIcon>
+                      <LoginIcon sx={{ color: 'text.primary' }} />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Login"
+                      sx={{ color: 'text.primary' }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              )}
+
               <ListItem>
-                <ListItemButton component={Link} to="/login">
-                  <ListItemIcon>
-                    <LoginIcon sx={{ color: 'text.primary' }} />
-                  </ListItemIcon>
+                <ListItemButton component={Link} to="/">
+                  <ListItemIcon></ListItemIcon>
                   <ListItemText
-                    primary="Login"
+                    primary="トップページ"
                     sx={{ color: 'text.primary' }}
                   />
                 </ListItemButton>
               </ListItem>
+
+              {user ? (
+                <ListItem>
+                  <ListItemButton component={Link} to="/mypage">
+                    <ListItemIcon></ListItemIcon>
+                    <ListItemText
+                      primary="マイページ"
+                      sx={{ color: 'text.primary' }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              ) : null}
 
               <ListItem>
                 <ListItemButton component={Link} to="/send">
@@ -237,17 +295,57 @@ export const Header = () => {
             <Divider />
 
             <List>
+            {user ? (
+                <ListItem>
+                  <ListItemButton
+                    component={Link}
+                    to="/"
+                    onClick={handleLogout}
+                  >
+                    <ListItemIcon>
+                      <LogoutIcon sx={{ color: 'text.primary' }} />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Logout"
+                      sx={{ color: 'text.primary' }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              ) : (
+                <ListItem>
+                  <ListItemButton component={Link} to="/login">
+                    <ListItemIcon>
+                      <LoginIcon sx={{ color: 'text.primary' }} />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Login"
+                      sx={{ color: 'text.primary' }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              )}
+
               <ListItem>
-                <ListItemButton component={Link} to="/login">
-                  <ListItemIcon>
-                    <LoginIcon sx={{ color: 'text.primary' }} />
-                  </ListItemIcon>
+                <ListItemButton component={Link} to="/">
+                  <ListItemIcon></ListItemIcon>
                   <ListItemText
-                    primary="Login"
+                    primary="トップページ"
                     sx={{ color: 'text.primary' }}
                   />
                 </ListItemButton>
               </ListItem>
+
+              {user ? (
+                <ListItem>
+                  <ListItemButton component={Link} to="/mypage">
+                    <ListItemIcon></ListItemIcon>
+                    <ListItemText
+                      primary="マイページ"
+                      sx={{ color: 'text.primary' }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              ) : null}
 
               <ListItem>
                 <ListItemButton component={Link} to="/send">
