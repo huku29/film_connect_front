@@ -79,6 +79,23 @@ export const Top = () => {
               この機会にTwitterで映画の感想や感謝の言葉を伝え交流の輪を広げましょう!
             </Typography>
           </Stack>
+          <Stack
+            sx={{
+              mt: 10,
+              textAlign: 'center',
+            }}
+          >
+            <Typography variant="h5" sx={{ p: 1, mt: 3 }}>
+              映画ランキング
+            </Typography>
+            <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
+              どの映画が多く作成されたかランキングページで一目でわかります！
+              <br />
+              また多くの方が観たことない映画ランキングも見ることができ、あなたの知っているマニアックな映画もこの機会におすすめましょう！
+              <br />
+              多くの映画レターを作成し、ランキングに入りましょう！
+            </Typography>
+          </Stack>
       
       </Box>
       ) : (
@@ -150,6 +167,23 @@ export const Top = () => {
               Twitterシェアをすることで受け取ったレターが誰から送られてきたかわかります!
               <br />
               この機会にTwitterで映画の感想や感謝の言葉を伝え交流の輪を広げましょう!
+            </Typography>
+          </Stack>
+          <Stack
+            sx={{
+              mt: 10,
+              textAlign: 'center',
+            }}
+          >
+            <Typography variant="h5" sx={{ p: 1, mt: 3 }}>
+              映画ランキング
+            </Typography>
+            <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
+              どの映画が多く作成されたかランキングページで一目でわかります！
+              <br />
+              また多くの方が観たことない映画ランキングも見ることができ、あなたの知っているマニアックな映画もこの機会におすすめましょう！
+              <br />
+              多くの映画レターを作成し、ランキングに入りましょう！
             </Typography>
           </Stack>
         </Box>
