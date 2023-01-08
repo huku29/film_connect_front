@@ -140,7 +140,6 @@ export const Send = () => {
 
   const matches = useMediaQuery('(min-width:575px)')
 
-
   return (
     <LoggedInLayout>
       {matches ? (
@@ -255,7 +254,7 @@ export const Send = () => {
 
                         <Link
                           target="_blank"
-                          rel="noopener"
+                          rel="noopener noreferrer"
                           href={`${getFilmDetail}/${film.id}`}
                           underline="hover"
                         >
@@ -310,7 +309,7 @@ export const Send = () => {
             </IconButton>
           </Paper>
 
-          <Box sx={{ flexGrow: 1, mt: '5%', ml: 'auto', mr: 'auto'}}>
+          <Box sx={{ flexGrow: 1, mt: '5%', ml: 'auto', mr: 'auto' }}>
             <InfiniteScroll
               initialLoad={false}
               loadMore={loadMore} //項目を読み込む際に処理するコールバック関数
@@ -372,7 +371,7 @@ export const Send = () => {
                           </List>
                           <Link
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                             href={`${getFilmDetail}/${film.id}`}
                             underline="hover"
                           >

@@ -198,7 +198,7 @@ export const Ranking = () => {
                             <List>
                               <Link
                                 target="_blank"
-                                rel="noopener"
+                                rel="noopener noreferrer"
                                 href={`${getFilmDetail}/${film.id}`}
                                 underline="hover"
                               >
@@ -248,7 +248,7 @@ export const Ranking = () => {
                             <List>
                               <Link
                                 target="_blank"
-                                rel="noopener"
+                                rel="noopener noreferrer"
                                 href={`${getFilmDetail}/${film.id}`}
                                 underline="hover"
                               >
@@ -368,7 +368,7 @@ export const Ranking = () => {
                             >
                               <Link
                                 target="_blank"
-                                rel="noopener"
+                                rel="noopener noreferrer"
                                 href={`${getFilmDetail}/${film.id}`}
                                 underline="hover"
                               >
@@ -425,7 +425,7 @@ export const Ranking = () => {
                             >
                               <Link
                                 target="_blank"
-                                rel="noopener"
+                                rel="noopener noreferrer"
                                 href={`${getFilmDetail}/${film.id}`}
                                 underline="hover"
                               >

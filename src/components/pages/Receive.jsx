@@ -76,24 +76,22 @@ export const Receive = () => {
     const config = { headers: { authorization: `Bearer ${token}` } }
 
     axios
-    .post(
-      registerReceivedLetter,
-      {
-        received_letter: params,
-      },
-      config
+      .post(
+        registerReceivedLetter,
+        {
+          received_letter: params,
+        },
+        config
       )
       .then((res) => {
         setOpenFlash(true)
         setTimeout(() => {
           setOpenFlash(false)
-
         }, 2000)
       })
       .catch(() => {})
-      
-      
-      setDisable(true)
+
+    setDisable(true)
     setOpenFlash(false)
   }
 
@@ -133,7 +131,6 @@ export const Receive = () => {
         setTimeout(() => {
           setOpenFlashAlert(false)
           setOpenFlash(false)
-
         }, 2000)
       })
       .catch((error) => {})
@@ -179,7 +176,7 @@ export const Receive = () => {
                   <CardContent>
                     <Link
                       target="_blank"
-                      rel="noopener"
+                      rel="noopener noreferrer"
                       href={`${getFilmDetail}/${movieData.movieId}`}
                       underline="hover"
                     >
@@ -223,8 +220,7 @@ export const Receive = () => {
                   <CardActions sx={{ ml: 12, my: -9.5 }}>
                     {
                       match_first_saw_letter_id ===
-                      movieData.letterId ? //   <FontAwesomeIcon icon={faFaceSurprise} size="3x" /> // <Button onClick={handleChangeFaceIcon}>
-                      // </Button>
+                      movieData.letterId ? // </Button> //   <FontAwesomeIcon icon={faFaceSurprise} size="3x" /> // <Button onClick={handleChangeFaceIcon}>
                       null : registNotWatchFilm ? (
                         <Button
                           variant="contained"
@@ -330,7 +326,7 @@ export const Receive = () => {
                   <CardContent>
                     <Link
                       target="_blank"
-                      rel="noopener"
+                      rel="noopener noreferrer"
                       href={`${getFilmDetail}/${movieData.movieId}`}
                       underline="hover"
                     >
@@ -365,17 +361,17 @@ export const Receive = () => {
                       </Button>
                     ) : null}
                   </CardActions>
-                    <CardActions sx={{ mb: -7, ml:20 }}>
-                      <Button
-                        variant="contained"
-                        sx={{}}
-                        onClick={handleGetReceiveLetters}
-                        disabled={disable}
-                      >
-                        受け取る
-                      </Button>
-                    </CardActions>
-                  <CardActions sx={{ml:5 }}>
+                  <CardActions sx={{ mb: -7, ml: 20 }}>
+                    <Button
+                      variant="contained"
+                      sx={{}}
+                      onClick={handleGetReceiveLetters}
+                      disabled={disable}
+                    >
+                      受け取る
+                    </Button>
+                  </CardActions>
+                  <CardActions sx={{ ml: 5 }}>
                     <TwitterShareButton
                       // url={}
                       via={movieData.twitterUserName}

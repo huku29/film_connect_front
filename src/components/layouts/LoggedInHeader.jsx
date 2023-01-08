@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { signOut } from 'firebase/auth'
 import { auth } from '@/firebase'
+import { contact } from '@/urls'
 
 const drawerWidth = 240
 
@@ -93,14 +94,13 @@ export const LoggedInHeader = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-          <Typography variant="h6" noWrap component="div" sx={{pt:1}}>
-            <img
+            <Typography variant="h6" noWrap component="div" sx={{ pt: 1 }}>
+              <img
                 src="https://film-connect.web.app/logo.png"
                 className="header-logo"
                 alt="header-logo"
                 width="200"
                 height="40"
-                
               />
             </Typography>
           </Typography>
@@ -150,7 +150,6 @@ export const LoggedInHeader = () => {
             </ListItemButton>
           </ListItem>
 
-          
           <ListItem>
             <ListItemButton component={Link} to="/mypage">
               <ListItemIcon></ListItemIcon>
@@ -174,10 +173,7 @@ export const LoggedInHeader = () => {
           <ListItem>
             <ListItemButton component={Link} to="/useterms">
               <ListItemIcon></ListItemIcon>
-              <ListItemText
-                primary="利用規約"
-                sx={{ color: 'text.primary' }}
-              />
+              <ListItemText primary="利用規約" sx={{ color: 'text.primary' }} />
             </ListItemButton>
           </ListItem>
 
@@ -192,9 +188,16 @@ export const LoggedInHeader = () => {
           </ListItem>
 
           <ListItem>
-            <ListItemButton component={Link} to="/privacypolicy">
+            <ListItemButton>
               <ListItemIcon></ListItemIcon>
-              <ListItemText primary="お問合せ" sx={{ color: 'text.primary' }} />
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={`${contact}`}
+                style={{ textDecoration: 'none', color: '#ff9800' }}
+              >
+                お問い合わせ
+              </a>
             </ListItemButton>
           </ListItem>
         </List>
