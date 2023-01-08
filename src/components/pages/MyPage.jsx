@@ -485,10 +485,9 @@ export const MyPage = () => {
                         </CardActions>
                         <CardActions sx={{ ml: 3, my: 1 }}>
                           <TwitterShareButton
-                            title={`@${receivedLetterDetail.twitterName}さんからのおすすめ映画`}
+                            title={`${receivedLetterDetail.movieTitle}は@${receivedLetterDetail.twitterName}さんからのおすすめ映画です！`}
                             hashtags={['映画で人と繋がりたい']}
                             url={'https://film-connect.web.app'}
-                            // via={"FilmConnect"}
                           >
                             <TwitterIcon size={'55px'} round />
                           </TwitterShareButton>
@@ -578,7 +577,7 @@ export const MyPage = () => {
                           </CardActions>
                           <CardActions sx={{ ml: 3, my: 1 }}>
                             <TwitterShareButton
-                              title={`@${notWatchfilmLetterDetail.twitterName}さんからのおすすめ映画`}
+                              title={`${notWatchfilmLetterDetail.movieTitle}は@${notWatchfilmLetterDetail.twitterName}さんからのおすすめ映画です！`}
                               hashtags={['映画で人と繋がりたい']}
                               url={'https://film-connect.web.app'}
                               // via={"FilmConnect"}
@@ -873,10 +872,9 @@ export const MyPage = () => {
                         </CardActions>
                         <CardActions sx={{ my: 1 }}>
                           <TwitterShareButton
-                            title={`@${receivedLetterDetail.twitterName}さんからのおすすめ映画`}
+                            title={`${receivedLetterDetail.movieTitle}は@${receivedLetterDetail.twitterName}さんからのおすすめ映画です！`}
                             hashtags={['映画で人と繋がりたい']}
                             url={'https://film-connect.web.app'}
-                            // via={"FilmConnect"}
                           >
                             <TwitterIcon size={'55px'} round />
                           </TwitterShareButton>
@@ -968,7 +966,7 @@ export const MyPage = () => {
                           </CardActions>
                           <CardActions sx={{ my: 1 }}>
                             <TwitterShareButton
-                              title={`@${notWatchfilmLetterDetail.twitterName}さんからのおすすめ映画`}
+                              title={`${notWatchfilmLetterDetail.movieTitle}は@${notWatchfilmLetterDetail.twitterName}さんからのおすすめ映画です！`}
                               hashtags={['映画で人と繋がりたい']}
                               url={'https://film-connect.web.app'}
                               // via={"FilmConnect"}

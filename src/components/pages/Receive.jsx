@@ -211,8 +211,9 @@ export const Receive = () => {
                   </CardActions>
                   <CardActions sx={{ ml: 3, my: -8 }}>
                     <TwitterShareButton
-                      // url={}
-                      via={movieData.twitterUserName}
+                      title={`${movieData.movieTitle}は@${movieData.twitterUserName}さんのおすすめ映画です！`}
+                      hashtags={['映画で人と繋がりたい']}
+                      url={'https://film-connect.web.app'}
                     >
                       <TwitterIcon size={'55px'} round />
                     </TwitterShareButton>
@@ -220,8 +221,7 @@ export const Receive = () => {
                   <CardActions sx={{ ml: 12, my: -9.5 }}>
                     {
                       match_first_saw_letter_id ===
-                      movieData.letterId ? // </Button> //   <FontAwesomeIcon icon={faFaceSurprise} size="3x" /> // <Button onClick={handleChangeFaceIcon}>
-                      null : registNotWatchFilm ? (
+                      movieData.letterId ? null : registNotWatchFilm ? ( // </Button> //   <FontAwesomeIcon icon={faFaceSurprise} size="3x" /> // <Button onClick={handleChangeFaceIcon}>
                         <Button
                           variant="contained"
                           sx={{ mt: 3, ml: 23 }}
@@ -373,8 +373,9 @@ export const Receive = () => {
                   </CardActions>
                   <CardActions sx={{ ml: 5 }}>
                     <TwitterShareButton
-                      // url={}
-                      via={movieData.twitterUserName}
+                      title={`${movieData.movieTitle}は@${movieData.twitterUserName}さんのおすすめ映画です！`}
+                      hashtags={['映画で人と繋がりたい']}
+                      url={'https://film-connect.web.app'}
                     >
                       <TwitterIcon size={'50px'} round />
                     </TwitterShareButton>
