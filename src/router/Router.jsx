@@ -8,6 +8,8 @@ import {
   Receive,
   WriteLetterPage,
   Ranking,
+  PrivacyPolicy, 
+  UseTerms 
 } from '@/components/pages'
 import { MyContext } from '@/App'
 import { useContext } from 'react'
@@ -27,11 +29,14 @@ export const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Top />} />
-        <Route path="/show" element={<Private component={<Show />} />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+        <Route path="/useterms" element={<UseTerms />} />
+        <Route path="/show" element={<Private component={<Show />} />} />
         <Route path="/mypage" element={<Private component={<MyPage />} />} />
         <Route path="/send" element={<Private component={<Send />} />} />
         <Route path="/receive" element={<Private component={<Receive />} />} />
+
         <Route
           path="/writeletter"
           element={<Private component={<WriteLetterPage />} />}

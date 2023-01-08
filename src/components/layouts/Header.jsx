@@ -200,7 +200,7 @@ export const Header = () => {
               ) : null}
 
               <ListItem>
-                <ListItemButton component={Link} to="/send">
+                <ListItemButton component={Link} to="/useterms">
                   <ListItemIcon></ListItemIcon>
                   <ListItemText
                     primary="利用規約"
@@ -211,7 +211,7 @@ export const Header = () => {
               </ListItem>
 
               <ListItem>
-                <ListItemButton component={Link} to="/send">
+                <ListItemButton component={Link} to="/privacypolicy">
                   <ListItemIcon></ListItemIcon>
                   <ListItemText
                     primary="プライバシーポリシー"
@@ -221,7 +221,7 @@ export const Header = () => {
               </ListItem>
 
               <ListItem>
-                <ListItemButton component={Link} to="/send">
+                <ListItemButton component={Link} to="/privacypolicy">
                   <ListItemIcon></ListItemIcon>
                   <ListItemText
                     primary="お問合せ"
@@ -348,18 +348,17 @@ export const Header = () => {
               ) : null}
 
               <ListItem>
-                <ListItemButton component={Link} to="/send">
+                <ListItemButton component={Link} to="/useterms">
                   <ListItemIcon></ListItemIcon>
                   <ListItemText
                     primary="利用規約"
                     sx={{ color: 'text.primary' }}
-                    to={'/mypage'}
                   />
                 </ListItemButton>
               </ListItem>
 
               <ListItem>
-                <ListItemButton component={Link} to="/send">
+                <ListItemButton component={Link} to="/">
                   <ListItemIcon></ListItemIcon>
                   <ListItemText
                     primary="プライバシーポリシー"
