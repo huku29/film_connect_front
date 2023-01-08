@@ -189,7 +189,7 @@ export const WriteLetterPage = () => {
             >
               <Link
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 href={`${getFilmDetail}/${filmId}`}
                 underline="hover"
               >
@@ -350,7 +350,7 @@ export const WriteLetterPage = () => {
             >
               <Link
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 href={`${getFilmDetail}/${filmId}`}
                 underline="hover"
               >

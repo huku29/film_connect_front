@@ -379,7 +379,7 @@ export const MyPage = () => {
                         <CardContent>
                           <Link
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                             href={`${getFilmDetail}/${sendLetter.movie_id}`}
                             underline="hover"
                           >
@@ -458,7 +458,7 @@ export const MyPage = () => {
                         <CardContent>
                           <Link
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                             href={`${getFilmDetail}/${receivedLetterDetail.movie_id}`}
                             underline="hover"
                           >
@@ -551,7 +551,7 @@ export const MyPage = () => {
                           <CardContent>
                             <Link
                               target="_blank"
-                              rel="noopener"
+                              rel="noopener noreferrer"
                               href={`${getFilmDetail}/${notWatchfilmLetterDetail.movie_id}`}
                               underline="hover"
                             >
@@ -763,7 +763,7 @@ export const MyPage = () => {
                         <CardContent>
                           <Link
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                             href={`${getFilmDetail}/${sendLetter.movie_id}`}
                             underline="hover"
                           >
@@ -846,7 +846,7 @@ export const MyPage = () => {
                         <CardContent>
                           <Link
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                             href={`${getFilmDetail}/${receivedLetterDetail.movie_id}`}
                             underline="hover"
                           >
@@ -941,7 +941,7 @@ export const MyPage = () => {
                           <CardContent>
                             <Link
                               target="_blank"
-                              rel="noopener"
+                              rel="noopener noreferrer"
                               href={`${getFilmDetail}/${notWatchfilmLetterDetail.movie_id}`}
                               underline="hover"
                             >

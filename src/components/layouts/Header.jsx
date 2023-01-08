@@ -22,6 +22,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { MyContext } from '@/App'
 import { signOut } from 'firebase/auth'
 import { auth } from '@/firebase'
+import { contact } from '@/urls'
 
 const drawerWidth = 240
 
@@ -79,8 +80,6 @@ export const Header = () => {
   }
 
   const [user] = useContext(MyContext)
-
-
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -219,14 +218,17 @@ export const Header = () => {
                   />
                 </ListItemButton>
               </ListItem>
-
               <ListItem>
-                <ListItemButton component={Link} to="/privacypolicy">
+                <ListItemButton>
                   <ListItemIcon></ListItemIcon>
-                  <ListItemText
-                    primary="お問合せ"
-                    sx={{ color: 'text.primary' }}
-                  />
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={`${contact}`}
+                    style={{ textDecoration: 'none', color: '#ff9800' }}
+                  >
+                    お問い合わせ
+                  </a>
                 </ListItemButton>
               </ListItem>
             </List>
@@ -295,7 +297,7 @@ export const Header = () => {
             <Divider />
 
             <List>
-            {user ? (
+              {user ? (
                 <ListItem>
                   <ListItemButton
                     component={Link}
@@ -366,14 +368,17 @@ export const Header = () => {
                   />
                 </ListItemButton>
               </ListItem>
-
               <ListItem>
-                <ListItemButton component={Link} to="/send">
+                <ListItemButton>
                   <ListItemIcon></ListItemIcon>
-                  <ListItemText
-                    primary="お問合せ"
-                    sx={{ color: 'text.primary' }}
-                  />
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={`${contact}`}
+                    style={{ textDecoration: 'none', color: '#ff9800' }}
+                  >
+                    お問い合わせ
+                  </a>
                 </ListItemButton>
               </ListItem>
             </List>
