@@ -6,3 +6,6 @@ export { Send } from './Send'
 export { Receive } from './Receive'
 export { WriteLetterPage} from './WriteLetterPage'
 export {Ranking} from './Ranking'
+export { PrivacyPolicy} from './PrivacyPolicy'
+export {UseTerms} from './UseTerms'
+
