@@ -1,54 +1,22 @@
-import { useState } from 'react'
-import { Box, BottomNavigation, BottomNavigationAction } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
-import { Link } from 'react-router-dom'
-
-export const Footer = (props) => {
-  const { menuList } = props
-  const [value, setValue] = useState(0)
-
+export const Footer = () => {
   return (
     <Box
       sx={{
+        backgroundColor: 'black',
+        height: '50px',
+        color: 'text.primary',
+        textAlign: 'center',
         width: 1,
-        '& .MuiBottomNavigationAction-root, .Mui-selected, svg': {
-          backgroundColor: 'black',
-          color: '#ff9800',
-        },
+        bottom: 0,
+        position: 'fixed',
+        left: 0,
       }}
     >
-      <BottomNavigation
-        showLabels
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue)
-        }}
-        sx={[
-          {
-            backgroundColor: 'black',
-            height: '50px',
-            color: '#fff',
-            textAlign: 'center',
-            width: 1,
-            bottom: 0,
-            position: 'fixed',
-            left: 0,
-          },
-        ]}
-      >
-        {/* {
-          // このLinkタグの書き方がどういう意味なのかまだわかっていない
-          menuList.map((menu, index) => (
-            <BottomNavigationAction
-              key={index}
-              label={menu.label}
-              icon={menu.icon}
-              component={Link}
-              to={menu.nextPage}
-            />
-          ))
-        } */}
-      </BottomNavigation>
+      <Typography sx={{ mt: 3, textAlign: 'center' }}>
+        © 2023 FilmConnect
+      </Typography>
     </Box>
   )
 }
