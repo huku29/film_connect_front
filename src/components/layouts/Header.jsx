@@ -358,9 +358,8 @@ export const Header = () => {
                   />
                 </ListItemButton>
               </ListItem>
-
               <ListItem>
-                <ListItemButton component={Link} to="/">
+                <ListItemButton component={Link} to="/privacypolicy">
                   <ListItemIcon></ListItemIcon>
                   <ListItemText
                     primary="プライバシーポリシー"

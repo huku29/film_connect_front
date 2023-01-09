@@ -106,7 +106,7 @@ export const WriteLetterPage = () => {
     }, 5000)
 
     const params = {
-      movie_id: filmId,
+      film_id: filmId,
       recommend_point: recommendData,
     }
     const token = await user.getIdToken(true)

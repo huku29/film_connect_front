@@ -26,7 +26,7 @@ import axios from 'axios'
 import {
   getFilmsDetails,
   getCreatedLettersRanking,
-  firstSawFilmLettersRanking,
+  notWatchFilmLettersRanking,
 } from '@/urls'
 
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -75,7 +75,7 @@ export const Ranking = () => {
       filmsRankingData.map(async (rankingData) => {
         const result = await axios.get(getFilmsDetails, {
           params: {
-            movie_id: rankingData,
+            film_id: rankingData,
           },
         })
         return result.data
@@ -92,14 +92,14 @@ export const Ranking = () => {
   const getFirstSawFilmsRank = async () => {
     if (sawFilmRank.length !== 0) return
     setIsLoading(true)
-    const res = await axios.get(firstSawFilmLettersRanking)
+    const res = await axios.get(notWatchFilmLettersRanking)
     const firstSawRankingDatas = res.data
 
     const firstSaeFilmsRankDatas = await Promise.all(
       firstSawRankingDatas.map(async (firseSawFilmData) => {
         const result = await axios.get(getFilmsDetails, {
           params: {
-            movie_id: firseSawFilmData,
+            film_id: firseSawFilmData,
           },
         })
         return result.data
