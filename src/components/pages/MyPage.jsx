@@ -485,7 +485,7 @@ export const MyPage = () => {
                         </CardActions>
                         <CardActions sx={{ ml: 3, my: 1 }}>
                           <TwitterShareButton
-                            title={`${receivedLetterDetail.filmTitle}は@${receivedLetterDetail.twitterName}さんからのおすすめ映画です！`}
+                            title={`「${receivedLetterDetail.filmTitle}」は@${receivedLetterDetail.twitterName}さんからのおすすめ映画です！`}
                             hashtags={['映画で人と繋がりたい']}
                             url={'https://film-connect.web.app'}
                           >
@@ -577,7 +577,7 @@ export const MyPage = () => {
                           </CardActions>
                           <CardActions sx={{ ml: 3, my: 1 }}>
                             <TwitterShareButton
-                              title={`${notWatchfilmLetterDetail.filmTitle}は@${notWatchfilmLetterDetail.twitterName}さんからのおすすめ映画です！`}
+                              title={`「${notWatchfilmLetterDetail.filmTitle}」は@${notWatchfilmLetterDetail.twitterName}さんからのおすすめ映画です！`}
                               hashtags={['映画で人と繋がりたい']}
                               url={'https://film-connect.web.app'}
                               // via={"FilmConnect"}
@@ -872,7 +872,7 @@ export const MyPage = () => {
                         </CardActions>
                         <CardActions sx={{ my: 1 }}>
                           <TwitterShareButton
-                            title={`${receivedLetterDetail.filmTitle}は@${receivedLetterDetail.twitterName}さんからのおすすめ映画です！`}
+                            title={`「${receivedLetterDetail.filmTitle}」は@${receivedLetterDetail.twitterName}さんからのおすすめ映画です！`}
                             hashtags={['映画で人と繋がりたい']}
                             url={'https://film-connect.web.app'}
                           >
@@ -966,7 +966,7 @@ export const MyPage = () => {
                           </CardActions>
                           <CardActions sx={{ my: 1 }}>
                             <TwitterShareButton
-                              title={`${notWatchfilmLetterDetail.filmTitle}は@${notWatchfilmLetterDetail.twitterName}さんからのおすすめ映画です！`}
+                              title={`「${notWatchfilmLetterDetail.filmTitle}」は@${notWatchfilmLetterDetail.twitterName}さんからのおすすめ映画です！`}
                               hashtags={['映画で人と繋がりたい']}
                               url={'https://film-connect.web.app'}
                               // via={"FilmConnect"}

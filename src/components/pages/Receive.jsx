@@ -211,7 +211,7 @@ export const Receive = () => {
                   </CardActions>
                   <CardActions sx={{ ml: 3, my: -8 }}>
                     <TwitterShareButton
-                      title={`${movieData.movieTitle}は@${movieData.twitterUserName}さんのおすすめ映画です！`}
+                      title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
                       hashtags={['映画で人と繋がりたい']}
                       url={'https://film-connect.web.app'}
                     >
@@ -373,7 +373,7 @@ export const Receive = () => {
                   </CardActions>
                   <CardActions sx={{ ml: 5 }}>
                     <TwitterShareButton
-                      title={`${movieData.movieTitle}は@${movieData.twitterUserName}さんのおすすめ映画です！`}
+                      title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
                       hashtags={['映画で人と繋がりたい']}
                       url={'https://film-connect.web.app'}
                     >
