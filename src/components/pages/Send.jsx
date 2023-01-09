@@ -358,11 +358,13 @@ export const Send = () => {
                               mr: 'auto',
                             },
                           }}
-                          onClick={() => handleWriteLetter(film)}
                         >
                           <Box sx={{ textAligh: 'center' }}>{film.title}</Box>
                           <List>
-                            <Button>
+                            <Button
+                              sx={{ mb: 3 }}
+                              onClick={() => handleWriteLetter(film)}
+                            >
                               <img
                                 alt=""
                                 src={`${filmsimg}/${film.poster_path}`}

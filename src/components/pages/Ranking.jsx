@@ -15,6 +15,7 @@ import { useAtom } from 'jotai'
 import {
   handleGetCreatedLettersRankingAtom,
   handleGetFirstSawFilmsRankingAtom,
+  handleSendFlashMessage,
 } from '@/jotai/atoms'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -31,6 +32,7 @@ import {
 
 import useMediaQuery from '@mui/material/useMediaQuery'
 
+
 export const Ranking = () => {
   const [filmRank, setFilmRank] = useAtom(handleGetCreatedLettersRankingAtom)
   const [swiper, setSwiper] = useState(null)
@@ -38,6 +40,7 @@ export const Ranking = () => {
   const [sawFilmRank, setSawFilmRank] = useAtom(
     handleGetFirstSawFilmsRankingAtom
   )
+  const [openFlash, setOpenFlash] = useAtom(handleSendFlashMessage)
   const [isLoading, setIsLoading] = useState(false)
 
   function TabPanel(props) {
@@ -112,6 +115,7 @@ export const Ranking = () => {
 
   useEffect(() => {
     getCreatedLettersRank()
+    setOpenFlash(false)
   }, [])
 
   const matches = useMediaQuery('(min-width:575px)')
