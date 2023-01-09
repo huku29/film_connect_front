@@ -116,12 +116,12 @@ export const MyPage = () => {
       letters.map(async (letter) => {
         const result = await axios.get(getFilmsDetails, {
           params: {
-            movie_id: letter.movie_id,
+            film_id: letter.film_id,
           },
         })
         const { title, poster_path } = result.data
-        letter.movieTitle = title
-        letter.movieImage = poster_path
+        letter.filmTitle = title
+        letter.filmImage = poster_path
         return letter
       })
     )
@@ -155,12 +155,12 @@ export const MyPage = () => {
 
         const result = await axios.get(getFilmsDetails, {
           params: {
-            movie_id: receivedLetterData.movie_id,
+            film_id: receivedLetterData.film_id,
           },
         })
         const { title, poster_path } = result.data
-        receivedLetterData.movieTitle = title
-        receivedLetterData.movieImage = poster_path
+        receivedLetterData.filmTitle = title
+        receivedLetterData.filmImage = poster_path
         return receivedLetterData
       })
     )
@@ -191,7 +191,7 @@ export const MyPage = () => {
 
     const res = await axios.get(getNotWatchFilmLetters, config)
 
-    const resNotWatchFilmLetterDatas = res.data.not_watch_movies
+    const resNotWatchFilmLetterDatas = res.data.not_watch_films
     const notWatchFilmLetterDatas = await Promise.all(
       resNotWatchFilmLetterDatas.map(async (notWatchFilmLetterData) => {
         const notWatchFilmDetails = await axios.get(
@@ -203,7 +203,7 @@ export const MyPage = () => {
           }
         )
 
-        return notWatchFilmDetails.data.not_watch_movie_details[0]
+        return notWatchFilmDetails.data.not_watch_film_letters_detail[0]
       })
     )
 
@@ -213,12 +213,12 @@ export const MyPage = () => {
 
         const result = await axios.get(getFilmsDetails, {
           params: {
-            movie_id: notWatchFilmData.movie_id,
+            film_id: notWatchFilmData.film_id,
           },
         })
         const { title, poster_path } = result.data
-        notWatchFilmData.movieTitle = title
-        notWatchFilmData.movieImage = poster_path
+        notWatchFilmData.filmTitle = title
+        notWatchFilmData.filmImage = poster_path
         return notWatchFilmData
       })
     )
@@ -363,7 +363,7 @@ export const MyPage = () => {
                         key={index}
                       >
                         <CardHeader
-                          title={sendLetter.movieTitle}
+                          title={sendLetter.filmTitle}
                           titleTypographyProps={{ variant: 'h5' }}
                           sx={{ color: 'black', textAlign: 'center', pt: 2 }}
                           // title={
@@ -380,13 +380,13 @@ export const MyPage = () => {
                           <Link
                             target="_blank"
                             rel="noopener noreferrer"
-                            href={`${getFilmDetail}/${sendLetter.movie_id}`}
+                            href={`${getFilmDetail}/${sendLetter.film_id}`}
                             underline="hover"
                           >
                             <CardMedia
                               height="400px"
                               component="img"
-                              image={`${filmsImgSmall}/${sendLetter.movieImage}`}
+                              image={`${filmsImgSmall}/${sendLetter.filmImage}`}
                               sx={{ objectFit: 'contain' }}
                               alt=""
                             />
@@ -442,7 +442,7 @@ export const MyPage = () => {
                         key={index}
                       >
                         <CardHeader
-                          title={receivedLetterDetail.movieTitle}
+                          title={receivedLetterDetail.filmTitle}
                           titleTypographyProps={{ variant: 'h5' }}
                           sx={{ color: 'black', textAlign: 'center', pt: 2 }}
                           // title={
@@ -459,13 +459,13 @@ export const MyPage = () => {
                           <Link
                             target="_blank"
                             rel="noopener noreferrer"
-                            href={`${getFilmDetail}/${receivedLetterDetail.movie_id}`}
+                            href={`${getFilmDetail}/${receivedLetterDetail.film_id}`}
                             underline="hover"
                           >
                             <CardMedia
                               height="400px"
                               component="img"
-                              image={`${filmsImgSmall}/${receivedLetterDetail.movieImage}`}
+                              image={`${filmsImgSmall}/${receivedLetterDetail.filmImage}`}
                               sx={{ objectFit: 'contain' }}
                               alt=""
                             />
@@ -485,7 +485,7 @@ export const MyPage = () => {
                         </CardActions>
                         <CardActions sx={{ ml: 3, my: 1 }}>
                           <TwitterShareButton
-                            title={`${receivedLetterDetail.movieTitle}は@${receivedLetterDetail.twitterName}さんからのおすすめ映画です！`}
+                            title={`${receivedLetterDetail.filmTitle}は@${receivedLetterDetail.twitterName}さんからのおすすめ映画です！`}
                             hashtags={['映画で人と繋がりたい']}
                             url={'https://film-connect.web.app'}
                           >
@@ -534,7 +534,7 @@ export const MyPage = () => {
                           key={index}
                         >
                           <CardHeader
-                            title={notWatchfilmLetterDetail.movieTitle}
+                            title={notWatchfilmLetterDetail.filmTitle}
                             titleTypographyProps={{ variant: 'h5' }}
                             sx={{ color: 'black', textAlign: 'center', pt: 2 }}
                             // title={
@@ -551,13 +551,13 @@ export const MyPage = () => {
                             <Link
                               target="_blank"
                               rel="noopener noreferrer"
-                              href={`${getFilmDetail}/${notWatchfilmLetterDetail.movie_id}`}
+                              href={`${getFilmDetail}/${notWatchfilmLetterDetail.film_id}`}
                               underline="hover"
                             >
                               <CardMedia
                                 height="400px"
                                 component="img"
-                                image={`${filmsImgSmall}/${notWatchfilmLetterDetail.movieImage}`}
+                                image={`${filmsImgSmall}/${notWatchfilmLetterDetail.filmImage}`}
                                 sx={{ objectFit: 'contain' }}
                                 alt=""
                               />
@@ -577,7 +577,7 @@ export const MyPage = () => {
                           </CardActions>
                           <CardActions sx={{ ml: 3, my: 1 }}>
                             <TwitterShareButton
-                              title={`${notWatchfilmLetterDetail.movieTitle}は@${notWatchfilmLetterDetail.twitterName}さんからのおすすめ映画です！`}
+                              title={`${notWatchfilmLetterDetail.filmTitle}は@${notWatchfilmLetterDetail.twitterName}さんからのおすすめ映画です！`}
                               hashtags={['映画で人と繋がりたい']}
                               url={'https://film-connect.web.app'}
                               // via={"FilmConnect"}
@@ -746,7 +746,7 @@ export const MyPage = () => {
                         key={index}
                       >
                         <CardHeader
-                          title={sendLetter.movieTitle}
+                          title={sendLetter.filmTitle}
                           titleTypographyProps={{ variant: 'h7' }}
                           sx={{ color: 'black', textAlign: 'center', pt: 2 }}
                           // title={
@@ -763,13 +763,13 @@ export const MyPage = () => {
                           <Link
                             target="_blank"
                             rel="noopener noreferrer"
-                            href={`${getFilmDetail}/${sendLetter.movie_id}`}
+                            href={`${getFilmDetail}/${sendLetter.film_id}`}
                             underline="hover"
                           >
                             <CardMedia
                               height="400px"
                               component="img"
-                              image={`${filmsImgSmall}/${sendLetter.movieImage}`}
+                              image={`${filmsImgSmall}/${sendLetter.filmImage}`}
                               sx={{ objectFit: 'contain' }}
                               alt=""
                             />
@@ -829,7 +829,7 @@ export const MyPage = () => {
                         key={index}
                       >
                         <CardHeader
-                          title={receivedLetterDetail.movieTitle}
+                          title={receivedLetterDetail.filmTitle}
                           titleTypographyProps={{ variant: 'h7' }}
                           sx={{ color: 'black', textAlign: 'center', pt: 2 }}
                           // title={
@@ -846,13 +846,13 @@ export const MyPage = () => {
                           <Link
                             target="_blank"
                             rel="noopener noreferrer"
-                            href={`${getFilmDetail}/${receivedLetterDetail.movie_id}`}
+                            href={`${getFilmDetail}/${receivedLetterDetail.film_id}`}
                             underline="hover"
                           >
                             <CardMedia
                               height="400px"
                               component="img"
-                              image={`${filmsImgSmall}/${receivedLetterDetail.movieImage}`}
+                              image={`${filmsImgSmall}/${receivedLetterDetail.filmImage}`}
                               sx={{ objectFit: 'contain' }}
                               alt=""
                             />
@@ -872,7 +872,7 @@ export const MyPage = () => {
                         </CardActions>
                         <CardActions sx={{ my: 1 }}>
                           <TwitterShareButton
-                            title={`${receivedLetterDetail.movieTitle}は@${receivedLetterDetail.twitterName}さんからのおすすめ映画です！`}
+                            title={`${receivedLetterDetail.filmTitle}は@${receivedLetterDetail.twitterName}さんからのおすすめ映画です！`}
                             hashtags={['映画で人と繋がりたい']}
                             url={'https://film-connect.web.app'}
                           >
@@ -923,7 +923,7 @@ export const MyPage = () => {
                           key={index}
                         >
                           <CardHeader
-                            title={notWatchfilmLetterDetail.movieTitle}
+                            title={notWatchfilmLetterDetail.filmTitle}
                             titleTypographyProps={{ variant: 'h5' }}
                             sx={{ color: 'black', textAlign: 'center', pt: 2 }}
                             // title={
@@ -940,13 +940,13 @@ export const MyPage = () => {
                             <Link
                               target="_blank"
                               rel="noopener noreferrer"
-                              href={`${getFilmDetail}/${notWatchfilmLetterDetail.movie_id}`}
+                              href={`${getFilmDetail}/${notWatchfilmLetterDetail.film_id}`}
                               underline="hover"
                             >
                               <CardMedia
                                 height="400px"
                                 component="img"
-                                image={`${filmsImgSmall}/${notWatchfilmLetterDetail.movieImage}`}
+                                image={`${filmsImgSmall}/${notWatchfilmLetterDetail.filmImage}`}
                                 sx={{ objectFit: 'contain' }}
                                 alt=""
                               />
@@ -966,7 +966,7 @@ export const MyPage = () => {
                           </CardActions>
                           <CardActions sx={{ my: 1 }}>
                             <TwitterShareButton
-                              title={`${notWatchfilmLetterDetail.movieTitle}は@${notWatchfilmLetterDetail.twitterName}さんからのおすすめ映画です！`}
+                              title={`${notWatchfilmLetterDetail.filmTitle}は@${notWatchfilmLetterDetail.twitterName}さんからのおすすめ映画です！`}
                               hashtags={['映画で人と繋がりたい']}
                               url={'https://film-connect.web.app'}
                               // via={"FilmConnect"}

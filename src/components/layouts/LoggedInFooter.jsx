@@ -6,7 +6,7 @@ import EqualizerIcon from '@mui/icons-material/Equalizer'
 import { Link } from 'react-router-dom'
 
 import axios from 'axios'
-import { getLetter, getSawFilmLettersData } from '@/urls'
+import { getLetter, getNotWatchFilmLetterDatas } from '@/urls'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -76,7 +76,10 @@ export const LoggedInFooter = (props) => {
         twitterUserName: res.data.user.name,
       })
 
-      const resSawFilmLetters = await axios.get(getSawFilmLettersData, config)
+      const resSawFilmLetters = await axios.get(
+        getNotWatchFilmLetterDatas,
+        config
+      )
 
       setGetFirstSawFilmLettersId(resSawFilmLetters.data)
 

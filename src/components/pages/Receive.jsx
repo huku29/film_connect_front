@@ -15,7 +15,7 @@ import {
   filmsImgSmall,
   registerReceivedLetter,
   getFilmDetail,
-  registerFirstSawFilm,
+  registerNotWatchFilmLetter,
 } from '@/urls'
 
 import { TwitterShareButton, TwitterIcon } from 'react-share'
@@ -117,9 +117,9 @@ export const Receive = () => {
 
     await axios
       .post(
-        registerFirstSawFilm,
+        registerNotWatchFilmLetter,
         {
-          first_saw_movie: params,
+          not_watch_film_letter: params,
         },
         config
       )
