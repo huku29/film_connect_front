@@ -41,8 +41,6 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { useAtom } from 'jotai'
 import { handleSendFlashMessage } from '@/jotai/atoms'
 
-// import Typography from '@mui/material/Typography'
-
 export const MyPage = () => {
   const [swiper, setSwiper] = useState(null)
   const [value, setValue] = useState(0)
@@ -64,13 +62,6 @@ export const MyPage = () => {
   const matches = useMediaQuery('(min-width:575px)')
 
   const matchLowWidth = useMediaQuery('(max-width:280px)')
-
-  // const [open] = useAtom(handleFadeModal)
-  // const [movieData] = useAtom(recieveMovieDataAtom)
-
-  // const [open, setOpen] = useState(false)
-
-  // const [checked, setChecked] = useState(false)
 
   function TabPanel(props) {
     const { children, value, index } = props
@@ -151,8 +142,6 @@ export const MyPage = () => {
 
     const newGetReceivedLetters = await Promise.all(
       newReceivedLetters.map(async (receivedLetterData) => {
-        //これを一つの配列にまとめたい
-
         const result = await axios.get(getFilmsDetails, {
           params: {
             film_id: receivedLetterData.film_id,
@@ -209,8 +198,6 @@ export const MyPage = () => {
 
     const getNotWatchFilmDatas = await Promise.all(
       notWatchFilmLetterDatas.map(async (notWatchFilmData) => {
-        //これを一つの配列にまとめたい
-
         const result = await axios.get(getFilmsDetails, {
           params: {
             film_id: notWatchFilmData.film_id,
@@ -241,7 +228,6 @@ export const MyPage = () => {
 
   useEffect(() => {
     getSendLetters()
-    // handleGetNotWatchFilmLetters ()
     setOpenFlash(false)
   }, [])
 
@@ -366,15 +352,6 @@ export const MyPage = () => {
                           title={sendLetter.filmTitle}
                           titleTypographyProps={{ variant: 'h5' }}
                           sx={{ color: 'black', textAlign: 'center', pt: 2 }}
-                          // title={
-                          //   <Typography
-                          //     gutterBottom
-                          //     variant="h5"
-                          //     sx={{ color: 'black', textAlign: 'center', pt: 2 }}
-                          //   >
-                          //     {sendLetter.movieTitle}
-                          //   </Typography>
-                          // }
                         />
                         <CardContent>
                           <Link
@@ -445,15 +422,6 @@ export const MyPage = () => {
                           title={receivedLetterDetail.filmTitle}
                           titleTypographyProps={{ variant: 'h5' }}
                           sx={{ color: 'black', textAlign: 'center', pt: 2 }}
-                          // title={
-                          //   <Typography
-                          //     gutterBottom
-                          //     variant="h5"
-                          //     sx={{ color: 'black', textAlign: 'center', pt: 2 }}
-                          //   >
-                          //     {sendLetter.movieTitle}
-                          //   </Typography>
-                          // }
                         />
                         <CardContent>
                           <Link
@@ -537,15 +505,6 @@ export const MyPage = () => {
                             title={notWatchfilmLetterDetail.filmTitle}
                             titleTypographyProps={{ variant: 'h5' }}
                             sx={{ color: 'black', textAlign: 'center', pt: 2 }}
-                            // title={
-                            //   <Typography
-                            //     gutterBottom
-                            //     variant="h5"
-                            //     sx={{ color: 'black', textAlign: 'center', pt: 2 }}
-                            //   >
-                            //     {sendLetter.movieTitle}
-                            //   </Typography>
-                            // }
                           />
                           <CardContent>
                             <Link
@@ -749,15 +708,6 @@ export const MyPage = () => {
                           title={sendLetter.filmTitle}
                           titleTypographyProps={{ variant: 'h7' }}
                           sx={{ color: 'black', textAlign: 'center', pt: 2 }}
-                          // title={
-                          //   <Typography
-                          //     gutterBottom
-                          //     variant="h5"
-                          //     sx={{ color: 'black', textAlign: 'center', pt: 2 }}
-                          //   >
-                          //     {sendLetter.movieTitle}
-                          //   </Typography>
-                          // }
                         />
                         <CardContent>
                           <Link
@@ -832,15 +782,6 @@ export const MyPage = () => {
                           title={receivedLetterDetail.filmTitle}
                           titleTypographyProps={{ variant: 'h7' }}
                           sx={{ color: 'black', textAlign: 'center', pt: 2 }}
-                          // title={
-                          //   <Typography
-                          //     gutterBottom
-                          //     variant="h5"
-                          //     sx={{ color: 'black', textAlign: 'center', pt: 2 }}
-                          //   >
-                          //     {sendLetter.movieTitle}
-                          //   </Typography>
-                          // }
                         />
                         <CardContent>
                           <Link
@@ -926,15 +867,6 @@ export const MyPage = () => {
                             title={notWatchfilmLetterDetail.filmTitle}
                             titleTypographyProps={{ variant: 'h5' }}
                             sx={{ color: 'black', textAlign: 'center', pt: 2 }}
-                            // title={
-                            //   <Typography
-                            //     gutterBottom
-                            //     variant="h5"
-                            //     sx={{ color: 'black', textAlign: 'center', pt: 2 }}
-                            //   >
-                            //     {sendLetter.movieTitle}
-                            //   </Typography>
-                            // }
                           />
                           <CardContent>
                             <Link

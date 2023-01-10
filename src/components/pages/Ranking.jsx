@@ -32,7 +32,6 @@ import {
 
 import useMediaQuery from '@mui/material/useMediaQuery'
 
-
 export const Ranking = () => {
   const [filmRank, setFilmRank] = useAtom(handleGetCreatedLettersRankingAtom)
   const [swiper, setSwiper] = useState(null)
@@ -42,6 +41,7 @@ export const Ranking = () => {
   )
   const [openFlash, setOpenFlash] = useAtom(handleSendFlashMessage)
   const [isLoading, setIsLoading] = useState(false)
+  const matches = useMediaQuery('(min-width:575px)')
 
   function TabPanel(props) {
     const { children, value, index } = props
@@ -117,8 +117,6 @@ export const Ranking = () => {
     getCreatedLettersRank()
     setOpenFlash(false)
   }, [])
-
-  const matches = useMediaQuery('(min-width:575px)')
 
   return (
     <LoggedInLayout>
@@ -302,7 +300,6 @@ export const Ranking = () => {
 
             <Tab
               label="観たことない映画"
-              // icon={<EqualizerIcon />}
               sx={{
                 color: '#ff9800',
                 fontSize: '11px',

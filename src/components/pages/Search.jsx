@@ -3,32 +3,29 @@ import { LoggedInLayout } from '@/components/layouts'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
-
-import { Alert, Snackbar, Link, Button } from '@mui/material'
-
-import InputBase from '@mui/material/InputBase'
-import IconButton from '@mui/material/IconButton'
+import {
+  Alert,
+  Snackbar,
+  Link,
+  Button,
+  InputBase,
+  IconButton,
+} from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
-
 import axios from 'axios'
 import { filmsSearch, filmsimg, getFilmDetail } from '@/urls'
 import InfiniteScroll from 'react-infinite-scroller'
 import List from '@mui/material/List'
-import { useNavigate, useLocation } from 'react-router-dom'
-
+import { useNavigate } from 'react-router-dom'
 import useMediaQuery from '@mui/material/useMediaQuery'
-
 import { useAtom } from 'jotai'
 import { handleSendFlashMessage } from '@/jotai/atoms'
 
-export const Send = () => {
+export const Search = () => {
   const [searchWord, setSearchWord] = useState('')
 
   const [hasMore, setHasMore] = useState(true)
   const [page, setPage] = useState(1)
-
-  const { state } = useLocation()
-  // const alertOpen = state && state.alertOpen
 
   const [open, setOpen] = useAtom(handleSendFlashMessage)
 
@@ -144,17 +141,6 @@ export const Send = () => {
     <LoggedInLayout>
       {matches ? (
         <>
-          {/* <Snackbar
-            //レター送信に成功したらalertで表示させる
-            open={open}
-            
-            sx={{  textAlign:'center', position: 'relative',}}
-          >
-            <Alert variant="filled" severity="success" sx={{}}>
-              レターが送信されました！
-            </Alert>
-          </Snackbar> */}
-
           <Paper
             component="form"
             onSubmit={getFilmApi}
@@ -393,4 +379,4 @@ export const Send = () => {
   )
 }
 
-export default Send
+export default Search

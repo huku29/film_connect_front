@@ -2,8 +2,8 @@ import { BaseLayout } from '@/components/layouts'
 import { Stack, Typography, Button, Box } from '@mui/material'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import { signInWithPopup } from 'firebase/auth'
-import { provider } from '@/firebase'
-import { auth } from '@/firebase'
+import { provider, auth } from '@/firebase'
+// import { auth } from '@/firebase'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -17,8 +17,6 @@ export const Login = () => {
   const navigation = useNavigate()
   const matches = useMediaQuery('(min-width:575px)')
   //使用したい値を使う
-
-  // const value = useContext(MyContext)
 
   //twitterログインの処理
   const handleTwitterLogin = () => {

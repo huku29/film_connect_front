@@ -1,18 +1,11 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Box, BottomNavigation, BottomNavigationAction } from '@mui/material'
 import EmailIcon from '@mui/icons-material/Email'
 import EqualizerIcon from '@mui/icons-material/Equalizer'
-
-import { Link } from 'react-router-dom'
-
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { getLetter, getNotWatchFilmLetterDatas } from '@/urls'
-
-import { useNavigate } from 'react-router-dom'
-
-import { useContext } from 'react'
 import { MyContext } from '@/App'
-
 //JOTAI
 import { useAtom } from 'jotai'
 import {

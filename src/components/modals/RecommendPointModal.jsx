@@ -1,14 +1,6 @@
-import Dialog from '@mui/material/Dialog'
-import DialogContent from '@mui/material/DialogContent'
-
+import { Dialog, DialogContent, DialogTitle, Typography } from '@mui/material'
 import PropTypes from 'prop-types'
 import { styled } from '@mui/material/styles'
-
-import DialogTitle from '@mui/material/DialogTitle'
-
-import Typography from '@mui/material/Typography'
-
-
 
 //JOTAI
 import { useAtom } from 'jotai'
@@ -35,7 +27,6 @@ function BootstrapDialogTitle(props) {
 
 BootstrapDialogTitle.propTypes = {
   children: PropTypes.node,
-  // onClose: PropTypes.func.isRequired,
 }
 
 export const RecommendPointModal = (props) => {
@@ -43,14 +34,12 @@ export const RecommendPointModal = (props) => {
 
   const sendLetterNumber = props.index
 
-  
   return (
     <div>
       <BootstrapDialog
         aria-labelledby="customized-dialog-title"
         open={props.open}
         onClose={props.onClose}
-        
       >
         <BootstrapDialogTitle
           id="customized-dialog-title"
@@ -71,16 +60,13 @@ export const RecommendPointModal = (props) => {
             bgcolor: '#fff3e0',
           }}
         >
-          {/* <Typography gutterBottom>{props.recommendPoint}</Typography> */}
-
           {props.recommendData ? (
-            
-            <Typography gutterBottom key={sendLetterNumber}>{props.recommendData}</Typography>
+            <Typography gutterBottom key={sendLetterNumber}>
+              {props.recommendData}
+            </Typography>
           ) : (
             <Typography gutterBottom>{movieData.recommendPoint}</Typography>
           )}
-          {/* <Typography gutterBottom>{movieData.recommendPoint}</Typography> */}
-          {/* <Typography gutterBottom>{props.recommendPoint}</Typography> */}
         </DialogContent>
       </BootstrapDialog>
     </div>

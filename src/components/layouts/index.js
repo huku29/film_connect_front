@@ -1,5 +1,5 @@
 export { BaseLayout } from './BaseLayout'
 export { LoggedInLayout } from './LoggedInLayout'
-export {Header} from './Header'
-export {LoggedInHeader} from './LoggedInHeader'
-export {LoggedInFooter} from './LoggedInFooter'
+export { Header } from './Header'
+export { LoggedInHeader } from './LoggedInHeader'
+export { LoggedInFooter } from './LoggedInFooter'

@@ -5,43 +5,26 @@ import {
   Backdrop,
   CircularProgress,
   Link,
+  Card,
+  TextField,
+  Box,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Container,
 } from '@mui/material'
-
-import Card from '@mui/material/Card'
-
-import TextField from '@mui/material/TextField'
-
-import Box from '@mui/material/Box'
-
 import { useForm, Controller } from 'react-hook-form'
-
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import DialogTitle from '@mui/material/DialogTitle'
-
-import { useLocation } from 'react-router-dom'
-
-import { useNavigate } from 'react-router-dom'
-
+import { useLocation, useNavigate } from 'react-router-dom'
 import { filmsImgSmall, getFilmDetail } from '@/urls'
-
 import axios from 'axios'
-
 import { useState } from 'react'
-
 import { LoggedInLayout } from '@/components/layouts'
-
 import { sendLetter } from '@/urls'
-
 import { useContext } from 'react'
 import { MyContext } from '@/App'
-
-import Container from '@mui/material/Container'
-
 import useMediaQuery from '@mui/material/useMediaQuery'
-
 import { useAtom } from 'jotai'
 import { handleSendFlashMessage } from '@/jotai/atoms'
 
@@ -123,7 +106,7 @@ export const WriteLetterPage = () => {
       )
       .then((res) => {
         setTimeout(() => {
-          navigation('/send', setOpenFlash(true))
+          navigation('/search', setOpenFlash(true))
         }, 5000)
       })
       .catch((error) => {
@@ -263,9 +246,8 @@ export const WriteLetterPage = () => {
                 </Backdrop>
               </Box>
             </Stack>
-            {/* <LoggedInFooter /> */}
           </Card>
-          {/* <ConfirmationModal open={openModal} onClose={handleCloseModal}/> */}
+
           <Box>
             <Dialog
               open={openModal}
@@ -423,9 +405,8 @@ export const WriteLetterPage = () => {
                 </Backdrop>
               </Box>
             </Stack>
-            {/* <LoggedInFooter /> */}
           </Card>
-          {/* <ConfirmationModal open={openModal} onClose={handleCloseModal}/> */}
+
           <Box>
             <Dialog
               open={openModal}

@@ -41,7 +41,7 @@ export const Top = () => {
             }}
           >
             <TwitterIcon
-              sx={{ fontSize: '100px', mr: 'auto', ml: 'auto', mt: 8,mb:5}}
+              sx={{ fontSize: '100px', mr: 'auto', ml: 'auto', mt: 8, mb: 5 }}
             />
             <Typography variant="h5" sx={{ p: 1, mt: 1 }}>
               Twitterでログイン
@@ -179,23 +179,23 @@ export const Top = () => {
             <Stack
               sx={{
                 mt: 10,
-                // textAlign: 'center',
               }}
             >
-              <TwitterIcon sx={{ fontSize: '80px', mr: 'auto', ml: 'auto',mb:5 }} />
+              <TwitterIcon
+                sx={{ fontSize: '80px', mr: 'auto', ml: 'auto', mb: 5 }}
+              />
               <Typography variant="h5" sx={{ p: 1, mt: 3 }}>
                 Twitterでログイン
               </Typography>
               <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
-              ログインをするとあなたのおすすめ映画を送り、誰かのおすすめ映画をレター形式で受け取ることができます！
-              <br />
-              映画ライフを楽しみましょう！
+                ログインをするとあなたのおすすめ映画を送り、誰かのおすすめ映画をレター形式で受け取ることができます！
+                <br />
+                映画ライフを楽しみましょう！
               </Typography>
             </Stack>
             <Stack
               sx={{
                 mt: 2,
-                // textAlign: 'center',
               }}
             >
               <Typography
@@ -218,17 +218,16 @@ export const Top = () => {
                 おすすめ映画レターを作成する
               </Typography>
               <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
-              匿名でおすすめ映画レターを作成し、ランダムに誰かの元へ送られます！
-              <br />
-              映画検索で表示されたおすすめ映画の画像を押すと作成画面が表示されます！
-              <br />
-              あなたのおすすめ映画を多くの人に共有しよう！
+                匿名でおすすめ映画レターを作成し、ランダムに誰かの元へ送られます！
+                <br />
+                映画検索で表示されたおすすめ映画の画像を押すと作成画面が表示されます！
+                <br />
+                あなたのおすすめ映画を多くの人に共有しよう！
               </Typography>
             </Stack>
             <Stack
               sx={{
                 mt: 2,
-                // textAlign: 'center',
               }}
             >
               <Typography
@@ -251,17 +250,16 @@ export const Top = () => {
                 おすすめ映画レターを受け取る
               </Typography>
               <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
-              受け取るボタンを押すとランダムに誰かがおすすめしてくれた映画レターが表示されます！
-              <br />
-              Twitterシェアをすることで受け取ったレターが誰から送られてきたかわかります!
-              <br />
-              この機会にTwitterで映画の感想や感謝の言葉を伝え交流の輪を広げましょう!
+                受け取るボタンを押すとランダムに誰かがおすすめしてくれた映画レターが表示されます！
+                <br />
+                Twitterシェアをすることで受け取ったレターが誰から送られてきたかわかります!
+                <br />
+                この機会にTwitterで映画の感想や感謝の言葉を伝え交流の輪を広げましょう!
               </Typography>
             </Stack>
             <Stack
               sx={{
                 mt: 2,
-                // textAlign: 'center',
               }}
             >
               <Typography
@@ -284,13 +282,13 @@ export const Top = () => {
                 映画ランキング
               </Typography>
               <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
-              どの映画がレター形式で多く作成されたかランキングページで一目でわかります！
-              <br />
-              また多くの方が観たことない映画ランキングも見ることができます！
-              <br />
-              あなたの知っているマニアックな映画もこの機会におすすめましょう！
-              <br />
-              多くの映画レターを作成し、ランキングに入りましょう！
+                どの映画がレター形式で多く作成されたかランキングページで一目でわかります！
+                <br />
+                また多くの方が観たことない映画ランキングも見ることができます！
+                <br />
+                あなたの知っているマニアックな映画もこの機会におすすめましょう！
+                <br />
+                多くの映画レターを作成し、ランキングに入りましょう！
               </Typography>
             </Stack>
           </Box>
