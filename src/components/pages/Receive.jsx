@@ -1,15 +1,19 @@
 import { LoggedInLayout } from '@/components/layouts'
-
 import { useState, useEffect } from 'react'
-
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Fade from '@mui/material/Fade'
-
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import CardMedia from '@mui/material/CardMedia'
-import Typography from '@mui/material/Typography'
+import {
+  Box,
+  Button,
+  Fade,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Alert,
+  Snackbar,
+  CardHeader,
+  CardActions,
+  Link,
+} from '@mui/material'
 
 import {
   filmsImgSmall,
@@ -17,9 +21,7 @@ import {
   getFilmDetail,
   registerNotWatchFilmLetter,
 } from '@/urls'
-
 import { TwitterShareButton, TwitterIcon } from 'react-share'
-
 //JOTAI
 import { useAtom } from 'jotai'
 import {
@@ -30,16 +32,10 @@ import {
   handleRegistNotWatchFilmAtom,
   handleGetFirstSawFilmLettersIdAtom,
 } from '@/jotai/atoms'
-
 import { RecommendPointModal } from '@/components/modals'
-
 import { useContext } from 'react'
 import { MyContext } from '@/App'
-
 import axios from 'axios'
-
-import { Alert, Snackbar, CardHeader, CardActions, Link } from '@mui/material'
-
 import useMediaQuery from '@mui/material/useMediaQuery'
 
 export const Receive = () => {
@@ -103,7 +99,6 @@ export const Receive = () => {
 
   //レスポンシブ
   const matches = useMediaQuery('(min-width:575px)')
-
   const [registNotWatchFilm, setRegistNotWatchFilm] = useAtom(
     handleRegistNotWatchFilmAtom
   )
@@ -219,26 +214,16 @@ export const Receive = () => {
                     </TwitterShareButton>
                   </CardActions>
                   <CardActions sx={{ ml: 12, my: -9.5 }}>
-                    {
-                      match_first_saw_letter_id ===
-                      movieData.letterId ? null : registNotWatchFilm ? ( // </Button> //   <FontAwesomeIcon icon={faFaceSurprise} size="3x" /> // <Button onClick={handleChangeFaceIcon}>
-                        <Button
-                          variant="contained"
-                          sx={{ mt: 3, ml: 23 }}
-                          onClick={handleRegistNotWatchMovie}
-                        >
-                          観たことない
-                        </Button>
-                      ) : null
-
-                      // <Button onClick={handleChangeFaceIcon}>
-                      //   <FontAwesomeIcon icon={faFaceMehBlank} size="3x" />
-                      // </Button>
-                      // <Button  variant="contained"
-                      // sx={{mt: 3, ml:15}}>
-                      //   観たことない映画に追加されました
-                      // </Button>
-                    }
+                    {match_first_saw_letter_id ===
+                    movieData.letterId ? null : registNotWatchFilm ? ( // </Button> //   <FontAwesomeIcon icon={faFaceSurprise} size="3x" /> // <Button onClick={handleChangeFaceIcon}>
+                      <Button
+                        variant="contained"
+                        sx={{ mt: 3, ml: 23 }}
+                        onClick={handleRegistNotWatchMovie}
+                      >
+                        観たことない
+                      </Button>
+                    ) : null}
                   </CardActions>
 
                   <Box
