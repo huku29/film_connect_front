@@ -16,7 +16,7 @@ import {
 } from '@mui/material'
 
 import MuiAppBar from '@mui/material/AppBar'
-
+import TwitterIcon from '@mui/icons-material/Twitter';
 import MenuIcon from '@mui/icons-material/Menu'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
@@ -25,7 +25,7 @@ import { Link } from 'react-router-dom'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { signOut } from 'firebase/auth'
 import { auth } from '@/firebase'
-import { contact } from '@/urls'
+import { contact,twitterOfficial } from '@/urls'
 
 const drawerWidth = 240
 
@@ -206,6 +206,21 @@ export const LoggedInHeader = () => {
               </a>
             </ListItemButton>
           </ListItem>
+          <ListItem>
+                <ListItemButton>
+                  <ListItemIcon>
+                  <TwitterIcon sx={{ color: 'text.primary' }} />
+                  </ListItemIcon>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={`${twitterOfficial }`}
+                    style={{ textDecoration: 'none', color: '#ff9800' }}
+                  >
+                    公式Twitter
+                  </a>
+                </ListItemButton>
+              </ListItem>
         </List>
       </Drawer>
     </Box>
