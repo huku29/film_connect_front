@@ -26,3 +26,4 @@ export const getFilmDetail = `${import.meta.env.VITE_FILM_DETAIL_URL}`;
 export const filmsimg = `${import.meta.env.VITE_FILM_IMG_URL}`;
 export const filmsImgSmall = `${import.meta.env.VITE_FILM_IMG_URL_SMALL}`;
 export const contact = `${import.meta.env.VITE_CONTACT_URL}`;
+export const twitterOfficial = `${import.meta.env.VITE_OFFICIAL_ACCOUNT_URL}`;

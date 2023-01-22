@@ -14,6 +14,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material'
+import TwitterIcon from '@mui/icons-material/Twitter';
 import MuiAppBar from '@mui/material/AppBar'
 import MenuIcon from '@mui/icons-material/Menu'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
@@ -25,7 +26,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { MyContext } from '@/App'
 import { signOut } from 'firebase/auth'
 import { auth } from '@/firebase'
-import { contact } from '@/urls'
+import { contact,twitterOfficial  } from '@/urls'
 
 const drawerWidth = 240
 
@@ -234,6 +235,21 @@ export const Header = () => {
                   </a>
                 </ListItemButton>
               </ListItem>
+              <ListItem>
+                <ListItemButton>
+                  <ListItemIcon>
+                  <TwitterIcon sx={{ color: 'text.primary' }} />
+                  </ListItemIcon>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={`${twitterOfficial }`}
+                    style={{ textDecoration: 'none', color: '#ff9800' }}
+                  >
+                    公式Twitter
+                  </a>
+                </ListItemButton>
+              </ListItem>
             </List>
           </Drawer>
         </>
@@ -380,6 +396,21 @@ export const Header = () => {
                     style={{ textDecoration: 'none', color: '#ff9800' }}
                   >
                     お問い合わせ
+                  </a>
+                </ListItemButton>
+              </ListItem>
+              <ListItem>
+                <ListItemButton>
+                  <ListItemIcon>
+                  <TwitterIcon sx={{ color: 'text.primary' }} />
+                  </ListItemIcon>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={`${twitterOfficial }`}
+                    style={{ textDecoration: 'none', color: '#ff9800' }}
+                  >
+                    公式Twitter
                   </a>
                 </ListItemButton>
               </ListItem>
