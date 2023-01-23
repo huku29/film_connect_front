@@ -28,3 +28,5 @@ export const handleGetFirstSawFilmsRankingAtom = atom([])
 export const handleRegistNotWatchFilmAtom = atom(true)
 
 export const handleGetFirstSawFilmLettersIdAtom = atom([])
+
+export const handleGetSearchWordAtom = atom('')

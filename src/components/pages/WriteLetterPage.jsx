@@ -26,7 +26,7 @@ import { useContext } from 'react'
 import { MyContext } from '@/App'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useAtom } from 'jotai'
-import { handleSendFlashMessage } from '@/jotai/atoms'
+import { handleSendFlashMessage, handleGetSearchWordAtom } from '@/jotai/atoms'
 
 export const WriteLetterPage = () => {
   const { control, handleSubmit, register } = useForm()
@@ -63,6 +63,8 @@ export const WriteLetterPage = () => {
     type: 'success',
     message: '成功しました。',
   })
+
+  const [searchWord, setSearchWord] = useAtom(handleGetSearchWordAtom)
 
   const [recommendPoint, setRecommendPoint] = useState()
 
@@ -117,10 +119,15 @@ export const WriteLetterPage = () => {
       })
       .finally(() => {
         setSearchFilm([])
+        setSearchWord('')
       })
     setRecommendPoint('')
     setStatus('')
     setSnackbarOpen('')
+  }
+
+  const backSearchPage = () => {
+    navigation('/search', setSearchWord(searchWord))
   }
 
   const matches = useMediaQuery('(min-width:575px)')
@@ -225,6 +232,16 @@ export const WriteLetterPage = () => {
                     />
                   </Box>
                 </Container>
+
+                <Button
+                  type="submit"
+                  variant="contained"
+                  size="small"
+                  sx={{ mt: 3, mr: 2, mb: 2 }}
+                  onClick={backSearchPage}
+                >
+                  検索画面に戻る
+                </Button>
 
                 <Button
                   type="submit"
@@ -384,6 +401,16 @@ export const WriteLetterPage = () => {
                     />
                   </Box>
                 </Container>
+
+                <Button
+                  type="submit"
+                  variant="contained"
+                  size="small"
+                  sx={{ mt: 2, mr: 1 }}
+                  onClick={backSearchPage}
+                >
+                  検索画面に戻る
+                </Button>
 
                 <Button
                   type="submit"

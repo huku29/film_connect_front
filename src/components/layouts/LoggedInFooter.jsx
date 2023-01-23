@@ -2,6 +2,8 @@ import { useState, useContext } from 'react'
 import { Box, BottomNavigation, BottomNavigationAction } from '@mui/material'
 import EmailIcon from '@mui/icons-material/Email'
 import EqualizerIcon from '@mui/icons-material/Equalizer'
+import SearchIcon from '@mui/icons-material/Search'
+import RoofingIcon from '@mui/icons-material/Roofing'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { getLetter, getNotWatchFilmLetterDatas } from '@/urls'
@@ -15,10 +17,10 @@ import {
   handleSendFlashMessage,
   handleRegistNotWatchFilmAtom,
   handleGetFirstSawFilmLettersIdAtom,
+  handleGetSearchWordAtom,
 } from '@/jotai/atoms'
 
-export const LoggedInFooter = (props) => {
-  const { menuList } = props
+export const LoggedInFooter = () => {
   const [value, setValue] = useState(0)
 
   const navigation = useNavigate()
@@ -27,17 +29,17 @@ export const LoggedInFooter = (props) => {
 
   const [, setMovieData] = useAtom(recieveMovieDataAtom)
 
-  const [openFlash, setOpenFlash] = useAtom(handleSendFlashMessage)
+  const [, setOpenFlash] = useAtom(handleSendFlashMessage)
 
   const [, setOpen] = useAtom(handleFadeModal)
 
+  const [, setSearchWord] = useAtom(handleGetSearchWordAtom)
+
   const [, setErrorMessage] = useAtom(handleGetErrorMessageAtom)
 
-  const [registNotWatchFilm, setRegistNotWatchFilm] = useAtom(
-    handleRegistNotWatchFilmAtom
-  )
+  const [, setRegistNotWatchFilm] = useAtom(handleRegistNotWatchFilmAtom)
 
-  const [getFirstSawFilmLettersId, setGetFirstSawFilmLettersId] = useAtom(
+  const [, setGetFirstSawFilmLettersId] = useAtom(
     handleGetFirstSawFilmLettersIdAtom
   )
 
@@ -116,25 +118,24 @@ export const LoggedInFooter = (props) => {
           },
         ]}
       >
-        {
-          // このLinkタグの書き方がどういう意味なのかまだわかっていない
-          menuList.map((menu, index) => (
-            <BottomNavigationAction
-              key={index}
-              label={menu.label}
-              icon={menu.icon}
-              component={Link}
-              to={menu.nextPage}
-            />
-          ))
-        }
         <BottomNavigationAction
-          label="Random"
+          label="検索"
+          icon={<SearchIcon />}
+          onClick={() => navigation('/search', setSearchWord(''))}
+        />
+        <BottomNavigationAction
+          label="マイページ"
+          icon={<RoofingIcon />}
+          component={Link}
+          to={'/mypage'}
+        />
+        <BottomNavigationAction
+          label="ランダム"
           icon={<EmailIcon />}
           onClick={handleGetLetter}
         />
         <BottomNavigationAction
-          label="Ranking"
+          label="ランキング"
           icon={<EqualizerIcon />}
           component={Link}
           to={'/ranking'}
