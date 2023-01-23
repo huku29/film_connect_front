@@ -19,10 +19,10 @@ import List from '@mui/material/List'
 import { useNavigate } from 'react-router-dom'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useAtom } from 'jotai'
-import { handleSendFlashMessage } from '@/jotai/atoms'
+import { handleSendFlashMessage, handleGetSearchWordAtom } from '@/jotai/atoms'
 
 export const Search = () => {
-  const [searchWord, setSearchWord] = useState('')
+  const [searchWord, setSearchWord] = useAtom(handleGetSearchWordAtom)
 
   const [hasMore, setHasMore] = useState(true)
   const [page, setPage] = useState(1)
@@ -82,9 +82,9 @@ export const Search = () => {
   }
 
   //画面遷移時に検索結果を初期化する
-  useEffect(() => {
-    setSearchFilm([])
-  }, [setSearchFilm])
+  // useEffect(() => {
+  //   setSearchFilm([])
+  // }, [setSearchFilm])
 
   const handleChange = (e) => {
     setOpen(false)
