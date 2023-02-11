@@ -2,9 +2,11 @@ import { BaseLayout } from '@/components/layouts'
 import { Stack, Typography, Box } from '@mui/material'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import { useTranslation } from 'react-i18next'
 
 export const Top = () => {
   const matches = useMediaQuery('(min-width:825px)')
+  const { t, i18n } = useTranslation()
 
   return (
     <BaseLayout>
@@ -33,7 +35,7 @@ export const Top = () => {
               textAlign: 'center',
             }}
           >
-            <Typography variant="h4"> How to use ? </Typography>
+            <Typography variant="h4"> {t('top.useage')} </Typography>
           </Stack>
           <Stack
             sx={{
@@ -44,12 +46,12 @@ export const Top = () => {
               sx={{ fontSize: '100px', mr: 'auto', ml: 'auto', mt: 8, mb: 5 }}
             />
             <Typography variant="h5" sx={{ p: 1, mt: 1 }}>
-              Twitterでログイン
+              {t('top.loginWithTwitter')}
             </Typography>
             <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 7 }}>
-              ログインをするとあなたのおすすめ映画を送り、誰かのおすすめ映画をレター形式で受け取ることができます！
+              {t('top.loginDescription1')}
               <br />
-              映画ライフを楽しみましょう！
+              {t('top.loginDescription2')}
             </Typography>
           </Stack>
           <Stack
@@ -67,14 +69,14 @@ export const Top = () => {
               />
             </Typography>
             <Typography variant="h5" sx={{ p: 1, mt: 3 }}>
-              おすすめ映画レターを作成する
+              {t('top.writeRecommendedFilmLetters')}
             </Typography>
             <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
-              匿名でおすすめ映画レターを作成し、ランダムに誰かの元へ送られます！
+              {t('top.writeRecommendedFilmLettersDescription1')}
               <br />
-              映画検索で表示されたおすすめ映画の画像を押すと作成画面が表示されます！
+              {t('top.writeRecommendedFilmLettersDescription2')}
               <br />
-              あなたのおすすめ映画を多くの人に共有しよう！
+              {t('top.writeRecommendedFilmLettersDescription3')}
             </Typography>
           </Stack>
           <Stack
@@ -92,14 +94,14 @@ export const Top = () => {
               />
             </Typography>
             <Typography variant="h5" sx={{ p: 1, mt: 3 }}>
-              おすすめ映画レターを受け取る
+              {t('top.receiveSomeoneRecommendedFilmLetters')}
             </Typography>
             <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
-              受け取るボタンを押すとランダムに誰かがおすすめしてくれた映画レターが表示されます！
+              {t('top.receiveSomeoneRecommendedFilmLettersDescription1')}
               <br />
-              Twitterシェアをすることで受け取ったレターが誰から送られてきたかわかります!
+              {t('top.receiveSomeoneRecommendedFilmLettersDescription2')}
               <br />
-              この機会にTwitterで映画の感想や感謝の言葉を伝え交流の輪を広げましょう!
+              {t('top.receiveSomeoneRecommendedFilmLettersDescription3')}
             </Typography>
           </Stack>
           <Stack
@@ -117,16 +119,16 @@ export const Top = () => {
               />
             </Typography>
             <Typography variant="h5" sx={{ p: 1, mt: 3 }}>
-              映画ランキング
+              {t('top.ranking')}
             </Typography>
             <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
-              どの映画がレター形式で多く作成されたかランキングページで一目でわかります！
+              {t('top.rankingDescription1')}
               <br />
-              また多くの方が観たことない映画ランキングも見ることができます！
+              {t('top.rankingDescription2')}
               <br />
-              あなたの知っているマニアックな映画もこの機会におすすめましょう！
+              {t('top.rankingDescription3')}
               <br />
-              多くの映画レターを作成し、ランキングに入りましょう！
+              {t('top.rankingDescription4')}
             </Typography>
             <Typography sx={{ mb: 5, textAlign: 'right' }}>
               <img
@@ -183,7 +185,7 @@ export const Top = () => {
                 mt: 30,
               }}
             >
-              <Typography variant="h4"> How to use ? </Typography>
+              <Typography variant="h4"> {t('top.useage')} </Typography>
             </Stack>
             <Stack
               sx={{
@@ -194,12 +196,12 @@ export const Top = () => {
                 sx={{ fontSize: '80px', mr: 'auto', ml: 'auto', mb: 5 }}
               />
               <Typography variant="h5" sx={{ p: 1, mt: 3 }}>
-                Twitterでログイン
+                {t('top.loginWithTwitter')}
               </Typography>
               <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
-                ログインをするとあなたのおすすめ映画を送り、誰かのおすすめ映画をレター形式で受け取ることができます！
+                {t('top.loginDescription1')}
                 <br />
-                映画ライフを楽しみましょう！
+                {t('top.loginDescription2')}
               </Typography>
             </Stack>
             <Stack
@@ -224,14 +226,14 @@ export const Top = () => {
                 />
               </Typography>
               <Typography variant="h5" sx={{ p: 1 }}>
-                おすすめ映画レターを作成する
+                {t('top.writeRecommendedFilmLetters')}
               </Typography>
               <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
-                匿名でおすすめ映画レターを作成し、ランダムに誰かの元へ送られます！
+                {t('top.writeRecommendedFilmLettersDescription1')}
                 <br />
-                映画検索で表示されたおすすめ映画の画像を押すと作成画面が表示されます！
+                {t('top.writeRecommendedFilmLettersDescription2')}
                 <br />
-                あなたのおすすめ映画を多くの人に共有しよう！
+                {t('top.writeRecommendedFilmLettersDescription3')}
               </Typography>
             </Stack>
             <Stack
@@ -256,15 +258,15 @@ export const Top = () => {
                 />
               </Typography>
               <Typography variant="h5" sx={{ p: 1 }}>
-                おすすめ映画レターを受け取る
-              </Typography>
-              <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
-                受け取るボタンを押すとランダムに誰かがおすすめしてくれた映画レターが表示されます！
-                <br />
-                Twitterシェアをすることで受け取ったレターが誰から送られてきたかわかります!
-                <br />
-                この機会にTwitterで映画の感想や感謝の言葉を伝え交流の輪を広げましょう!
-              </Typography>
+              {t('top.receiveSomeoneRecommendedFilmLetters')}
+            </Typography>
+            <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
+              {t('top.receiveSomeoneRecommendedFilmLettersDescription1')}
+              <br />
+              {t('top.receiveSomeoneRecommendedFilmLettersDescription2')}
+              <br />
+              {t('top.receiveSomeoneRecommendedFilmLettersDescription3')}
+            </Typography>
             </Stack>
             <Stack
               sx={{
@@ -288,16 +290,16 @@ export const Top = () => {
                 />
               </Typography>
               <Typography variant="h5" sx={{ p: 1 }}>
-                映画ランキング
-              </Typography>
-              <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
-                どの映画がレター形式で多く作成されたかランキングページで一目でわかります！
-                <br />
-                また多くの方が観たことない映画ランキングも見ることができます！
-                <br />
-                あなたの知っているマニアックな映画もこの機会におすすめましょう！
-                <br />
-                多くの映画レターを作成し、ランキングに入りましょう！
+              {t('top.ranking')}
+            </Typography>
+            <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
+              {t('top.rankingDescription1')}
+              <br />
+              {t('top.rankingDescription2')}
+              <br />
+              {t('top.rankingDescription3')}
+              <br />
+              {t('top.rankingDescription4')}
               </Typography>
               <Typography sx={{ mb: 5, textAlign: 'right' }}>
                 <img
