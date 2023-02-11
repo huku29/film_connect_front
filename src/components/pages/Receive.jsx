@@ -20,6 +20,7 @@ import {
   registerReceivedLetter,
   getFilmDetail,
   registerNotWatchFilmLetter,
+  getFilmsDetails,
 } from '@/urls'
 import { TwitterShareButton, TwitterIcon } from 'react-share'
 //JOTAI
@@ -37,6 +38,7 @@ import { useContext } from 'react'
 import { MyContext } from '@/App'
 import axios from 'axios'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import { useTranslation } from 'react-i18next'
 
 export const Receive = () => {
   const [movieData] = useAtom(recieveMovieDataAtom)
@@ -49,6 +51,9 @@ export const Receive = () => {
 
   const [errorMessage] = useAtom(handleGetErrorMessageAtom)
 
+  const { t, i18n } = useTranslation()
+  
+
   const [getFirstSawFilmLettersId, setGetFirstSawFilmLettersId] = useAtom(
     handleGetFirstSawFilmLettersIdAtom
   )
@@ -56,6 +61,8 @@ export const Receive = () => {
   const match_first_saw_letter_id = getFirstSawFilmLettersId.find(
     (getFirstSawFilmLetterId) => getFirstSawFilmLetterId === movieData.letterId
   )
+
+  
 
   const handleOpenModal = () => {
     setOpenModal(true)
@@ -92,10 +99,6 @@ export const Receive = () => {
   }
 
   //受け取るボタンを押すとフラッシュメッセージを消す
-  useEffect(() => {
-    setDisable(false)
-    setOpenFlash(false)
-  }, [movieData])
 
   //レスポンシブ
   const matches = useMediaQuery('(min-width:575px)')
@@ -134,6 +137,30 @@ export const Receive = () => {
       })
   }
 
+  const handleGetFilmDataFromId = async() => {
+    const params = {film_id: movieData.film_id}
+    await axios
+      .get(
+        getFilmsDetails,
+        {
+          film_id: params,
+        }
+      )
+      .then((res) => {
+      })
+  }
+
+  useEffect(() => {
+    setDisable(false)
+    setOpenFlash(false)
+  }, [movieData])
+
+  
+
+  // useEffect(() => {
+  //   handleGetFilmDataFromId()
+  // }, [])
+
   return (
     <LoggedInLayout>
       {matches ? (
@@ -142,7 +169,8 @@ export const Receive = () => {
             {/* 受け取るレターがなければメッセージを表示して、あればコンテンツを表示 */}
             {errorMessage ? (
               <Typography sx={{ color: '#ff9800', mt: 40 }}>
-                {errorMessage}
+                {/* {errorMessage} */}
+                {t('receive.erroMessage')}
               </Typography>
             ) : (
               <Fade in={open}>
@@ -191,7 +219,7 @@ export const Receive = () => {
                       sx={{ mt: 3, mx: 'auto' }}
                       onClick={handleOpenModal}
                     >
-                      おすすめポイントを見る
+                      {t('recommendPoint')}
                     </Button>
                   </CardActions>
                   <CardActions>
@@ -201,13 +229,24 @@ export const Receive = () => {
                       onClick={handleGetReceiveLetters}
                       disabled={disable}
                     >
-                      受け取る
+                      {t('receive.button')}
                     </Button>
                   </CardActions>
                   <CardActions sx={{ ml: 3, my: -8 }}>
-                    <TwitterShareButton
+                    {/* <TwitterShareButton
                       title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
-                      hashtags={['映画で人と繋がりたい']}
+                      hashtags={['映画で人と繋がりたい','FilmConnect']}
+                      url={'https://film-connect.web.app'}
+                    >
+                      <TwitterIcon size={'55px'} round />
+                    </TwitterShareButton> */}
+                    <TwitterShareButton
+                      title={t(`twitterShareContent`, {
+                        film: movieData.movieTitle,
+                        twitterUser: movieData.twitterUserName,
+                      })}
+                      // title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
+                      hashtags={['映画で人と繋がりたい', 'FilmConnect']}
                       url={'https://film-connect.web.app'}
                     >
                       <TwitterIcon size={'55px'} round />
@@ -221,7 +260,7 @@ export const Receive = () => {
                         sx={{ mt: 3, ml: 23 }}
                         onClick={handleRegistNotWatchMovie}
                       >
-                        観たことない
+                        {t('neverSeen')}
                       </Button>
                     ) : null}
                   </CardActions>
@@ -248,7 +287,7 @@ export const Receive = () => {
                         severity="success"
                         sx={{ positon: 'fixed', bottom: '700px' }}
                       >
-                        レターを受け取りました！
+                        {t('receive.receivedAlert')}
                       </Alert>
                     </Snackbar>
                     <Snackbar
@@ -269,7 +308,7 @@ export const Receive = () => {
                         severity="success"
                         sx={{ positon: 'fixed', bottom: '700px' }}
                       >
-                        観たことないリストに追加されました
+                        {t('receive.addNeverSeenFilmList')}
                       </Alert>
                     </Snackbar>
                   </Box>
@@ -288,7 +327,7 @@ export const Receive = () => {
           <Box mt={40} textAlign="center">
             {/* 受け取るレターがなければメッセージを表示して、あればコンテンツを表示 */}
             {errorMessage ? (
-              <Typography sx={{ color: '#ff9800' }}>{errorMessage}</Typography>
+              <Typography sx={{ color: '#ff9800' }}>{t('receive.erroMessage')}</Typography>
             ) : (
               <Fade in={open}>
                 <Card
@@ -331,7 +370,7 @@ export const Receive = () => {
                       sx={{ ml: 5 }}
                       onClick={handleOpenModal}
                     >
-                      おすすめポイントを見る
+                      {t('recommendPoint')}
                     </Button>
                   </CardActions>
                   <CardActions sx={{}}>
@@ -342,7 +381,7 @@ export const Receive = () => {
                         sx={{ ml: 5, textAlign: 'center', width: '190px' }}
                         onClick={handleRegistNotWatchMovie}
                       >
-                        観たことない
+                        {t('neverSeen')}
                       </Button>
                     ) : null}
                   </CardActions>
@@ -353,16 +392,20 @@ export const Receive = () => {
                       onClick={handleGetReceiveLetters}
                       disabled={disable}
                     >
-                      受け取る
+                      {t('receive.button')}
                     </Button>
                   </CardActions>
                   <CardActions sx={{ ml: 5 }}>
                     <TwitterShareButton
-                      title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
-                      hashtags={['映画で人と繋がりたい']}
+                      title={t(`twitterShareContent`, {
+                        film: movieData.movieTitle,
+                        twitterUser: movieData.twitterUserName,
+                      })}
+                      // title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
+                      hashtags={['映画で人と繋がりたい', 'FilmConnect']}
                       url={'https://film-connect.web.app'}
                     >
-                      <TwitterIcon size={'50px'} round />
+                      <TwitterIcon size={'55px'} round />
                     </TwitterShareButton>
                   </CardActions>
                   <Box
@@ -388,7 +431,7 @@ export const Receive = () => {
                         severity="success"
                         sx={{ positon: 'fixed', bottom: '700px' }}
                       >
-                        レターを受け取りました！
+                        {t('receive.receivedAlert')}
                       </Alert>
                     </Snackbar>
                     <Snackbar
@@ -410,7 +453,7 @@ export const Receive = () => {
                         severity="success"
                         sx={{ positon: 'fixed', bottom: '700px' }}
                       >
-                        観たことないリストに追加されました
+                        {t('receive.addNeverSeenFilmList')}
                       </Alert>
                     </Snackbar>
                   </Box>
