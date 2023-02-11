@@ -3,11 +3,17 @@ import { Box, BottomNavigation, BottomNavigationAction } from '@mui/material'
 import EmailIcon from '@mui/icons-material/Email'
 import EqualizerIcon from '@mui/icons-material/Equalizer'
 import SearchIcon from '@mui/icons-material/Search'
-import RoofingIcon from '@mui/icons-material/Roofing'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { getLetter, getNotWatchFilmLetterDatas } from '@/urls'
+import {
+  getLetter,
+  getNotWatchFilmLetterDatas,
+  getFilmsDetails,
+  getFilmsDetailsByEnglish,
+} from '@/urls'
 import { MyContext } from '@/App'
+import { useTranslation } from 'react-i18next'
 //JOTAI
 import { useAtom } from 'jotai'
 import {
@@ -19,6 +25,7 @@ import {
   handleGetFirstSawFilmLettersIdAtom,
   handleGetSearchWordAtom,
 } from '@/jotai/atoms'
+import { useEffect } from 'react'
 
 export const LoggedInFooter = () => {
   const [value, setValue] = useState(0)
@@ -39,6 +46,8 @@ export const LoggedInFooter = () => {
 
   const [, setRegistNotWatchFilm] = useAtom(handleRegistNotWatchFilmAtom)
 
+  const { t, i18n } = useTranslation()
+
   const [, setGetFirstSawFilmLettersId] = useAtom(
     handleGetFirstSawFilmLettersIdAtom
   )
@@ -46,47 +55,83 @@ export const LoggedInFooter = () => {
   const handleGetLetter = async () => {
     const token = await user.getIdToken(true)
     const config = { headers: { authorization: `Bearer ${token}` } }
-
+    //ランダムで映画レターの情報を取得
     axios.get(getLetter, config).then(async (res) => {
       //受け取れるレターがなければ、メッセージを渡す
       if (res.data.message) {
         setErrorMessage(res.data.message)
-        return navigation('/receive')
       } else {
         //エラーメッセージがない場合は空にする
         setErrorMessage('')
       }
-
       const json = res.data.detail
       const obj = JSON.parse(json)
+      const filmId = obj.id
 
-      setMovieData({
-        movieTitle: obj.title,
-        movieImg: obj.poster_path,
-        movieId: obj.id,
-        receiverId: res.data.current_user_id,
-        letterId: res.data.letter.id,
-        userId: res.data.letter.user_id,
-        recommendPoint: res.data.letter.recommend_point,
-        twitterUserName: res.data.user.name,
-      })
+      if (i18n.language === 'ja') {
+        axios
+          .get(getFilmsDetails, {
+            params: {
+              film_id: filmId,
+            },
+          })
+          .then((res2) => {
+
+            setMovieData({
+              movieTitle: res2.data.title,
+              movieImg: res2.data.poster_path,
+
+              movieId: obj.id,
+              receiverId: res.data.current_user_id,
+              letterId: res.data.letter.id,
+              userId: res.data.letter.user_id,
+              recommendPoint: res.data.letter.recommend_point,
+              twitterUserName: res.data.user.name,
+            })
+          })
+      } else {
+        axios
+          .get(getFilmsDetailsByEnglish, {
+            params: {
+              film_id: filmId,
+            },
+          })
+          .then((res2) => {
+
+            setMovieData({
+              movieTitle: res2.data.title,
+              movieImg: res2.data.poster_path,
+              movieId: obj.id,
+              receiverId: res.data.current_user_id,
+              letterId: res.data.letter.id,
+              userId: res.data.letter.user_id,
+              recommendPoint: res.data.letter.recommend_point,
+              twitterUserName: res.data.user.name,
+            })
+          })
+      }
 
       const resSawFilmLetters = await axios.get(
         getNotWatchFilmLetterDatas,
         config
       )
-
       setGetFirstSawFilmLettersId(resSawFilmLetters.data)
-
       setOpen(true)
-
-      navigation('/receive')
     })
 
     setOpen(false)
-    setOpenFlash(false)
+    //フラッシュメッセージを表示させない
+    setTimeout(() => {
+      setOpenFlash(false)
+    }, 2000)
+    // setOpenFlash(false)
     setRegistNotWatchFilm(true)
   }
+
+  //日本語・英語ボタン押してもランダムが走ってしまう
+  useEffect(() => {
+    handleGetLetter()
+  }, [])
 
   return (
     <Box
@@ -107,7 +152,7 @@ export const LoggedInFooter = () => {
         sx={[
           {
             backgroundColor: 'black',
-            height: '50px',
+            height: '70px',
             color: '#fff',
             textAlign: 'center',
             width: 1,
@@ -119,23 +164,25 @@ export const LoggedInFooter = () => {
         ]}
       >
         <BottomNavigationAction
-          label="検索"
+          label={t('footer.search')}
           icon={<SearchIcon />}
           onClick={() => navigation('/search', setSearchWord(''))}
         />
         <BottomNavigationAction
-          label="マイページ"
-          icon={<RoofingIcon />}
+          label={t('footer.mypage')}
+          icon={<AccountCircleIcon />}
           component={Link}
           to={'/mypage'}
         />
         <BottomNavigationAction
-          label="ランダム"
+          label={t('footer.random')}
           icon={<EmailIcon />}
+          component={Link}
+          to={'/receive'}
           onClick={handleGetLetter}
         />
         <BottomNavigationAction
-          label="ランキング"
+          label={t('footer.ranking')}
           icon={<EqualizerIcon />}
           component={Link}
           to={'/ranking'}
