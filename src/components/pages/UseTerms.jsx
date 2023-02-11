@@ -7,27 +7,27 @@ export const UseTerms = () => {
 
   return (
     <BaseLayout>
-      <Typography variant="h3" sx={{ mt: 12, textAlign: 'center', mb: 5 }}>
+      <Typography variant="h4" sx={{ mt: 12, textAlign: 'center', mb: 5,fontWeight: 'bold'}}>
       {t('termsOfUse')}
       </Typography>
-      <Box sx={{ ml: 5, mt: 5, mb: 8}}>
+      <Box sx={{ ml: 5, mt: 5, mb: 8 }}>
         <Typography sx={{ mb: 5, }}>
           この利用規約(以下、「本規約」といいます。)は、本サービス(本サイトを含むものとし、以下、特に両者を区別しません。)の利用条件を定めるものです。本規約は、本サービスを利用するすべてのユーザーに適用されます。
         </Typography>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>本規約への同意</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>本規約への同意</Typography>
           <Typography>
             ユーザーは、本サービスを利用することによって、本規約に有効かつ取り消し不能な同意をしたものとみなされます。本規約に同意しないユーザーは、本サービスをご利用いただけません。
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>利用登録</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>利用登録</Typography>
           <Typography>
             本サービスの利用を希望する方は、本規約に同意の上、当社の定める方法によって利用登録を申請し、当社がこれを承認することによって、本サービスの利用登録をすることができます。
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>登録拒否</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>登録拒否</Typography>
           <Typography>
             当サイトは、以下のいずれかの事由があると判断した場合、利用登録の申請を承認しないことがあります。当社は登録拒否の理由について一切の開示義務を負いません。
           </Typography>
@@ -42,33 +42,33 @@ export const UseTerms = () => {
           </List>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>未成年による利用</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>未成年による利用</Typography>
           <Typography>
             ユーザーが未成年である場合には、法定代理人の同意を得た上で、本サービスを利用してください。本サービスのご利用にあたり必要となるスマートフォンその他デバイスについても、必ず法定代理人の同意を得た上でご使用下さい。
             法定代理人の同意を得ずに本サービスのご利用を開始したユーザーが成年に達した場合、未成年者であった間の利用行為を追認したものとみなします。
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>ログイン情報の管理</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>ログイン情報の管理</Typography>
           <Typography>
             ユーザーは、自己の責任において、本サービスのログイン情報を適切に管理するものとします。ユーザーは、いかなる場合にも、ログイン情報を第三者に譲渡または貸与し、もしくは第三者と共用することはできません。当サイトは、ログイン情報が第三者によって使用されたことによって生じた損害につき、当サイトに故意又は重大な過失がある場合を除き、一切の責任を負いません。
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>コンテンツのご利用</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>コンテンツのご利用</Typography>
           <Typography>
             当サイトは、ユーザーに対し、本サービスが提供する文章、画像、動画、音声、音楽、ソフトウェア、プログラム、コードその他のコンテンツについて、本サービスの利用範囲内における私的な利用を許諾します。有償コンテンツについては、当社が定める利用料金の支払が完了した場合に、本サービスの利用範囲内における私的な利用を許諾します。これは、譲渡及び再許諾できない、非独占的な利用権です。この範囲を超えて本サービスが提供するコンテンツを利用することは一切禁止します。
             理由の如何を問わず、ユーザーが本サービスを利用する権利を失った場合、本サービスの一切のコンテンツの利用ができなくなることを、ユーザーは予め承諾するものとします。ユーザーが本サービスを利用するにあたって、Twitterのユーザー名が他のユーザーに分かることを承認するものとします。
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>遅延損害金</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>遅延損害金</Typography>
           <Typography>
             当サイトに対する金銭債務の支払を遅滞したユーザーは、当社に対し、年14.6％の割合による遅延損害金を支払うものとします。
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>ユーザーの投稿</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>ユーザーの投稿</Typography>
           <Typography>
             ユーザーは、ユーザーの投稿に含まれる情報を送信することについて適法な権利を有していること、及びユーザーの投稿が第三者の知的財産権（著作権、特許権、実用新案権、商標権、意匠権（それらの権利を取得し、又はそれらの権利につき登録等を出願する権利を含みます。）又はアイデア、ノウハウ等をいい、以下同様とします。）、所有権その他の権利を侵害していないことについて、当社に対し表明し、保証するものとします。
             ユーザーの投稿に関する著作権は、ユーザー自身に留保されます。当社はユーザーの投稿に関して著作権を取得することはありません。ただし、当社は、本サービスの提供、維持、改善又は本サービスのプロモーションに必要な範囲において、無償、無期限かつ地域非限定で、ユーザーの投稿を複製、翻案、自動公衆送信及びそのために必要な送信可能化をすることができるものとします。この場合、ユーザーは、当社および当社から権利を承継し又は許諾されたものに対し著作者人格権を行使しないものとします。
@@ -110,7 +110,7 @@ export const UseTerms = () => {
           </List>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>禁止事項</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>禁止事項</Typography>
           <Typography>
             ユーザーは、本サービスの利用にあたり、以下の行為をしてはなりません。
           </Typography>
@@ -176,7 +176,7 @@ export const UseTerms = () => {
           </List>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>換金行為の禁止</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>換金行為の禁止</Typography>
           <Typography>
             本サービス内で取得した一切のコンテンツまたは本仮想通貨については、手段の如何を問わず、以下の取引を一切禁止します。
           </Typography>
@@ -191,7 +191,7 @@ export const UseTerms = () => {
           </List>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>反社会的勢力の排除</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>反社会的勢力の排除</Typography>
           <Typography>
             ユーザーは、次の各号のいずれか一にも該当しないことを表明し、かつ将来にわたっても該当しないことを表明し、保証するものとします。
           </Typography>
@@ -231,7 +231,7 @@ export const UseTerms = () => {
           </List>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>利用制限</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>利用制限</Typography>
           <Typography>
             当サイトは、ユーザーが以下のいずれかに該当する場合には、事前の通知なく、ユーザーに対して、本サービスの全部もしくは一部の利用を制限し、またはユーザーとしての登録を抹消することができるものとします。当社は、本条に基づき当社が行った行為によりユーザーに生じた損害について、一切の責任を負いません。
           </Typography>
@@ -254,7 +254,7 @@ export const UseTerms = () => {
           </List>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>本サービスの提供の停止</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>本サービスの提供の停止</Typography>
           <Typography>
             当サイトは、以下のいずれかの事由があると判断した場合、ユーザーに事前に通知することなく本サービスの全部または一部の提供を停止または中断することができるものとします。当社は、この場合にユーザーまたは第三者が被ったいかなる不利益または損害についても、一切の責任を負わないものとします。
           </Typography>
@@ -274,13 +274,13 @@ export const UseTerms = () => {
           </List>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>保証の否認</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>保証の否認</Typography>
           <Typography>
             当サイトは、本サービスや本サービスが提供するコンテンツに、システムバグや第三者の権利侵害が含まれないことを保証するものではありません。また、安全性、信頼性、正確性、完全性、有効性、特定の目的への適合性を保証するものでもありません。
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>免責</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>免責</Typography>
           <Typography>
             当サイトは、本サービスに関してユーザーに生じたあらゆる損害について一切の責任を負いません。ただし、本サービスに関する当社とユーザーとの間の契約（本規約を含みます。）が消費者契約法に定める消費者契約となる場合、この免責規定は適用されません。
             消費者契約に該当する場合であっても、当社は、当社の過失（重過失を除きます。）によってユーザーに生じた損害のうち特別の事情から生じた損害（当社またはユーザーが損害発生につき予見し、または予見し得た場合を含みます。）について、一切の責任を負いません。ユーザーと他のユーザーまたは第三者との間において生じたトラブルについても一切責任を負いません。
@@ -291,62 +291,62 @@ export const UseTerms = () => {
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>サービス内容の変更</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>サービス内容の変更</Typography>
           <Typography>
             当社は、ユーザーに通知することなく、本サービスの内容を変更したり、本サービスの提供を中止、終了することができるものとします。ユーザーは、本サービスが終了した場合、有料コンテンツを利用する一切の権利を失い、以後、当該有料コンテンツを利用できなくなることについて、あらかじめ、異議なく同意するものとします。当社は、これらによってユーザーに生じた損害について一切の責任を負いません。
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>利用規約の変更</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>利用規約の変更</Typography>
           <Typography>
             当社は、ユーザーに通知することなく、いつでも本規約を変更することができるものとします。変更後の本規約は、当社ウェブサイトに掲示された時点から効力を生じるものとします。本規約の変更後、本サービスの利用を継続したユーザーは、変更後の本規約に同意したものとみなします。
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>個人情報の取扱い</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>個人情報の取扱い</Typography>
           <Typography>
             本サービスの利用によって取得するユーザーの個人情報については、当社のプライバシーポリシーに従い適切に取り扱うものとします。
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>通知または連絡</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>通知または連絡</Typography>
           <Typography>
             ユーザーと当社との間の通知または連絡は、当社の定める方法によって行うものとします。当社は、ユーザーから、当社が別途定める方式に従った変更届け出がない限り、現在登録されている連絡先が有効なものとみなして当該連絡先へ通知または連絡を行い、これらは、発信時にユーザーへ到達したものとみなします。
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>個人情報の取扱い</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>個人情報の取扱い</Typography>
           <Typography>
             本サービスの利用によって取得するユーザーの個人情報については、当社のプライバシーポリシーに従い適切に取り扱うものとします。
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>権利義務の譲渡</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>権利義務の譲渡</Typography>
           <Typography>
             ユーザーは、当社の書面による事前の承諾なく、利用契約上の地位または本規約に基づく権利もしくは義務を第三者に譲渡し、または担保に供することはできません。
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>事業譲渡</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>事業譲渡</Typography>
           <Typography>
             当社は本サービスにかかる事業を他社に事業譲渡（事業譲渡、会社分割その他事業が移転するあらゆる場合を含みます。）した場合には、当該事業譲渡に伴い利用契約上の地位、本規約に基づく権利及び義務並びにユーザーの情報を当該事業譲渡の譲受人に譲渡することができるものとします。ユーザーは、かかる譲渡につき予め同意したものとみなします。
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>適用関係</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>適用関係</Typography>
           <Typography>
             本規約は、ユーザーと当社との間の本サービスの利用に関わる一切の関係に適用されるものとします。
             当社は本サービスに関し、本規約のほか、ご利用にあたってのルールを定めることがあります。これらのルールは、その名称のいかんに関わらず、本規約の一部を構成するものとします。本規約がこれらのルールと矛盾する場合には、これらのルールが優先して適用されるものとします。
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>分離可能性</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>分離可能性</Typography>
           <Typography>
             本規約のいずれかの条項又はその一部が無効又は執行不能と判断された場合であっても、当該判断は他の部分に影響を及ぼさず、本規約の残りの部分は、引き続き有効かつ執行力を有するものとします。
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{fontWeight: 'bold' }}>準拠法・裁判管轄</Typography>
+          <Typography variant="h6" sx={{fontWeight: 'bold' }}>準拠法・裁判管轄</Typography>
           <Typography>
             本規約の解釈にあたっては、日本法を準拠法とします。本サービスに関して紛争が生じた場合には、大津地方裁判所を専属的合意管轄とします。
           </Typography>

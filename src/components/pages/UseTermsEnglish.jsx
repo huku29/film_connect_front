@@ -7,7 +7,7 @@ export const UseTermsEnglish = () => {
 
   return (
     <BaseLayout>
-      <Typography variant="h3" sx={{ mt: 12, textAlign: 'center', mb: 5 }}>
+      <Typography variant="h4" sx={{ mt: 12, textAlign: 'center', mb: 5,fontWeight: 'bold'}}>
         Terms of Use
       </Typography>
       <Box sx={{ ml: 5, mt: 5, mb: 8 }}>
@@ -19,7 +19,7 @@ export const UseTermsEnglish = () => {
           Services (the “User(s)”).
         </Typography>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Consent to the Terms
           </Typography>
           <Typography>
@@ -29,7 +29,7 @@ export const UseTermsEnglish = () => {
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Registration for Use
           </Typography>
           <Typography>
@@ -40,7 +40,7 @@ export const UseTermsEnglish = () => {
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Refusal of Registration
           </Typography>
           <Typography>
@@ -62,7 +62,7 @@ export const UseTermsEnglish = () => {
           </List>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Use by Minors
           </Typography>
           <Typography>
@@ -77,7 +77,7 @@ export const UseTermsEnglish = () => {
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Management of Login Information
           </Typography>
           <Typography>
@@ -90,7 +90,7 @@ export const UseTermsEnglish = () => {
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Use of Content
           </Typography>
           <Typography>
@@ -110,7 +110,7 @@ export const UseTermsEnglish = () => {
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Default Charges
           </Typography>
           <Typography>
@@ -120,7 +120,7 @@ export const UseTermsEnglish = () => {
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Posts by the User
           </Typography>
           <Typography>
@@ -202,7 +202,7 @@ export const UseTermsEnglish = () => {
           </List>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Prohibited Matters
           </Typography>
           <Typography>When using the Services, the User shall not:</Typography>
@@ -285,7 +285,7 @@ export const UseTermsEnglish = () => {
           </List>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Prohibition of Exchange for Cash
           </Typography>
           <Typography>
@@ -306,7 +306,7 @@ export const UseTermsEnglish = () => {
           </List>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Exclusion of Anti-Social Forces
           </Typography>
           <Typography>
@@ -381,7 +381,7 @@ export const UseTermsEnglish = () => {
           </List>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Restrictions on Use of the Services
           </Typography>
           <Typography>
@@ -422,7 +422,7 @@ export const UseTermsEnglish = () => {
           </List>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Cessation of the Provision of the Services
           </Typography>
           <Typography>
@@ -453,7 +453,7 @@ export const UseTermsEnglish = () => {
           </List>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             DISCLAIMER OF WARRANTY
           </Typography>
           <Typography>
@@ -465,7 +465,7 @@ export const UseTermsEnglish = () => {
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Disclaimer
           </Typography>
           <Typography>
@@ -496,7 +496,7 @@ export const UseTermsEnglish = () => {
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Change of the Description of the Services
           </Typography>
           <Typography>
@@ -510,7 +510,7 @@ export const UseTermsEnglish = () => {
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Amendments to the Terms
           </Typography>
           <Typography>
@@ -522,7 +522,7 @@ export const UseTermsEnglish = () => {
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Handling of Personal Information
           </Typography>
           <Typography>
@@ -532,7 +532,7 @@ export const UseTermsEnglish = () => {
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Notice or Contact
           </Typography>
           <Typography>
@@ -546,7 +546,7 @@ export const UseTermsEnglish = () => {
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Assignment of Rights and Obligations
           </Typography>
           <Typography>
@@ -557,7 +557,7 @@ export const UseTermsEnglish = () => {
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Assignment of Business
           </Typography>
           <Typography>
@@ -572,7 +572,7 @@ export const UseTermsEnglish = () => {
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Applicability
           </Typography>
           <Typography>
@@ -585,7 +585,7 @@ export const UseTermsEnglish = () => {
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Severability
           </Typography>
           <Typography>
@@ -596,7 +596,7 @@ export const UseTermsEnglish = () => {
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             Governing Law and Jurisdiction
           </Typography>
           <Typography>
