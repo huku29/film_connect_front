@@ -28,9 +28,11 @@ import {
   getFilmsDetails,
   getCreatedLettersRanking,
   notWatchFilmLettersRanking,
+  getFilmsDetailsByEnglish,
 } from '@/urls'
 
 import useMediaQuery from '@mui/material/useMediaQuery'
+import { useTranslation } from 'react-i18next'
 
 export const Ranking = () => {
   const [filmRank, setFilmRank] = useAtom(handleGetCreatedLettersRankingAtom)
@@ -42,6 +44,7 @@ export const Ranking = () => {
   const [openFlash, setOpenFlash] = useAtom(handleSendFlashMessage)
   const [isLoading, setIsLoading] = useState(false)
   const matches = useMediaQuery('(min-width:575px)')
+  const { t, i18n } = useTranslation()
 
   function TabPanel(props) {
     const { children, value, index } = props
@@ -69,23 +72,39 @@ export const Ranking = () => {
   )
 
   const getCreatedLettersRank = async () => {
-    if (filmRank.length !== 0) return
-    setIsLoading(true)
     const res = await axios.get(getCreatedLettersRanking)
     const filmsRankingData = res.data
 
-    const rankingDatas = await Promise.all(
-      filmsRankingData.map(async (rankingData) => {
-        const result = await axios.get(getFilmsDetails, {
-          params: {
-            film_id: rankingData,
-          },
+
+    if (i18n.language === 'ja') {
+      const rankingDatas = await Promise.all(
+        filmsRankingData.map(async (rankingData) => {
+          const result = await axios.get(getFilmsDetails, {
+            params: {
+              film_id: rankingData,
+            },
+          })
+          return result.data
         })
-        return result.data
-      })
-    )
-    setFilmRank(rankingDatas)
-    setIsLoading(false)
+      )
+
+      setFilmRank(rankingDatas)
+      // setIsLoading(false)
+    } else {
+      const rankingDatas = await Promise.all(
+        filmsRankingData.map(async (rankingData) => {
+          const result = await axios.get(getFilmsDetailsByEnglish, {
+            params: {
+              film_id: rankingData,
+            },
+          })
+          return result.data
+        })
+      )
+
+      setFilmRank(rankingDatas)
+      // setIsLoading(false)
+    }
   }
 
   const slideChange = (index) => {
@@ -93,28 +112,44 @@ export const Ranking = () => {
   }
 
   const getFirstSawFilmsRank = async () => {
-    if (sawFilmRank.length !== 0) return
-    setIsLoading(true)
+    // if (sawFilmRank.length !== 0) return
+    // setIsLoading(true)
     const res = await axios.get(notWatchFilmLettersRanking)
     const firstSawRankingDatas = res.data
 
-    const firstSaeFilmsRankDatas = await Promise.all(
-      firstSawRankingDatas.map(async (firseSawFilmData) => {
-        const result = await axios.get(getFilmsDetails, {
-          params: {
-            film_id: firseSawFilmData,
-          },
+    if (i18n.language === 'ja') {
+      const firstSawFilmsRankDatas = await Promise.all(
+        firstSawRankingDatas.map(async (firseSawFilmData) => {
+          const result = await axios.get(getFilmsDetails, {
+            params: {
+              film_id: firseSawFilmData,
+            },
+          })
+          return result.data
         })
-        return result.data
-      })
-    )
+      )
+      setSawFilmRank(firstSawFilmsRankDatas)
+      // setIsLoading(false)
+    } else {
+      const firstSawFilmsRankDatas = await Promise.all(
+        firstSawRankingDatas.map(async (firseSawFilmData) => {
+          const result = await axios.get(getFilmsDetailsByEnglish, {
+            params: {
+              film_id: firseSawFilmData,
+            },
+          })
+          return result.data
+        })
+      )
 
-    setSawFilmRank(firstSaeFilmsRankDatas)
+      setSawFilmRank(firstSawFilmsRankDatas)
+    }
     setIsLoading(false)
   }
 
   useEffect(() => {
     getCreatedLettersRank()
+    getFirstSawFilmsRank()
     setOpenFlash(false)
   }, [])
 
@@ -130,11 +165,11 @@ export const Ranking = () => {
           }}
         >
           <Typography variant="h4" sx={{ mt: 15, mb: 5, textAlign: 'center' }}>
-            映画ランキング
+            {t('ranking.title')}
           </Typography>
           <Tabs value={value} onChange={handleChange} centered sx={{ mb: 5 }}>
             <Tab
-              label="おすすめされた映画ランキング"
+              label={t('ranking.recommendedFilmRanking')}
               // icon={}
               sx={{ color: '#ff9800' }}
               onClick={getCreatedLettersRank}
@@ -142,7 +177,7 @@ export const Ranking = () => {
             />
 
             <Tab
-              label="観たことない映画ランキング"
+              label={t('ranking.neverSeenFilmRanking')}
               // icon={<EqualizerIcon />}
               sx={{ color: '#ff9800' }}
               onClick={getFirstSawFilmsRank}
@@ -184,13 +219,13 @@ export const Ranking = () => {
                           textAlign: 'center',
                         }}
                       >
-                        作成された映画ランキングはありません
+                        {/* {t('ranking.noRecommendedFilmRanking')} */}
                       </Box>
                     ) : (
                       filmRank.map((film, index) => (
                         <Box key={index}>
                           <Typography variant="h4" sx={{ textAlign: 'center' }}>
-                            {`--${index + 1}位--`}
+                            {t('ranking.rank', { rank: index + 1 })}
                           </Typography>
                           <Box
                             sx={{
@@ -198,19 +233,22 @@ export const Ranking = () => {
                             }}
                           >
                             <List>
+                              <img
+                                alt=""
+                                src={`${filmsimg}/${film.poster_path}`}
+                              ></img>
                               <Link
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 href={`${getFilmDetail}/${film.id}`}
                                 underline="hover"
                               >
-                                <img
-                                  alt=""
-                                  src={`${filmsimg}/${film.poster_path}`}
-                                ></img>
+                                <Box sx={{ mb: 7 }}>
+                                  {' '}
+                                  {t(`search.details`, { title: film.title })}
+                                </Box>
                               </Link>
                             </List>
-                            <Box sx={{ mb: 7 }}>{film.title}</Box>
                           </Box>
                         </Box>
                       ))
@@ -234,13 +272,14 @@ export const Ranking = () => {
                           textAlign: 'center',
                         }}
                       >
-                        観たことない映画ランキングはありません
+                        {/* {t('ranking.neverSeenFilmRankingDescription')} */}
                       </Box>
                     ) : (
                       sawFilmRank.map((film, index) => (
                         <Box key={index}>
                           <Typography variant="h4" sx={{ textAlign: 'center' }}>
-                            {`--${index + 1}位--`}
+                            {/* {`--${index + 1}位--`} */}
+                            {t('ranking.rank', { rank: index + 1 })}
                           </Typography>
                           <Box
                             sx={{
@@ -248,19 +287,22 @@ export const Ranking = () => {
                             }}
                           >
                             <List>
+                              <img
+                                alt=""
+                                src={`${filmsimg}/${film.poster_path}`}
+                              ></img>
                               <Link
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 href={`${getFilmDetail}/${film.id}`}
                                 underline="hover"
                               >
-                                <img
-                                  alt=""
-                                  src={`${filmsimg}/${film.poster_path}`}
-                                ></img>
+                                <Box sx={{ mb: 7 }}>
+                                  {' '}
+                                  {t(`search.details`, { title: film.title })}
+                                </Box>
                               </Link>
                             </List>
-                            <Box sx={{ mb: 7 }}>{film.title}</Box>
                           </Box>
                         </Box>
                       ))
@@ -281,11 +323,11 @@ export const Ranking = () => {
           }}
         >
           <Typography variant="h4" sx={{ mt: 15, mb: 5, textAlign: 'center' }}>
-            映画ランキング
+            {t('ranking.title')}
           </Typography>
           <Tabs value={value} onChange={handleChange} centered sx={{ mb: 5 }}>
             <Tab
-              label="おすすめされた映画"
+              label={t('ranking.recommendedFilmRanking')}
               // icon={}
               sx={{
                 color: '#ff9800',
@@ -299,7 +341,7 @@ export const Ranking = () => {
             />
 
             <Tab
-              label="観たことない映画"
+              label={t('ranking.neverSeenFilmRanking')}
               sx={{
                 color: '#ff9800',
                 fontSize: '11px',
@@ -346,13 +388,14 @@ export const Ranking = () => {
                           textAlign: 'center',
                         }}
                       >
-                        作成された映画ランキングはありません
+                        {/* {t('ranking.noRecommendFilmRanking')} */}
                       </Box>
                     ) : (
                       filmRank.map((film, index) => (
                         <Box key={index}>
                           <Typography variant="h4" sx={{ textAlign: 'center' }}>
-                            {`--${index + 1}位--`}
+                            {/* {`--${index + 1}位--`} */}
+                            {t('ranking.rank', { rank: index + 1 })}
                           </Typography>
                           <Box
                             sx={{
@@ -367,19 +410,22 @@ export const Ranking = () => {
                                 },
                               }}
                             >
+                              <img
+                                alt=""
+                                src={`${filmsimg}/${film.poster_path}`}
+                              ></img>
                               <Link
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 href={`${getFilmDetail}/${film.id}`}
                                 underline="hover"
                               >
-                                <img
-                                  alt=""
-                                  src={`${filmsimg}/${film.poster_path}`}
-                                ></img>
+                                <Box sx={{ mb: 7 }}>
+                                  {' '}
+                                  {t(`search.details`, { title: film.title })}
+                                </Box>
                               </Link>
                             </List>
-                            <Box sx={{ mb: 7 }}>{film.title}</Box>
                           </Box>
                         </Box>
                       ))
@@ -403,13 +449,13 @@ export const Ranking = () => {
                           textAlign: 'center',
                         }}
                       >
-                        観たことない映画ランキングはありません
+                        {/* {t('ranking.neverSeenFilmRankingDescription')} */}
                       </Box>
                     ) : (
                       sawFilmRank.map((film, index) => (
                         <Box key={index}>
                           <Typography variant="h4" sx={{ textAlign: 'center' }}>
-                            {`--${index + 1}位--`}
+                            {t('ranking.rank', { rank: index + 1 })}
                           </Typography>
                           <Box
                             sx={{
@@ -424,19 +470,22 @@ export const Ranking = () => {
                                 },
                               }}
                             >
+                              <img
+                                alt=""
+                                src={`${filmsimg}/${film.poster_path}`}
+                              ></img>
                               <Link
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 href={`${getFilmDetail}/${film.id}`}
                                 underline="hover"
                               >
-                                <img
-                                  alt=""
-                                  src={`${filmsimg}/${film.poster_path}`}
-                                ></img>
+                                <Box sx={{ mb: 7 }}>
+                                  {' '}
+                                  {t(`search.details`, { title: film.title })}
+                                </Box>
                               </Link>
                             </List>
-                            <Box sx={{ mb: 7 }}>{film.title}</Box>
                           </Box>
                         </Box>
                       ))
