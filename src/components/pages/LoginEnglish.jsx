@@ -1,5 +1,5 @@
 import { BaseLayout } from '@/components/layouts'
-import { Stack, Typography, Button, Box, Link,ListItemButton} from '@mui/material'
+import { Stack, Typography, Button, Box, Link } from '@mui/material'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import { signInWithPopup } from 'firebase/auth'
 import { provider, auth } from '@/firebase'
@@ -13,7 +13,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 
 //Appで定義した読み込みたい値を取得するためにuseContextとMyContextをインポートしてあげる
 
-export const Login = () => {
+export const LoginEnglish = () => {
   const [success, setSuccess] = useState('')
   const navigation = useNavigate()
   const { t, i18n } = useTranslation()
@@ -41,6 +41,14 @@ export const Login = () => {
       .catch((error) => {
         setSuccess('アカウントの作成に失敗しました')
       })
+  }
+
+  const handleTermsOfUse = () => {
+    navigation("/usetermsenglish")
+  }
+
+  const handlePrivacyPolicy = () => {
+    navigation("/privacypolicyenglish")
   }
 
   return (
@@ -84,12 +92,11 @@ export const Login = () => {
                 inherit: 'p',
               }}
             >
-              ユーザーが本サービスへの登録申込をしたことをもって
-              <Link href="/useterms">利用規約</Link>および
-              <Link href="/privacypolicy">プライバシーポリシー</Link>
-              のすべての条項に同意したものとみなします。
+              By applying to register for this service, the user agrees to all
+              the terms and conditions of{' '}
+              <Link onClick={handleTermsOfUse}  style={{ cursor: 'pointer' }}>the Terms of Use </Link> and{' '}
+              <Link onClick={handlePrivacyPolicy} style={{ cursor: 'pointer' }}>Privacy Policy </Link>.
             </Typography>
-
           </Stack>
         </Box>
       ) : (
@@ -120,8 +127,20 @@ export const Login = () => {
               <TwitterIcon />
               {t('login.button')}
             </Button>
-            <Typography>
-              ユーザーが本サービスへの登録申込をしたことをもって利用規約およびプライバシーポリシーのすべての条項に同意したものとみなします。
+            <Typography
+              variant="contained2"
+              sx={{
+                color: '#ff9800',
+                width: '310px',
+
+                mt: 5,
+                inherit: 'p',
+              }}
+            >
+              By applying to register for this service, the user agrees to all
+              the terms and conditions of{' '}
+              <Link onClick={handleTermsOfUse}  style={{ cursor: 'pointer' }}>the Terms of Use </Link> and{' '}
+              <Link onClick={handlePrivacyPolicy} style={{ cursor: 'pointer' }}>Privacy Policy </Link>.
             </Typography>
           </Stack>
         </Box>
