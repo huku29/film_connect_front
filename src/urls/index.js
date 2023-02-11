@@ -1,5 +1,7 @@
 export const filmsSearch = `${import.meta.env.VITE_DEFAULT_API_URL}/api/v1/films/search`;
+export const filmsSearchByEnglish = `${import.meta.env.VITE_DEFAULT_API_URL}/api/v1/films/search_by_english`;
 export const getFilmsDetails = `${import.meta.env.VITE_DEFAULT_API_URL}/api/v1/films/info`;
+export const getFilmsDetailsByEnglish = `${import.meta.env.VITE_DEFAULT_API_URL}/api/v1/films/info_by_english`;
 
 
 
@@ -8,6 +10,7 @@ export const getUsersName = `${import.meta.env.VITE_DEFAULT_API_URL}/api/v1/user
 
 export const sendLetter = `${import.meta.env.VITE_DEFAULT_API_URL}/api/v1/letters`;
 export const getLetter = `${import.meta.env.VITE_DEFAULT_API_URL}/api/v1/letters/random`;
+export const getLetterByEnglish = `${import.meta.env.VITE_DEFAULT_API_URL}/api/v1/letters/random_by_english`;
 export const getMadeLetters = `${import.meta.env.VITE_DEFAULT_API_URL}/api/v1/letters`;
 export const getCreatedLettersRanking = `${import.meta.env.VITE_DEFAULT_API_URL}/api/v1/letters/rank`;
 
