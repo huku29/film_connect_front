@@ -13,19 +13,27 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Button,
 } from '@mui/material'
 
 import MuiAppBar from '@mui/material/AppBar'
-import TwitterIcon from '@mui/icons-material/Twitter';
+import TwitterIcon from '@mui/icons-material/Twitter'
 import MenuIcon from '@mui/icons-material/Menu'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import RoofingIcon from '@mui/icons-material/Roofing'
+import MailOutlineIcon from '@mui/icons-material/MailOutline'
+import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption'
+import ArticleIcon from '@mui/icons-material/Article'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 import { Link } from 'react-router-dom'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { signOut } from 'firebase/auth'
 import { auth } from '@/firebase'
-import { contact,twitterOfficial } from '@/urls'
+import { contact, twitterOfficial } from '@/urls'
+import { useTranslation } from 'react-i18next'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 const drawerWidth = 240
 
@@ -81,6 +89,14 @@ export const LoggedInHeader = () => {
       })
   }
 
+  const { t, i18n } = useTranslation()
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng)
+  }
+
+  const matches = useMediaQuery('(min-width:575px)')
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -100,16 +116,54 @@ export const LoggedInHeader = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            <Typography variant="h6" noWrap component="div" sx={{ pt: 1 }}>
-              <img
-                src="https://film-connect.web.app/logo.png"
-                className="header-logo"
-                alt="header-logo"
-                width="200"
-                height="40"
-              />
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{
+                pt: 1
+              }}
+            >
+              {matches ? (
+                <img
+                  src="https://film-connect.web.app/logo.png"
+                  className="header-logo"
+                  alt="header-logo"
+                  width="200"
+                  height="40"
+                />
+              ) : (
+                <img
+                  src="https://film-connect.web.app/logo.png"
+                  className="header-logo"
+                  alt="header-logo"
+                  width="120"
+                  height="40"
+                />
+              )}
             </Typography>
           </Typography>
+          {matches ? (
+            <Typography sx={{ ml: 'auto' }}>
+              <Button onClick={() => changeLanguage('ja')}>日本語</Button>
+              <Button onClick={() => changeLanguage('en')}>English</Button>
+            </Typography>
+          ) : (
+            <Typography sx={{ ml: 'auto' }}>
+              <Button
+                sx={{ fontSize: '3px'}}
+                onClick={() => changeLanguage('ja')}
+              >
+                日本語
+              </Button>
+              <Button
+                sx={{ fontSize: '3px' }}
+                onClick={() => changeLanguage('en')}
+              >
+                English
+              </Button>
+            </Typography>
+          )}
         </Toolbar>
       </AppBar>
 
@@ -152,15 +206,20 @@ export const LoggedInHeader = () => {
               <ListItemIcon>
                 <LogoutIcon sx={{ color: 'text.primary' }} />
               </ListItemIcon>
-              <ListItemText primary="Logout" sx={{ color: 'text.primary' }} />
+              <ListItemText
+                primary={t('header.logout')}
+                sx={{ color: 'text.primary' }}
+              />
             </ListItemButton>
           </ListItem>
 
           <ListItem>
             <ListItemButton component={Link} to="/mypage">
-              <ListItemIcon></ListItemIcon>
+              <ListItemIcon>
+                <AccountCircleIcon sx={{ color: 'text.primary' }} />
+              </ListItemIcon>
               <ListItemText
-                primary="マイページ"
+                primary={t('header.myPage')}
                 sx={{ color: 'text.primary' }}
               />
             </ListItemButton>
@@ -168,9 +227,11 @@ export const LoggedInHeader = () => {
 
           <ListItem>
             <ListItemButton component={Link} to="/">
-              <ListItemIcon></ListItemIcon>
+              <ListItemIcon>
+                <RoofingIcon sx={{ color: 'text.primary' }} />
+              </ListItemIcon>
               <ListItemText
-                primary="トップページ"
+                primary={t('header.homePage')}
                 sx={{ color: 'text.primary' }}
               />
             </ListItemButton>
@@ -178,16 +239,23 @@ export const LoggedInHeader = () => {
 
           <ListItem>
             <ListItemButton component={Link} to="/useterms">
-              <ListItemIcon></ListItemIcon>
-              <ListItemText primary="利用規約" sx={{ color: 'text.primary' }} />
+              <ListItemIcon>
+                <ArticleIcon sx={{ color: 'text.primary' }} />
+              </ListItemIcon>
+              <ListItemText
+                primary={t('termsOfUse')}
+                sx={{ color: 'text.primary' }}
+              />
             </ListItemButton>
           </ListItem>
 
           <ListItem>
             <ListItemButton component={Link} to="/privacypolicy">
-              <ListItemIcon></ListItemIcon>
+              <ListItemIcon>
+                <EnhancedEncryptionIcon sx={{ color: 'text.primary' }} />
+              </ListItemIcon>
               <ListItemText
-                primary="プライバシーポリシー"
+                primary={t('privacyPolicy')}
                 sx={{ color: 'text.primary' }}
               />
             </ListItemButton>
@@ -195,32 +263,34 @@ export const LoggedInHeader = () => {
 
           <ListItem>
             <ListItemButton>
-              <ListItemIcon></ListItemIcon>
+              <ListItemIcon>
+                <MailOutlineIcon sx={{ color: 'text.primary' }} />
+              </ListItemIcon>
               <a
                 target="_blank"
                 rel="noopener noreferrer"
                 href={`${contact}`}
                 style={{ textDecoration: 'none', color: '#ff9800' }}
               >
-                お問い合わせ
+                {t('header.contact')}
               </a>
             </ListItemButton>
           </ListItem>
           <ListItem>
-                <ListItemButton>
-                  <ListItemIcon>
-                  <TwitterIcon sx={{ color: 'text.primary' }} />
-                  </ListItemIcon>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`${twitterOfficial }`}
-                    style={{ textDecoration: 'none', color: '#ff9800' }}
-                  >
-                    公式Twitter
-                  </a>
-                </ListItemButton>
-              </ListItem>
+            <ListItemButton>
+              <ListItemIcon>
+                <TwitterIcon sx={{ color: 'text.primary' }} />
+              </ListItemIcon>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={`${twitterOfficial}`}
+                style={{ textDecoration: 'none', color: '#ff9800' }}
+              >
+                {t('header.official')}
+              </a>
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
     </Box>
