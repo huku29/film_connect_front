@@ -111,17 +111,30 @@ export const Login = () => {
                 backgroundColor: 'black ',
                 color: '#ff9800',
                 borderRadius: '5%',
-                width: '260px',
+                width: '230px',
                 padding: '10px',
-                mt: 5,
+                mt: 7,
+                mr: "auto",
+                ml: "auto"
               }}
               onClick={handleTwitterLogin}
             >
               <TwitterIcon />
               {t('login.button')}
             </Button>
-            <Typography>
-              ユーザーが本サービスへの登録申込をしたことをもって利用規約およびプライバシーポリシーのすべての条項に同意したものとみなします。
+            <Typography
+              variant="contained2"
+              sx={{
+                color: '#ff9800',
+                width: '285px',
+                mt: 5,
+                inherit: 'p',
+              }}
+            >
+              ユーザーが本サービスへの登録申込をしたことをもって
+              <Link href="/useterms">利用規約</Link>および
+              <Link href="/privacypolicy">プライバシーポリシー</Link>
+              のすべての条項に同意したものとみなします。
             </Typography>
           </Stack>
         </Box>

@@ -118,9 +118,11 @@ export const LoginEnglish = () => {
                 backgroundColor: 'black ',
                 color: '#ff9800',
                 borderRadius: '5%',
-                width: '260px',
+                width: '230px',
                 padding: '10px',
                 mt: 5,
+                mr: "auto",
+                ml: "auto"
               }}
               onClick={handleTwitterLogin}
             >
@@ -131,7 +133,7 @@ export const LoginEnglish = () => {
               variant="contained2"
               sx={{
                 color: '#ff9800',
-                width: '310px',
+                width: '290px',
 
                 mt: 5,
                 inherit: 'p',
