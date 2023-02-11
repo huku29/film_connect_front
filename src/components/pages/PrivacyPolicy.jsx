@@ -1,11 +1,14 @@
 import { BaseLayout } from '../layouts'
 import { Typography, Box, List, ListItem } from '@mui/material'
+import {useTranslation} from 'react-i18next';
 
 export const PrivacyPolicy = () => {
+  const {t, i18n} = useTranslation();
+
   return (
     <BaseLayout>
       <Typography variant="h3" sx={{ mt: 12, textAlign: 'center', mb: 8 }}>
-        プライバシーポリシー
+      {t('privacyPolicy')}
       </Typography>
       <Box sx={{ ml: 5, mb: 8 }}>
         <Box sx={{ mb: 5 }}>
