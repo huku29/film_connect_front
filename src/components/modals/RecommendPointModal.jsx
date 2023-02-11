@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles'
 //JOTAI
 import { useAtom } from 'jotai'
 import { recieveMovieDataAtom } from '@/jotai/atoms'
+import {useTranslation} from 'react-i18next'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -33,6 +34,7 @@ export const RecommendPointModal = (props) => {
   const [movieData] = useAtom(recieveMovieDataAtom)
 
   const sendLetterNumber = props.index
+  const {t, i18n} = useTranslation();
 
   return (
     <div>
@@ -50,7 +52,7 @@ export const RecommendPointModal = (props) => {
             bgcolor: '#fff3e0',
           }}
         >
-          おすすめポイント
+          {t('recommendPointTitle')}
         </BootstrapDialogTitle>
         <DialogContent
           dividers

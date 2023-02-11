@@ -8,12 +8,19 @@ import {
   WriteLetterPage,
   Ranking,
   PrivacyPolicy,
+  PrivacyPolicyEnglish,
   UseTerms,
+  UseTermsEnglish,
+  SearchEnglish,
+  LoginEnglish
 } from '@/components/pages'
 import { MyContext } from '@/App'
-import { useContext } from 'react'
+import { useContext,useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export const Router = () => {
+  const { t, i18n } = useTranslation()
+
   const [user] = useContext(MyContext)
 
   const Private = (props) => {
@@ -28,11 +35,14 @@ export const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Top />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-        <Route path="/useterms" element={<UseTerms />} />
+        <Route path="/login" element={ i18n.language === "ja" ? <Login /> : <LoginEnglish /> } />
+        <Route path="/privacypolicyenglish" element={<PrivacyPolicyEnglish />} />
+        <Route path="/privacypolicy" element={ i18n.language === "ja" ? <PrivacyPolicy/>: <PrivacyPolicyEnglish/>} />
+        <Route path="/usetermsenglish" element={<UseTermsEnglish />} />
+        <Route path="/useterms"  element={ i18n.language === "ja" ? <UseTerms/>: <UseTermsEnglish/>}/>
         <Route path="/mypage" element={<Private component={<MyPage />} />} />
-        <Route path="/search" element={<Private component={<Search />} />} />
+        <Route path="/searchenglish" element={<Private component={< SearchEnglish/>} />} />
+        <Route path="/search" element={ i18n.language === "ja" ? <Private component={<Search />}/>:  <Private component={< SearchEnglish/>} />} />  
         <Route path="/receive" element={<Private component={<Receive />} />} />
         <Route
           path="/writeletter"

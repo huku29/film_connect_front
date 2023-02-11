@@ -27,14 +27,16 @@ import { MyContext } from '@/App'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useAtom } from 'jotai'
 import { handleSendFlashMessage, handleGetSearchWordAtom } from '@/jotai/atoms'
+import { useTranslation } from 'react-i18next'
 
 export const WriteLetterPage = () => {
   const { control, handleSubmit, register } = useForm()
+  const { t, i18n } = useTranslation()
 
   const validationRules = {
     recommendPoint: {
-      required: 'おすすめポイントを入力してください。',
-      minLength: { value: 30, message: '30文字以上で入力してください。' },
+      required: t('writeLetter.required'),
+      minLength: { value: 30, message: t('writeLetter.minLength') },
     },
   }
 
@@ -61,7 +63,7 @@ export const WriteLetterPage = () => {
   const [status, setStatus] = useState({
     open: false,
     type: 'success',
-    message: '成功しました。',
+    message: t('writeLetter.alert'),
   })
 
   const [searchWord, setSearchWord] = useAtom(handleGetSearchWordAtom)
@@ -114,7 +116,7 @@ export const WriteLetterPage = () => {
       .catch((error) => {
         setStatus({
           type: 'error',
-          message: `送信できませんでした`,
+          message: t('writeLetter.canNotSend'),
         })
       })
       .finally(() => {
@@ -139,6 +141,7 @@ export const WriteLetterPage = () => {
           <Card
             sx={{
               mt: 10,
+              mb:10,
               ml: 'auto',
               mr: 'auto',
               width: 700,
@@ -208,7 +211,7 @@ export const WriteLetterPage = () => {
                           value={recommendPoint}
                           onChange={(e) => setRecommendPoint(e.target.value)}
                           type="text"
-                          label="おすすめポイント"
+                          label={t('writeLetter.label')}
                           error={fieldState.invalid}
                           helperText={fieldState.error?.message}
                           multiline
@@ -240,7 +243,7 @@ export const WriteLetterPage = () => {
                   sx={{ mt: 3, mr: 2, mb: 2 }}
                   onClick={backSearchPage}
                 >
-                  検索画面に戻る
+                  {t('writeLetter.backSearchPageButton')}
                 </Button>
 
                 <Button
@@ -249,7 +252,7 @@ export const WriteLetterPage = () => {
                   size="small"
                   sx={{ mt: 3, mr: 2, mb: 2 }}
                 >
-                  送信
+                  {t('writeLetter.sendButton')}
                 </Button>
 
                 <Backdrop
@@ -273,23 +276,24 @@ export const WriteLetterPage = () => {
               aria-describedby="alert-dialog-description"
             >
               <DialogTitle id="alert-dialog-title" sx={{ bgcolor: '#fff3e0' }}>
-                {'あなたのツイッターユーザー名を確認することができます！'}
+                {t('writeLetter.dialog.title')}
               </DialogTitle>
               <DialogContent sx={{ bgcolor: '#fff3e0' }}>
                 <DialogContentText
                   id="alert-dialog-description"
                   sx={{ bgcolor: '#fff3e0' }}
                 >
-                  <p>
-                    このおすすめ映画を送信すると、受け取ったユーザーがあなたのツイッターユーザー名と一緒におすすめ映画をシェアできることができます。
-                  </p>
-                  <p>よろしいですか？</p>
+                  <p>{t('writeLetter.dialog.content1')}</p>
+                  <p> {t('writeLetter.dialog.content2')}</p>
                 </DialogContentText>
               </DialogContent>
               <DialogActions sx={{ bgcolor: '#fff3e0' }}>
-                <Button onClick={handleCloseModal}>いいえ</Button>
+                <Button onClick={handleCloseModal}>
+                  {' '}
+                  {t('writeLetter.dialog.noButton')}
+                </Button>
                 <Button onClick={onSubmit} autoFocus>
-                  はい
+                  {t('writeLetter.dialog.yesButton')}
                 </Button>
               </DialogActions>
             </Dialog>
@@ -301,7 +305,7 @@ export const WriteLetterPage = () => {
             sx={{
               mt: 8,
               ml: 5,
-              mb: 4,
+              mb: 10,
               width: 300,
               height: 600,
               bgcolor: '#fff3e0',
@@ -310,7 +314,6 @@ export const WriteLetterPage = () => {
               '@media screen and (min-width:400px)': {
                 textAligh: 'center',
                 mt: 10,
-                // ml: 7,
                 ml: 'auto',
                 mr: 'auto',
               },
@@ -319,6 +322,7 @@ export const WriteLetterPage = () => {
                 mt: 6,
                 ml: 'auto',
                 mr: 'auto',
+                mb:10
               },
               '@media screen and (width:540px)': {
                 textAligh: 'center',
@@ -378,7 +382,7 @@ export const WriteLetterPage = () => {
                           value={recommendPoint}
                           onChange={(e) => setRecommendPoint(e.target.value)}
                           type="text"
-                          label="おすすめポイント"
+                          label={t('writeLetter.label')}
                           error={fieldState.invalid}
                           helperText={fieldState.error?.message}
                           multiline
@@ -409,7 +413,7 @@ export const WriteLetterPage = () => {
                   sx={{ mt: 2, mr: 1 }}
                   onClick={backSearchPage}
                 >
-                  検索画面に戻る
+                  {t('writeLetter.backSearchPageButton')}
                 </Button>
 
                 <Button
@@ -418,7 +422,7 @@ export const WriteLetterPage = () => {
                   size="small"
                   sx={{ mt: 2, mr: 1 }}
                 >
-                  送信
+                  {t('writeLetter.sendButton')}
                 </Button>
 
                 <Backdrop
@@ -442,23 +446,21 @@ export const WriteLetterPage = () => {
               aria-describedby="alert-dialog-description"
             >
               <DialogTitle id="alert-dialog-title" sx={{ bgcolor: '#fff3e0' }}>
-                {'あなたのツイッターユーザー名を確認することができます！'}
+                {t('writeLetter.dialog.title')}
               </DialogTitle>
               <DialogContent sx={{ bgcolor: '#fff3e0' }}>
                 <DialogContentText
                   id="alert-dialog-description"
                   sx={{ bgcolor: '#fff3e0' }}
                 >
-                  <p>
-                    このおすすめ映画を送信すると、受け取ったユーザーがあなたのツイッターユーザー名と一緒におすすめ映画をシェアできることができます。
-                  </p>
-                  <p>よろしいですか？</p>
+                  <p>{t('writeLetter.dialog.content1')}</p>
+                  <p> {t('writeLetter.dialog.content2')}</p>
                 </DialogContentText>
               </DialogContent>
               <DialogActions sx={{ bgcolor: '#fff3e0' }}>
-                <Button onClick={handleCloseModal}>いいえ</Button>
+                <Button onClick={handleCloseModal}> {t('writeLetter.dialog.noButton')}</Button>
                 <Button onClick={onSubmit} autoFocus>
-                  はい
+                {t('writeLetter.dialog.yesButton')}
                 </Button>
               </DialogActions>
             </Dialog>

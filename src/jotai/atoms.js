@@ -11,6 +11,18 @@ export const recieveMovieDataAtom = atom({
   twitterUserName: '',
 })
 
+export const recieveMovieDataByEnglishAtom = atom({
+  movieTitle: '',
+  movieImg: '',
+  receiverId: '',
+  letterId: '',
+  userId: '',
+  recommendPoint: '',
+  twitterUserName: '',
+})
+
+
+
 export const handleFadeModal = atom(false)
 
 export const madeLettersDataAtom = atom([])

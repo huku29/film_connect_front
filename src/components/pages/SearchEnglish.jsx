@@ -10,11 +10,12 @@ import {
   Button,
   InputBase,
   IconButton,
+  Typography,
 } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import axios from 'axios'
 import { useTranslation } from 'react-i18next'
-import { filmsSearch, filmsimg, getFilmDetail } from '@/urls'
+import { filmsimg, getFilmDetail, filmsSearchByEnglish } from '@/urls'
 import InfiniteScroll from 'react-infinite-scroller'
 import List from '@mui/material/List'
 import { useNavigate } from 'react-router-dom'
@@ -22,7 +23,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { useAtom } from 'jotai'
 import { handleSendFlashMessage, handleGetSearchWordAtom } from '@/jotai/atoms'
 
-export const Search = () => {
+export const SearchEnglish = () => {
   const [searchWord, setSearchWord] = useAtom(handleGetSearchWordAtom)
 
   const [hasMore, setHasMore] = useState(true)
@@ -34,9 +35,16 @@ export const Search = () => {
 
   const [searchFilm, setSearchFilm] = useState([])
 
+  const { t, i18n } = useTranslation()
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng)
+  }
+
+  
   const loadMore = () => {
     axios
-      .get(filmsSearch, {
+      .get(filmsSearchByEnglish, {
         params: {
           search_word: searchWord,
           //getMovieApi関数を実行した段階でpageが1の状態だから、ロードしたら＋1しないと最初のスクロール時点では同じ1ページが表示されてしまう
@@ -68,7 +76,7 @@ export const Search = () => {
     }
 
     axios
-      .get(filmsSearch, {
+      .get(filmsSearchByEnglish, {
         params: {
           search_word: searchWord,
           //getMovieの関数が発火すれば1ページがはじめに出るようにする
@@ -136,12 +144,6 @@ export const Search = () => {
   useEffect(() => {
     getFilmApi()
   }, [debouncedInputText])
-
-  const { t, i18n } = useTranslation()
-
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng)
-  }
 
   const matches = useMediaQuery('(min-width:575px)')
 
@@ -389,4 +391,4 @@ export const Search = () => {
   )
 }
 
-export default Search
+export default SearchEnglish

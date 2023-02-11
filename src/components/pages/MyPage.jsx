@@ -20,6 +20,7 @@ import axios from 'axios'
 import {
   getMadeLetters,
   getFilmsDetails,
+  getFilmsDetailsByEnglish,
   getReceivedLetters,
   getReceivedLettersData,
   filmsImgSmall,
@@ -40,12 +41,14 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 
 import { useAtom } from 'jotai'
 import { handleSendFlashMessage } from '@/jotai/atoms'
+import { useTranslation } from 'react-i18next'
 
 export const MyPage = () => {
   const [swiper, setSwiper] = useState(null)
   const [value, setValue] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
   const [openFlash, setOpenFlash] = useAtom(handleSendFlashMessage)
+  const { t, i18n } = useTranslation()
 
   const slideChange = (index) => {
     setValue(index)
@@ -94,30 +97,46 @@ export const MyPage = () => {
   const getSendLetters = async () => {
     if (sendLetters.length !== 0) return
     setIsLoading(true)
-
     const token = await user.getIdToken(true)
     const config = { headers: { authorization: `Bearer ${token}` } }
-
     const res = await axios.get(getMadeLetters, config)
-
     //letterの情報
     const letters = res.data.letter
-
-    const newLetters = await Promise.all(
-      letters.map(async (letter) => {
-        const result = await axios.get(getFilmsDetails, {
-          params: {
-            film_id: letter.film_id,
-          },
+    if (i18n.language === 'ja') {
+      const newLetters = await Promise.all(
+        letters.map(async (letter) => {
+          const result = await axios.get(getFilmsDetails, {
+            params: {
+              film_id: letter.film_id,
+            },
+          })
+          const { title, poster_path } = result.data
+          letter.filmTitle = title
+          letter.filmImage = poster_path
+          return letter
         })
-        const { title, poster_path } = result.data
-        letter.filmTitle = title
-        letter.filmImage = poster_path
-        return letter
-      })
-    )
-    setSendLetters(newLetters)
-    setIsLoading(false)
+      )
+      setSendLetters(newLetters)
+      setIsLoading(false)
+    }else{
+      //英語版のバックエンドのpathに変更
+      const newLetters = await Promise.all(
+        letters.map(async (letter) => {
+          const result = await axios.get(getFilmsDetailsByEnglish, {
+            params: {
+              film_id: letter.film_id,
+            },
+          })
+          const { title, poster_path } = result.data
+          letter.filmTitle = title
+          letter.filmImage = poster_path
+          return letter
+        })
+      )
+      setSendLetters(newLetters)
+      setIsLoading(false)
+
+    }
   }
 
   const handleGetReceivedLetters = async () => {
@@ -140,35 +159,72 @@ export const MyPage = () => {
       })
     )
 
-    const newGetReceivedLetters = await Promise.all(
-      newReceivedLetters.map(async (receivedLetterData) => {
-        const result = await axios.get(getFilmsDetails, {
-          params: {
-            film_id: receivedLetterData.film_id,
-          },
+    if (i18n.language === 'ja') {
+      
+      const newGetReceivedLetters = await Promise.all(
+        newReceivedLetters.map(async (receivedLetterData) => {
+          const result = await axios.get(getFilmsDetails, {
+            params: {
+              film_id: receivedLetterData.film_id,
+            },
+          })
+          const { title, poster_path } = result.data
+          receivedLetterData.filmTitle = title
+          receivedLetterData.filmImage = poster_path
+          return receivedLetterData
         })
-        const { title, poster_path } = result.data
-        receivedLetterData.filmTitle = title
-        receivedLetterData.filmImage = poster_path
-        return receivedLetterData
-      })
-    )
-
-    const newGetReceivedLettersWithUserInfo = await Promise.all(
-      newGetReceivedLetters.map(async (receivedLetterDataWithUserInfo) => {
-        const newResult = await axios.get(getUsersName, {
-          params: {
-            user_id: receivedLetterDataWithUserInfo.user_id,
-          },
+      )
+  
+      const newGetReceivedLettersWithUserInfo = await Promise.all(
+        newGetReceivedLetters.map(async (receivedLetterDataWithUserInfo) => {
+          const newResult = await axios.get(getUsersName, {
+            params: {
+              user_id: receivedLetterDataWithUserInfo.user_id,
+            },
+          })
+          const { name } = newResult.data[0]
+          receivedLetterDataWithUserInfo.twitterName = name
+          return receivedLetterDataWithUserInfo
         })
-        const { name } = newResult.data[0]
-        receivedLetterDataWithUserInfo.twitterName = name
-        return receivedLetterDataWithUserInfo
-      })
-    )
+      )
+  
+      setReceivedLetterDetails(newGetReceivedLettersWithUserInfo)
+      setIsLoading(false)
+    }else{
+      //英語版
+      const newGetReceivedLetters = await Promise.all(
+        newReceivedLetters.map(async (receivedLetterData) => {
+          const result = await axios.get(getFilmsDetailsByEnglish, {
+            params: {
+              film_id: receivedLetterData.film_id,
+            },
+          })
+          const { title, poster_path } = result.data
+          receivedLetterData.filmTitle = title
+          receivedLetterData.filmImage = poster_path
+          return receivedLetterData
+          
+        })
+        )
+  
+      const newGetReceivedLettersWithUserInfo = await Promise.all(
+        newGetReceivedLetters.map(async (receivedLetterDataWithUserInfo) => {
+          const newResult = await axios.get(getUsersName, {
+            params: {
+              user_id: receivedLetterDataWithUserInfo.user_id,
+            },
+          })
+          const { name } = newResult.data[0]
+          receivedLetterDataWithUserInfo.twitterName = name
+          return receivedLetterDataWithUserInfo
+        })
+      )
+  
+      setReceivedLetterDetails(newGetReceivedLettersWithUserInfo)
+      setIsLoading(false)
 
-    setReceivedLetterDetails(newGetReceivedLettersWithUserInfo)
-    setIsLoading(false)
+    }
+
   }
 
   const handleGetNotWatchFilmLetters = async () => {
@@ -196,34 +252,67 @@ export const MyPage = () => {
       })
     )
 
-    const getNotWatchFilmDatas = await Promise.all(
-      notWatchFilmLetterDatas.map(async (notWatchFilmData) => {
-        const result = await axios.get(getFilmsDetails, {
-          params: {
-            film_id: notWatchFilmData.film_id,
-          },
-        })
-        const { title, poster_path } = result.data
-        notWatchFilmData.filmTitle = title
-        notWatchFilmData.filmImage = poster_path
-        return notWatchFilmData
-      })
-    )
+    if (i18n.language === 'ja') {
 
-    const getNotWatchFilmLetterDatasWithUserInfo = await Promise.all(
-      getNotWatchFilmDatas.map(async (receivedLetterDataWithUserInfo) => {
-        const newResult = await axios.get(getUsersName, {
-          params: {
-            user_id: receivedLetterDataWithUserInfo.user_id,
-          },
+      const getNotWatchFilmDatas = await Promise.all(
+        notWatchFilmLetterDatas.map(async (notWatchFilmData) => {
+          const result = await axios.get(getFilmsDetails, {
+            params: {
+              film_id: notWatchFilmData.film_id,
+            },
+          })
+          const { title, poster_path } = result.data
+          notWatchFilmData.filmTitle = title
+          notWatchFilmData.filmImage = poster_path
+          return notWatchFilmData
         })
-        const { name } = newResult.data[0]
-        receivedLetterDataWithUserInfo.twitterName = name
-        return receivedLetterDataWithUserInfo
-      })
-    )
-    setNotWatchfilmLetterDetails(getNotWatchFilmLetterDatasWithUserInfo)
-    setIsLoading(false)
+      )
+      const getNotWatchFilmLetterDatasWithUserInfo = await Promise.all(
+        getNotWatchFilmDatas.map(async (receivedLetterDataWithUserInfo) => {
+          const newResult = await axios.get(getUsersName, {
+            params: {
+              user_id: receivedLetterDataWithUserInfo.user_id,
+            },
+          })
+          const { name } = newResult.data[0]
+          receivedLetterDataWithUserInfo.twitterName = name
+          return receivedLetterDataWithUserInfo
+        })
+      )
+      setNotWatchfilmLetterDetails(getNotWatchFilmLetterDatasWithUserInfo)
+      setIsLoading(false)
+    }else{
+      //英語版
+      const getNotWatchFilmDatas = await Promise.all(
+        notWatchFilmLetterDatas.map(async (notWatchFilmData) => {
+          const result = await axios.get(getFilmsDetailsByEnglish, {
+            params: {
+              film_id: notWatchFilmData.film_id,
+            },
+          })
+          const { title, poster_path } = result.data
+          notWatchFilmData.filmTitle = title
+          notWatchFilmData.filmImage = poster_path
+          return notWatchFilmData
+        })
+      )
+      const getNotWatchFilmLetterDatasWithUserInfo = await Promise.all(
+        getNotWatchFilmDatas.map(async (receivedLetterDataWithUserInfo) => {
+          const newResult = await axios.get(getUsersName, {
+            params: {
+              user_id: receivedLetterDataWithUserInfo.user_id,
+            },
+          })
+          const { name } = newResult.data[0]
+          receivedLetterDataWithUserInfo.twitterName = name
+          return receivedLetterDataWithUserInfo
+        })
+      )
+      setNotWatchfilmLetterDetails(getNotWatchFilmLetterDatasWithUserInfo)
+      setIsLoading(false)
+
+    }
+
   }
 
   useEffect(() => {
@@ -240,6 +329,7 @@ export const MyPage = () => {
     },
     [swiper]
   )
+
 
   return (
     <LoggedInLayout>
@@ -278,20 +368,20 @@ export const MyPage = () => {
               sx={{ ml: 10 }}
             >
               <Tab
-                label="送信済みレター"
+                label={t('mypage.sentFilmLetters')}
                 sx={{ color: '#ff9800' }}
                 onClick={getSendLetters}
                 value={0}
               />
 
               <Tab
-                label="受け取ったレター"
+                label={t('mypage.receivedFilmLetters')}
                 sx={{ color: '#ff9800' }}
                 onClick={handleGetReceivedLetters}
                 value={1}
               />
               <Tab
-                label="観たことない映画レター"
+                label={t('mypage.neverSeenFilmLetters')}
                 sx={{ color: '#ff9800' }}
                 onClick={handleGetNotWatchFilmLetters}
                 value={2}
@@ -332,7 +422,7 @@ export const MyPage = () => {
                         textAlign: 'center',
                       }}
                     >
-                      送信したレターはありません
+                      {t('mypage.noSentFilmLetters')}
                     </Box>
                   ) : (
                     sendLetters.map((sendLetter, index) => (
@@ -376,7 +466,7 @@ export const MyPage = () => {
                             sx={{ mt: 5, mx: 'auto' }}
                             onClick={() => handleOpenModal(sendLetter)}
                           >
-                            おすすめポイントを見る
+                            {t('recommendPoint')}
                           </Button>
                         </CardActions>
                       </Card>
@@ -402,7 +492,7 @@ export const MyPage = () => {
                         textAlign: 'center',
                       }}
                     >
-                      受け取ったレターはありません
+                      {t('mypage.noReceivedFilmLetters')}
                     </Box>
                   ) : (
                     receivedLetterDetails.map((receivedLetterDetail, index) => (
@@ -448,13 +538,17 @@ export const MyPage = () => {
                               handleOpenModal(receivedLetterDetail)
                             }
                           >
-                            おすすめポイントを見る
+                            {t('recommendPoint')}
                           </Button>
                         </CardActions>
                         <CardActions sx={{ ml: 3, my: 1 }}>
                           <TwitterShareButton
-                            title={`「${receivedLetterDetail.filmTitle}」は@${receivedLetterDetail.twitterName}さんからのおすすめ映画です！`}
-                            hashtags={['映画で人と繋がりたい']}
+                            title={t(`twitterShareContent`, {
+                              film: receivedLetterDetail.filmTitle,
+                              twitterUser: receivedLetterDetail.twitterName,
+                            })}
+                            // title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
+                            hashtags={['映画で人と繋がりたい', 'FilmConnect']}
                             url={'https://film-connect.web.app'}
                           >
                             <TwitterIcon size={'55px'} round />
@@ -484,7 +578,7 @@ export const MyPage = () => {
                         textAlign: 'center',
                       }}
                     >
-                      観たことない映画レターはありません
+                      {t('mypage.neverSeenFilmLettersDescription')}
                     </Box>
                   ) : (
                     notWatchfilmLetterDetails.map(
@@ -531,15 +625,19 @@ export const MyPage = () => {
                                 handleOpenModal(notWatchfilmLetterDetail)
                               }
                             >
-                              おすすめポイントを見る
+                              {t(`recommendPoint`)}
                             </Button>
                           </CardActions>
                           <CardActions sx={{ ml: 3, my: 1 }}>
                             <TwitterShareButton
-                              title={`「${notWatchfilmLetterDetail.filmTitle}」は@${notWatchfilmLetterDetail.twitterName}さんからのおすすめ映画です！`}
-                              hashtags={['映画で人と繋がりたい']}
+                              title={t(`twitterShareContent`, {
+                                film: notWatchfilmLetterDetail.filmTitle,
+                                twitterUser:
+                                  notWatchfilmLetterDetail.twitterName,
+                              })}
+                              // title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
+                              hashtags={['映画で人と繋がりたい', 'FilmConnect']}
                               url={'https://film-connect.web.app'}
-                              // via={"FilmConnect"}
                             >
                               <TwitterIcon size={'55px'} round />
                             </TwitterShareButton>
@@ -589,12 +687,12 @@ export const MyPage = () => {
             {matchLowWidth ? (
               <Tabs value={value} onChange={handleChange}>
                 <Tab
-                  label="送信済みレター"
+                  label={t('mypage.sentFilmLetters')}
                   sx={{
                     color: '#ff9800',
                     fontSize: '11px',
                     '@media screen and (width:280px)': {
-                      fontSize: '1px',
+                      fontSize: '0.3px',
                     },
                   }}
                   onClick={getSendLetters}
@@ -602,7 +700,7 @@ export const MyPage = () => {
                 />
 
                 <Tab
-                  label="受け取ったレター"
+                  label={t('mypage.receivedFilmLetters')}
                   sx={{
                     color: '#ff9800',
                     fontSize: '11px',
@@ -614,7 +712,7 @@ export const MyPage = () => {
                   value={1}
                 />
                 <Tab
-                  label="観たことない映画レター"
+                  label={t('mypage.neverSeenFilmLetters')}
                   sx={{
                     color: '#ff9800',
                     fontSize: '11px',
@@ -629,20 +727,20 @@ export const MyPage = () => {
             ) : (
               <Tabs value={value} onChange={handleChange} centered>
                 <Tab
-                  label="送信済みレター"
+                  label={t('mypage.sentFilmLetters')}
                   sx={{ color: '#ff9800', fontSize: '11px' }}
                   onClick={getSendLetters}
                   value={0}
                 />
 
                 <Tab
-                  label="受け取ったレター"
+                  label={t('mypage.receivedFilmLetters')}
                   sx={{ color: '#ff9800', fontSize: '11px' }}
                   onClick={handleGetReceivedLetters}
                   value={1}
                 />
                 <Tab
-                  label="観たことない映画レター"
+                  label={t('mypage.neverSeenFilmLetters')}
                   sx={{ color: '#ff9800', fontSize: '11px' }}
                   onClick={handleGetNotWatchFilmLetters}
                   value={2}
@@ -684,7 +782,7 @@ export const MyPage = () => {
                         textAlign: 'center',
                       }}
                     >
-                      送信したレターはありません
+                      {t('mypage.noSentFilmLetters')}
                     </Box>
                   ) : (
                     sendLetters.map((sendLetter, index) => (
@@ -732,7 +830,7 @@ export const MyPage = () => {
                             sx={{ mt: 5, mx: 'auto' }}
                             onClick={() => handleOpenModal(sendLetter)}
                           >
-                            おすすめポイントを見る
+                            {t('recommendPoint')}
                           </Button>
                         </CardActions>
                       </Card>
@@ -758,7 +856,7 @@ export const MyPage = () => {
                         textAlign: 'center',
                       }}
                     >
-                      受け取ったレターはありません
+                      {t('mypage.noReceivedFilmLetters')}
                     </Box>
                   ) : (
                     receivedLetterDetails.map((receivedLetterDetail, index) => (
@@ -808,13 +906,17 @@ export const MyPage = () => {
                               handleOpenModal(receivedLetterDetail)
                             }
                           >
-                            おすすめポイントを見る
+                            {t('recommendPoint')}
                           </Button>
                         </CardActions>
                         <CardActions sx={{ my: 1 }}>
                           <TwitterShareButton
-                            title={`「${receivedLetterDetail.filmTitle}」は@${receivedLetterDetail.twitterName}さんからのおすすめ映画です！`}
-                            hashtags={['映画で人と繋がりたい']}
+                            title={t(`twitterShareContent`, {
+                              film: receivedLetterDetail.filmTitle,
+                              twitterUser: receivedLetterDetail.twitterName,
+                            })}
+                            // title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
+                            hashtags={['映画で人と繋がりたい', 'FilmConnect']}
                             url={'https://film-connect.web.app'}
                           >
                             <TwitterIcon size={'55px'} round />
@@ -842,7 +944,7 @@ export const MyPage = () => {
                         textAlign: 'center',
                       }}
                     >
-                      観たことない映画レターはありません
+                      {t('mypage.neverSeenFilmLettersDescription')}
                     </Box>
                   ) : (
                     notWatchfilmLetterDetails.map(
@@ -893,15 +995,19 @@ export const MyPage = () => {
                                 handleOpenModal(notWatchfilmLetterDetail)
                               }
                             >
-                              おすすめポイントを見る
+                              {t('recommendPoint')}
                             </Button>
                           </CardActions>
                           <CardActions sx={{ my: 1 }}>
                             <TwitterShareButton
-                              title={`「${notWatchfilmLetterDetail.filmTitle}」は@${notWatchfilmLetterDetail.twitterName}さんからのおすすめ映画です！`}
-                              hashtags={['映画で人と繋がりたい']}
+                              title={t(`twitterShareContent`, {
+                                film: notWatchfilmLetterDetail.filmTitle,
+                                twitterUser:
+                                  notWatchfilmLetterDetail.twitterName,
+                              })}
+                              // title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
+                              hashtags={['映画で人と繋がりたい', 'FilmConnect']}
                               url={'https://film-connect.web.app'}
-                              // via={"FilmConnect"}
                             >
                               <TwitterIcon size={'55px'} round />
                             </TwitterShareButton>

@@ -1,0 +1,90 @@
+{
+  "header": {
+    "login": "ログイン",
+    "myPage": "マイページ",
+    "logout": "ログアウト",
+    "homePage": "トップページ",
+    "contact": "お問い合わせ",
+    "official": "公式ツイッター"
+  },
+  "footer": {
+    "search": "検索",
+    "mypage": "マイページ",
+    "random": "ランダム",
+    "ranking": "ランキング"
+  },
+  "top": {
+    "useage":"使い方説明",
+    "loginWithTwitter": "Twitterでログイン",
+    "loginDescription1": "ログインをするとあなたのおすすめ映画を送り、誰かのおすすめ映画をレター形式で受け取ることができます！",
+    "loginDescription2": "映画ライフを楽しみましょう！",
+    "writeRecommendedFilmLetters": "おすすめ映画レターを作成する",
+    "writeRecommendedFilmLettersDescription1": "匿名でおすすめ映画レターを作成し、ランダムに誰かの元へ送られます！",
+    "writeRecommendedFilmLettersDescription2": "映画検索で表示されたおすすめ映画の画像を押すと作成画面が表示されます！",
+    "writeRecommendedFilmLettersDescription3": "あなたのおすすめ映画を多くの人に共有しよう！",
+    "receiveSomeoneRecommendedFilmLetters": "おすすめ映画レターを受け取る",
+    "receiveSomeoneRecommendedFilmLettersDescription1": "受け取るボタンを押すとランダムに誰かがおすすめしてくれた映画レターが表示されます！",
+    "receiveSomeoneRecommendedFilmLettersDescription2": "Twitterシェアをすることで受け取ったレターが誰から送られてきたかわかります!",
+    "receiveSomeoneRecommendedFilmLettersDescription3": " この機会にTwitterで映画の感想や感謝の言葉を伝え交流の輪を広げましょう!",
+    "ranking": "映画ランキング",
+    "rankingDescription1": "どの映画がレター形式で多く作成されたかランキングページで一目でわかります！",
+    "rankingDescription2": "また多くの方が観たことない映画ランキングも見ることができます！",
+    "rankingDescription3": "あなたの知っているマニアックな映画もこの機会におすすめましょう！",
+    "rankingDescription4": "多くの映画レターを作成し、ランキングに入りましょう！"
+  },
+  "login": {
+    "title": "ログイン",
+    "button": "Twitterログイン"
+  },
+  "mypage": {
+    "sentFilmLetters": "送信済みレター",
+    "noSentFilmLetters": "送信したレターはありません",
+    "receivedFilmLetters": "受け取ったレター",
+    "noReceivedFilmLetters": "受け取ったレターはありません",
+    "neverSeenFilmLetters": "観たことない映画",
+    "neverSeenFilmLettersDescription": "観たことない映画レターはありません"
+  },
+  "search": {
+    "field": "映画検索",
+    "details": "{{title}}の詳細を見る",
+    "searchResults": "検索結果がありません",
+    "alert": "レターが送信されました"
+  },
+
+  "ranking": {
+    "title": "映画ランキング",
+    "rank": "--{{rank}}位--",
+    "recommendedFilmRanking": "おすすめされた映画ランキング",
+    "noRecommendedFilmRanking": "おすすめされた映画ランキングはありません",
+    "neverSeenFilmRanking": "観たことない映画ランキング",
+    "neverSeenFilmRankingDescription": "観たことない映画ランキングはありません"
+  },
+  "receive": {
+    "button": "受け取る",
+    "receivedAlert":"レターを受け取りました",
+    "addNeverSeenFilmList":"観たことないリストに追加されました",
+    "erroMessage":"受け取れるおすすめ映画がありません"
+  },
+  "writeLetter":{
+    "required":"おすすめポイントを入力してください",
+    "minLength":"30文字以上で入力してください。",
+    "alert":"送信されました",
+    "canNotSend":"送信できませんでした",
+    "label":"おすすめポイント",
+    "sendButton":"送信",
+    "backSearchPageButton":"検索画面に戻る",
+    "dialog":{
+      "title":"'あなたのツイッターユーザー名を確認することができます",
+      "content1":"このおすすめ映画を送信すると、受け取ったユーザーがあなたのツイッターユーザー名と一緒におすすめ映画をシェアできることができます。",
+      "content2":"よろしいですか？",
+      "yesButton":"はい",
+      "noButton":"いいえ"
+    }
+  },
+  "recommendPoint": "おすすめポイントを見る",
+  "recommendPointTitle": "おすすめポイント",
+  "neverSeen": "観たことない",
+  "twitterShareContent": "「{{film}}」は@{{twitterUser}}さんのおすすめ映画です！ ",
+  "termsOfUse": "利用規約",
+  "privacyPolicy": "プライバシーポリシー"
+}

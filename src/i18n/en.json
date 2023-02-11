@@ -1,0 +1,89 @@
+{
+  "header": {
+    "login": "Login",
+    "myPage": "MyPage",
+    "logout": "Logout",
+    "homePage": "HomePage",
+    "contact": "Enquiry",
+    "official": "Official"
+  },
+  "footer": {
+    "search": "Search",
+    "mypage": "MyPage",
+    "random": "Random",
+    "ranking": "Ranking"
+  },
+  "top": {
+    "useage": "How to use ?",
+    "loginWithTwitter": "Login With Twitter",
+    "loginDescription1": "After logging in you can send your recommendations and receive recommendations from others!",
+    "loginDescription2": "Enjoy your FilmConnect life!",
+    "writeRecommendedFilmLetters": "Write your recommendations.",
+    "writeRecommendedFilmLettersDescription1": "Write a recommendation anonymously and it will be sent to someone at random!",
+    "writeRecommendedFilmLettersDescription2": "  Search for the film you want to recommend on the search page and you       will see the image of the film, press the image to begin writing a recommendation. ",
+    "writeRecommendedFilmLettersDescription3": "Share your recommended films with many people!",
+    "receiveSomeoneRecommendedFilmLetters": "Receive someone's recommendations.",
+    "receiveSomeoneRecommendedFilmLettersDescription1": "Press the receive button at the bottom of the page and you'll randomly see someone's recommendation!",
+    "receiveSomeoneRecommendedFilmLettersDescription2": " Press the Twitter share button to see who sent you the recommendation!",
+    "receiveSomeoneRecommendedFilmLettersDescription3": "Write a film review, thank the recommender and have an interaction with them!",
+    "ranking": "Ranking",
+    "rankingDescription1": "From the ranking page, you can see at a glance which films have been recommended the most.",
+    "rankingDescription2": " You can see a ranking of films that many people haven't seen.",
+    "rankingDescription3": "Recommend some of your favorite cult films!",
+    "rankingDescription4": "Write many recommendations and join the rankings!"
+  },
+  "login": {
+    "title": "Login Page",
+    "button": "Login With Twitter"
+  },
+  "mypage": {
+    "sentFilmLetters": "Sent recommendations",
+    "noSentFilmLetters": "You have sent no recommendations.",
+    "receivedFilmLetters": "Received recommendations",
+    "noReceivedFilmLetters": "There are no recommendations in your inbox.",
+    "neverSeenFilmLetters": "Never seen film ",
+    "neverSeenFilmLettersDescription": "There are no recommendations in your ‘you've never seen’."
+  },
+  "search": {
+    "field": "Search films",
+    "details": "details of {{title}}",
+    "searchResults": "There are no search results.",
+    "alert": "Your letter has been sent."
+  },
+  "ranking": {
+    "title": "FILM RANKING",
+    "rank": "--{{rank}}--",
+    "recommendedFilmRanking": "Recommended Film Ranking",
+    "noRecommendedFilmRanking": "There are no recommended film ranking.",
+    "neverSeenFilmRanking": "Never Seen Film Ranking",
+    "neverSeenFilmRankingDescription": "There are no films in your Never Seen Film Ranking."
+  },
+  "receive": {
+    "button": "receive",
+    "receivedAlert": "You've received a recommendation.",
+    "addNeverSeenFilmList": "Added to the list of films you've never seen.",
+    "erroMessage": "You have not received any recommendations."
+  },
+  "writeLetter": {
+    "required": "Write your recommendation here.",
+    "minLength": "30 or more characters",
+    "alert": "Your recommended film has been sent。",
+    "canNotSend": "Your recommended film could not be sent.",
+    "label": "Recommend point",
+    "sendButton": "Send",
+    "backSearchPageButton": "Back to search page",
+    "dialog": {
+      "title": "The recipients of your recommended film(s) will be able to see your Twitter username.",
+      "content1": "Sending this letter of your recommended film letter allows the recipient to share your Twitter username and film recommendations.",
+      "content2": "Is taht OK?",
+      "yesButton": "Yes",
+      "noButton": "No"
+    }
+  },
+  "recommendPoint": "Recommend Point",
+  "recommendPointTitle": "Recommend Point",
+  "neverSeen": "neverSeen",
+  "twitterShareContent": "「{{film}}」 was recommended by @{{twitterUser}} ",
+  "termsOfUse": "Terms of Use",
+  "privacyPolicy": "Privacy Policy"
+}

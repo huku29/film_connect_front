@@ -1,11 +1,14 @@
 import { Typography, Box, List, ListItem } from '@mui/material'
 import { BaseLayout } from '../layouts'
+import {useTranslation} from 'react-i18next';
 
 export const UseTerms = () => {
+  const {t, i18n} = useTranslation();
+
   return (
     <BaseLayout>
       <Typography variant="h3" sx={{ mt: 12, textAlign: 'center', mb: 5 }}>
-        利用規約
+      {t('termsOfUse')}
       </Typography>
       <Box sx={{ ml: 5, mt: 5, mb: 8}}>
         <Typography sx={{ mb: 5, }}>
@@ -48,7 +51,7 @@ export const UseTerms = () => {
         <Box sx={{ mb: 5 }}>
           <Typography variant="h5" sx={{fontWeight: 'bold' }}>ログイン情報の管理</Typography>
           <Typography>
-            ユーザーは、自己の責任において、本サービスのログイン情報を適切に管理するものとします。ユーザーは、いかなる場合にも、ログイン情報を第三者に譲渡または貸与し、もしくは第三者と共用することはできません。当社は、ログイン情報が第三者によって使用されたことによって生じた損害につき、当社に故意又は重大な過失がある場合を除き、一切の責任を負いません。
+            ユーザーは、自己の責任において、本サービスのログイン情報を適切に管理するものとします。ユーザーは、いかなる場合にも、ログイン情報を第三者に譲渡または貸与し、もしくは第三者と共用することはできません。当サイトは、ログイン情報が第三者によって使用されたことによって生じた損害につき、当サイトに故意又は重大な過失がある場合を除き、一切の責任を負いません。
           </Typography>
         </Box>
         <Box sx={{ mb: 5 }}>
