@@ -132,14 +132,14 @@ export const PrivacyPolicy = () => {
           </Box>
         </>
       ) : (
-        <Box sx={{ mr: 'auto', ml: 'auto' }}>
+        <>
           <Typography
-            variant="h5"
+            variant="h4"
             sx={{ mt: 12, textAlign: 'center', mb: 5, fontWeight: 'bold' }}
           >
             {t('privacyPolicy')}
           </Typography>
-          <Box sx={{ mt: 5, mb: 8 }}>
+          <Box sx={{ml:2, mt: 5, mb: 8 }}>
             <Box sx={{ mb: 5 }}>
               <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                 お客様から取得する情報
@@ -255,7 +255,7 @@ export const PrivacyPolicy = () => {
             </Box>
             <Typography variant="subtitle1"></Typography>2023年01月15日 制定
           </Box>
-        </Box>
+        </>
       )}
     </BaseLayout>
   )

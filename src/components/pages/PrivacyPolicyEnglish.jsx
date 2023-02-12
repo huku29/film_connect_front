@@ -171,12 +171,12 @@ export const PrivacyPolicyEnglish = () => {
       ) : (
         <>
           <Typography
-            variant="h5"
+            variant="h4"
             sx={{ mt: 12, textAlign: 'center', mb: 5, fontWeight: 'bold' }}
           >
             Privacy Policy
           </Typography>
-          <Box sx={{ ml: 5, mb: 8, mt: 5 }}>
+          <Box sx={{ ml:2, mb: 8, mt: 5 }}>
             <Box sx={{ mb: 5 }}>
               <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                 User Information to be Acquired
