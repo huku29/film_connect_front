@@ -5,7 +5,8 @@
     "logout": "ログアウト",
     "homePage": "トップページ",
     "contact": "お問い合わせ",
-    "official": "公式ツイッター"
+    "official": "公式ツイッター",
+    "share":"ツイッターでシェア"
   },
   "footer": {
     "search": "検索",
