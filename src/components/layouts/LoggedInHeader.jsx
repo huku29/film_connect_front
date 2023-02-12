@@ -291,6 +291,21 @@ export const LoggedInHeader = () => {
               </a>
             </ListItemButton>
           </ListItem>
+          <ListItem>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <TwitterIcon sx={{ color: 'text.primary' }} />
+                  </ListItemIcon>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href= "https://twitter.com/intent/tweet?text=%20%23FilmConnect%0ahttps://filmconnect.jp/"
+                    style={{ textDecoration: 'none', color: '#ff9800' }}
+                  >
+                    {t('header.share')}
+                  </a>
+                </ListItemButton>
+              </ListItem>
         </List>
       </Drawer>
     </Box>
