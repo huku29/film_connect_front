@@ -357,10 +357,10 @@ export const SearchEnglish = () => {
                             },
                           }}
                         >
-                          <Box sx={{ textAligh: 'center' }}>{film.title}</Box>
+                          <Box sx={{textAlign: 'center'  }}>{film.title}</Box>
                           <List>
                             <Button
-                              sx={{ mb: 3 }}
+                              sx={{ mb: 3,textAlign: 'center'}}
                               onClick={() => handleWriteLetter(film)}
                             >
                               <img
@@ -369,6 +369,7 @@ export const SearchEnglish = () => {
                               ></img>
                             </Button>
                           </List>
+                          <Box sx={{textAlign: 'center'}}>
                           <Link
                             target="_blank"
                             rel="noopener noreferrer"
@@ -377,6 +378,7 @@ export const SearchEnglish = () => {
                           >
                             {t(`search.details`, { title: film.title })}
                           </Link>
+                          </Box>
                         </Box>
                       </Grid>
                     ) : null

@@ -355,10 +355,10 @@ export const Search = () => {
                             },
                           }}
                         >
-                          <Box sx={{ textAligh: 'center' }}>{film.title}</Box>
+                          <Box sx={{ textAlign: 'center' }}>{film.title}</Box>
                           <List>
                             <Button
-                              sx={{ mb: 3 }}
+                              sx={{ mb: 3, textAlign: 'center' }}
                               onClick={() => handleWriteLetter(film)}
                             >
                               <img
@@ -367,14 +367,16 @@ export const Search = () => {
                               ></img>
                             </Button>
                           </List>
-                          <Link
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href={`${getFilmDetail}/${film.id}`}
-                            underline="hover"
-                          >
-                            {t(`search.details`, { title: film.title })}
-                          </Link>
+                          <Box sx={{ textAlign: 'center' }}>
+                            <Link
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={`${getFilmDetail}/${film.id}`}
+                              underline="hover"
+                            >
+                              {t(`search.details`, { title: film.title })}
+                            </Link>
+                          </Box>
                         </Box>
                       </Grid>
                     ) : null
