@@ -126,7 +126,7 @@ export const LoggedInHeader = () => {
             >
               {matches ? (
                 <img
-                  src="https://film-connect.web.app/logo.png"
+                  src="https://filmconnect.jp/logo.png"
                   className="header-logo"
                   alt="header-logo"
                   width="200"
@@ -134,7 +134,7 @@ export const LoggedInHeader = () => {
                 />
               ) : (
                 <img
-                  src="https://film-connect.web.app/logo.png"
+                  src="https://filmconnect.jp/logo.png"
                   className="header-logo"
                   alt="header-logo"
                   width="120"

@@ -22,7 +22,7 @@ export const Top = () => {
             }}
           >
             <img
-              src="https://film-connect.web.app/top_img.png"
+              src="https://filmconnect.jp/top_img.png"
               className="top-img-logo"
               alt="top-img-logo"
               width="600"
@@ -62,7 +62,7 @@ export const Top = () => {
           >
             <Typography>
               <img
-                src="https://film-connect.web.app/write_letter.png"
+                src="https://filmconnect.jp/write_letter.png"
                 className="write-letter-logo"
                 alt="write-letter-logo"
                 width="320"
@@ -87,7 +87,7 @@ export const Top = () => {
           >
             <Typography>
               <img
-                src="https://film-connect.web.app/receive_img.png"
+                src="https://filmconnect.jp/receive_img.png"
                 className="receive-logo"
                 alt="receive-logo"
                 width="350"
@@ -112,7 +112,7 @@ export const Top = () => {
           >
             <Typography>
               <img
-                src="https://film-connect.web.app/ranking.png"
+                src="https://filmconnect.jp/ranking.png"
                 className="ranking-logo"
                 alt="ranking-logo"
                 width="350"
@@ -165,7 +165,7 @@ export const Top = () => {
             }}
           >
             <img
-              src="https://film-connect.web.app/top_img.png"
+              src="https://filmconnect.jp/top_img.png"
               className="top-img-logo"
               alt="top-img-logo"
               width="300"
@@ -218,7 +218,7 @@ export const Top = () => {
                 }}
               >
                 <img
-                  src="https://film-connect.web.app/write_letter.png"
+                  src="https://filmconnect.jp/write_letter.png"
                   className="write-letter-logo"
                   alt="write-letter-logo"
                   width="200"
@@ -250,7 +250,7 @@ export const Top = () => {
                 }}
               >
                 <img
-                  src="https://film-connect.web.app/receive_img.png"
+                  src="https://filmconnect.jp/receive_img.png"
                   className="receive-letter-logo"
                   alt="receive-letter-logo"
                   width="200"
@@ -282,7 +282,7 @@ export const Top = () => {
                 }}
               >
                 <img
-                  src="https://film-connect.web.app/ranking.png"
+                  src="https://filmconnect.jp/ranking.png"
                   className="ranking-logo"
                   alt="ranking-logo"
                   width="200"
