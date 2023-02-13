@@ -299,7 +299,7 @@ export const LoggedInHeader = () => {
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href= "https://twitter.com/intent/tweet?text=%20%23FilmConnect%0ahttps://filmconnect.jp/"
+                    href= "https://twitter.com/intent/tweet?text=%20%23FilmConnect%0ahttps://filmconnect.jp"
                     style={{ textDecoration: 'none', color: '#ff9800' }}
                   >
                     {t('header.share')}

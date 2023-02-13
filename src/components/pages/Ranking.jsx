@@ -75,7 +75,6 @@ export const Ranking = () => {
     const res = await axios.get(getCreatedLettersRanking)
     const filmsRankingData = res.data
 
-
     if (i18n.language === 'ja') {
       const rankingDatas = await Promise.all(
         filmsRankingData.map(async (rankingData) => {
@@ -237,17 +236,31 @@ export const Ranking = () => {
                                 alt=""
                                 src={`${filmsimg}/${film.poster_path}`}
                               ></img>
-                              <Link
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                href={`${getFilmDetail}/${film.id}`}
-                                underline="hover"
-                              >
-                                <Box sx={{ mb: 7 }}>
-                                  {' '}
-                                  {t(`search.details`, { title: film.title })}
-                                </Box>
-                              </Link>
+                              {i18n.language === 'ja' ? (
+                                <Link
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  href={`${getFilmDetail}/${film.id}`}
+                                  underline="hover"
+                                >
+                                  <Box sx={{ mb: 7 }}>
+                                    {' '}
+                                    {t(`search.details`, { title: film.title })}
+                                  </Box>
+                                </Link>
+                              ) : (
+                                <Link
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  href={`${getFilmDetail}/${film.id}/en`}
+                                  underline="hover"
+                                >
+                                  <Box sx={{ mb: 7 }}>
+                                    {' '}
+                                    {t(`search.details`, { title: film.title })}
+                                  </Box>
+                                </Link>
+                              )}
                             </List>
                           </Box>
                         </Box>
@@ -291,17 +304,31 @@ export const Ranking = () => {
                                 alt=""
                                 src={`${filmsimg}/${film.poster_path}`}
                               ></img>
-                              <Link
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                href={`${getFilmDetail}/${film.id}`}
-                                underline="hover"
-                              >
-                                <Box sx={{ mb: 7 }}>
-                                  {' '}
-                                  {t(`search.details`, { title: film.title })}
-                                </Box>
-                              </Link>
+                              {i18n.language === 'ja' ? (
+                                <Link
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  href={`${getFilmDetail}/${film.id}`}
+                                  underline="hover"
+                                >
+                                  <Box sx={{ mb: 7 }}>
+                                    {' '}
+                                    {t(`search.details`, { title: film.title })}
+                                  </Box>
+                                </Link>
+                              ) : (
+                                <Link
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  href={`${getFilmDetail}/${film.id}/en`}
+                                  underline="hover"
+                                >
+                                  <Box sx={{ mb: 7 }}>
+                                    {' '}
+                                    {t(`search.details`, { title: film.title })}
+                                  </Box>
+                                </Link>
+                              )}
                             </List>
                           </Box>
                         </Box>
@@ -414,17 +441,31 @@ export const Ranking = () => {
                                 alt=""
                                 src={`${filmsimg}/${film.poster_path}`}
                               ></img>
-                              <Link
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                href={`${getFilmDetail}/${film.id}`}
-                                underline="hover"
-                              >
-                                <Box sx={{ mb: 7 }}>
-                                  {' '}
-                                  {t(`search.details`, { title: film.title })}
-                                </Box>
-                              </Link>
+                              {i18n.language === 'ja' ? (
+                                <Link
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  href={`${getFilmDetail}/${film.id}`}
+                                  underline="hover"
+                                >
+                                  <Box sx={{ mb: 7 }}>
+                                    {' '}
+                                    {t(`search.details`, { title: film.title })}
+                                  </Box>
+                                </Link>
+                              ) : (
+                                <Link
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  href={`${getFilmDetail}/${film.id}/en`}
+                                  underline="hover"
+                                >
+                                  <Box sx={{ mb: 7 }}>
+                                    {' '}
+                                    {t(`search.details`, { title: film.title })}
+                                  </Box>
+                                </Link>
+                              )}
                             </List>
                           </Box>
                         </Box>
@@ -474,17 +515,31 @@ export const Ranking = () => {
                                 alt=""
                                 src={`${filmsimg}/${film.poster_path}`}
                               ></img>
-                              <Link
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                href={`${getFilmDetail}/${film.id}`}
-                                underline="hover"
-                              >
-                                <Box sx={{ mb: 7 }}>
-                                  {' '}
-                                  {t(`search.details`, { title: film.title })}
-                                </Box>
-                              </Link>
+                              {i18n.language === 'ja' ? (
+                                <Link
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  href={`${getFilmDetail}/${film.id}`}
+                                  underline="hover"
+                                >
+                                  <Box sx={{ mb: 7 }}>
+                                    {' '}
+                                    {t(`search.details`, { title: film.title })}
+                                  </Box>
+                                </Link>
+                              ) : (
+                                <Link
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  href={`${getFilmDetail}/${film.id}/en`}
+                                  underline="hover"
+                                >
+                                  <Box sx={{ mb: 7 }}>
+                                    {' '}
+                                    {t(`search.details`, { title: film.title })}
+                                  </Box>
+                                </Link>
+                              )}
                             </List>
                           </Box>
                         </Box>

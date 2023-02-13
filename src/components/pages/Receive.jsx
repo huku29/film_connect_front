@@ -52,7 +52,6 @@ export const Receive = () => {
   const [errorMessage] = useAtom(handleGetErrorMessageAtom)
 
   const { t, i18n } = useTranslation()
-  
 
   const [getFirstSawFilmLettersId, setGetFirstSawFilmLettersId] = useAtom(
     handleGetFirstSawFilmLettersIdAtom
@@ -61,8 +60,6 @@ export const Receive = () => {
   const match_first_saw_letter_id = getFirstSawFilmLettersId.find(
     (getFirstSawFilmLetterId) => getFirstSawFilmLetterId === movieData.letterId
   )
-
-  
 
   const handleOpenModal = () => {
     setOpenModal(true)
@@ -137,25 +134,19 @@ export const Receive = () => {
       })
   }
 
-  const handleGetFilmDataFromId = async() => {
-    const params = {film_id: movieData.film_id}
+  const handleGetFilmDataFromId = async () => {
+    const params = { film_id: movieData.film_id }
     await axios
-      .get(
-        getFilmsDetails,
-        {
-          film_id: params,
-        }
-      )
-      .then((res) => {
+      .get(getFilmsDetails, {
+        film_id: params,
       })
+      .then((res) => {})
   }
 
   useEffect(() => {
     setDisable(false)
     setOpenFlash(false)
   }, [movieData])
-
-  
 
   // useEffect(() => {
   //   handleGetFilmDataFromId()
@@ -196,22 +187,42 @@ export const Receive = () => {
                     titleTypographyProps={{ variant: 'h5' }}
                     sx={{ color: 'black', textAlign: 'center', pt: 2 }}
                   />
-                  <CardContent>
-                    <Link
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={`${getFilmDetail}/${movieData.movieId}`}
-                      underline="hover"
-                    >
-                      <CardMedia
-                        height="400px"
-                        component="img"
-                        image={`${filmsImgSmall}/${movieData.movieImg}`}
-                        sx={{ objectFit: 'contain' }}
-                        alt=""
-                      />
-                    </Link>
-                  </CardContent>
+                  {i18n.language === 'ja' ? (
+                    <CardContent>
+                      <Link
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={`${getFilmDetail}/${movieData.movieId}`}
+                        underline="hover"
+                      >
+                        <CardMedia
+                          height="400px"
+                          component="img"
+                          image={`${filmsImgSmall}/${movieData.movieImg}`}
+                          sx={{ objectFit: 'contain' }}
+                          alt=""
+                        />
+                      </Link>
+                    </CardContent>
+                  ) : (
+                    <CardContent>
+                      <Link
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={`${getFilmDetail}/${movieData.movieId}/en`}
+                        underline="hover"
+                      >
+                        <CardMedia
+                          height="400px"
+                          component="img"
+                          image={`${filmsImgSmall}/${movieData.movieImg}`}
+                          sx={{ objectFit: 'contain' }}
+                          alt=""
+                        />
+                      </Link>
+                    </CardContent>
+                  )}
+
                   <CardActions>
                     <Button
                       variant="contained"
@@ -233,7 +244,6 @@ export const Receive = () => {
                     </Button>
                   </CardActions>
                   <CardActions sx={{ ml: 3, my: -8 }}>
-                   
                     <TwitterShareButton
                       title={t(`twitterShareContent`, {
                         film: movieData.movieTitle,
@@ -321,7 +331,9 @@ export const Receive = () => {
           <Box mt={40} textAlign="center">
             {/* 受け取るレターがなければメッセージを表示して、あればコンテンツを表示 */}
             {errorMessage ? (
-              <Typography sx={{ color: '#ff9800' }}>{t('receive.erroMessage')}</Typography>
+              <Typography sx={{ color: '#ff9800' }}>
+                {t('receive.erroMessage')}
+              </Typography>
             ) : (
               <Fade in={open}>
                 <Card
@@ -341,22 +353,42 @@ export const Receive = () => {
                     titleTypographyProps={{ variant: 'h7' }}
                     sx={{ color: 'black', textAlign: 'center' }}
                   />
-                  <CardContent>
-                    <Link
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={`${getFilmDetail}/${movieData.movieId}`}
-                      underline="hover"
-                    >
-                      <CardMedia
-                        height="400px"
-                        component="img"
-                        image={`${filmsImgSmall}/${movieData.movieImg}`}
-                        sx={{ objectFit: 'contain' }}
-                        alt=""
-                      />
-                    </Link>
-                  </CardContent>
+                  {i18n.language === 'ja' ? (
+                    <CardContent>
+                      <Link
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={`${getFilmDetail}/${movieData.movieId}`}
+                        underline="hover"
+                      >
+                        <CardMedia
+                          height="400px"
+                          component="img"
+                          image={`${filmsImgSmall}/${movieData.movieImg}`}
+                          sx={{ objectFit: 'contain' }}
+                          alt=""
+                        />
+                      </Link>
+                    </CardContent>
+                  ) : (
+                    <CardContent>
+                      <Link
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={`${getFilmDetail}/${movieData.movieId}/en`}
+                        underline="hover"
+                      >
+                        <CardMedia
+                          height="400px"
+                          component="img"
+                          image={`${filmsImgSmall}/${movieData.movieImg}`}
+                          sx={{ objectFit: 'contain' }}
+                          alt=""
+                        />
+                      </Link>
+                    </CardContent>
+                  )}
+
                   <CardActions>
                     <Button
                       variant="contained"

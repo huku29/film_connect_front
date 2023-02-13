@@ -141,7 +141,7 @@ export const WriteLetterPage = () => {
           <Card
             sx={{
               mt: 10,
-              mb:10,
+              mb: 10,
               ml: 'auto',
               mr: 'auto',
               width: 700,
@@ -180,14 +180,25 @@ export const WriteLetterPage = () => {
                 color: 'black',
               }}
             >
-              <Link
-                target="_blank"
-                rel="noopener noreferrer"
-                href={`${getFilmDetail}/${filmId}`}
-                underline="hover"
-              >
-                <img alt="" src={`${filmsImgSmall}/${filmImg}`}></img>
-              </Link>
+              {i18n.language === 'ja' ? (
+                <Link
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`${getFilmDetail}/${filmId}`}
+                  underline="hover"
+                >
+                  <img alt="" src={`${filmsImgSmall}/${filmImg}`}></img>
+                </Link>
+              ) : (
+                <Link
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`${getFilmDetail}/${filmId}/en`}
+                  underline="hover"
+                >
+                  <img alt="" src={`${filmsImgSmall}/${filmImg}`}></img>
+                </Link>
+              )}
             </Typography>
 
             <Stack
@@ -322,7 +333,7 @@ export const WriteLetterPage = () => {
                 mt: 6,
                 ml: 'auto',
                 mr: 'auto',
-                mb:10
+                mb: 10,
               },
               '@media screen and (width:540px)': {
                 textAligh: 'center',
@@ -351,14 +362,25 @@ export const WriteLetterPage = () => {
                 color: 'black',
               }}
             >
-              <Link
-                target="_blank"
-                rel="noopener noreferrer"
-                href={`${getFilmDetail}/${filmId}`}
-                underline="hover"
-              >
-                <img alt="" src={`${filmsImgSmall}/${filmImg}`}></img>
-              </Link>
+              {i18n.language === 'ja' ? (
+                <Link
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`${getFilmDetail}/${filmId}`}
+                  underline="hover"
+                >
+                  <img alt="" src={`${filmsImgSmall}/${filmImg}`}></img>
+                </Link>
+              ) : (
+                <Link
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`${getFilmDetail}/${filmId}/en`}
+                  underline="hover"
+                >
+                  <img alt="" src={`${filmsImgSmall}/${filmImg}`}></img>
+                </Link>
+              )}
             </Typography>
 
             <Stack
@@ -458,9 +480,12 @@ export const WriteLetterPage = () => {
                 </DialogContentText>
               </DialogContent>
               <DialogActions sx={{ bgcolor: '#fff3e0' }}>
-                <Button onClick={handleCloseModal}> {t('writeLetter.dialog.noButton')}</Button>
+                <Button onClick={handleCloseModal}>
+                  {' '}
+                  {t('writeLetter.dialog.noButton')}
+                </Button>
                 <Button onClick={onSubmit} autoFocus>
-                {t('writeLetter.dialog.yesButton')}
+                  {t('writeLetter.dialog.yesButton')}
                 </Button>
               </DialogActions>
             </Dialog>

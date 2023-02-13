@@ -118,7 +118,7 @@ export const MyPage = () => {
       )
       setSendLetters(newLetters)
       setIsLoading(false)
-    }else{
+    } else {
       //英語版のバックエンドのpathに変更
       const newLetters = await Promise.all(
         letters.map(async (letter) => {
@@ -135,7 +135,6 @@ export const MyPage = () => {
       )
       setSendLetters(newLetters)
       setIsLoading(false)
-
     }
   }
 
@@ -160,7 +159,6 @@ export const MyPage = () => {
     )
 
     if (i18n.language === 'ja') {
-      
       const newGetReceivedLetters = await Promise.all(
         newReceivedLetters.map(async (receivedLetterData) => {
           const result = await axios.get(getFilmsDetails, {
@@ -174,7 +172,7 @@ export const MyPage = () => {
           return receivedLetterData
         })
       )
-  
+
       const newGetReceivedLettersWithUserInfo = await Promise.all(
         newGetReceivedLetters.map(async (receivedLetterDataWithUserInfo) => {
           const newResult = await axios.get(getUsersName, {
@@ -187,10 +185,10 @@ export const MyPage = () => {
           return receivedLetterDataWithUserInfo
         })
       )
-  
+
       setReceivedLetterDetails(newGetReceivedLettersWithUserInfo)
       setIsLoading(false)
-    }else{
+    } else {
       //英語版
       const newGetReceivedLetters = await Promise.all(
         newReceivedLetters.map(async (receivedLetterData) => {
@@ -203,10 +201,9 @@ export const MyPage = () => {
           receivedLetterData.filmTitle = title
           receivedLetterData.filmImage = poster_path
           return receivedLetterData
-          
         })
-        )
-  
+      )
+
       const newGetReceivedLettersWithUserInfo = await Promise.all(
         newGetReceivedLetters.map(async (receivedLetterDataWithUserInfo) => {
           const newResult = await axios.get(getUsersName, {
@@ -219,12 +216,10 @@ export const MyPage = () => {
           return receivedLetterDataWithUserInfo
         })
       )
-  
+
       setReceivedLetterDetails(newGetReceivedLettersWithUserInfo)
       setIsLoading(false)
-
     }
-
   }
 
   const handleGetNotWatchFilmLetters = async () => {
@@ -253,7 +248,6 @@ export const MyPage = () => {
     )
 
     if (i18n.language === 'ja') {
-
       const getNotWatchFilmDatas = await Promise.all(
         notWatchFilmLetterDatas.map(async (notWatchFilmData) => {
           const result = await axios.get(getFilmsDetails, {
@@ -281,7 +275,7 @@ export const MyPage = () => {
       )
       setNotWatchfilmLetterDetails(getNotWatchFilmLetterDatasWithUserInfo)
       setIsLoading(false)
-    }else{
+    } else {
       //英語版
       const getNotWatchFilmDatas = await Promise.all(
         notWatchFilmLetterDatas.map(async (notWatchFilmData) => {
@@ -310,9 +304,7 @@ export const MyPage = () => {
       )
       setNotWatchfilmLetterDetails(getNotWatchFilmLetterDatasWithUserInfo)
       setIsLoading(false)
-
     }
-
   }
 
   useEffect(() => {
@@ -329,7 +321,6 @@ export const MyPage = () => {
     },
     [swiper]
   )
-
 
   return (
     <LoggedInLayout>
@@ -443,22 +434,42 @@ export const MyPage = () => {
                           titleTypographyProps={{ variant: 'h5' }}
                           sx={{ color: 'black', textAlign: 'center', pt: 2 }}
                         />
-                        <CardContent>
-                          <Link
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href={`${getFilmDetail}/${sendLetter.film_id}`}
-                            underline="hover"
-                          >
-                            <CardMedia
-                              height="400px"
-                              component="img"
-                              image={`${filmsImgSmall}/${sendLetter.filmImage}`}
-                              sx={{ objectFit: 'contain' }}
-                              alt=""
-                            />
-                          </Link>
-                        </CardContent>
+                        {i18n.language === 'ja' ? (
+                          <CardContent>
+                            <Link
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={`${getFilmDetail}/${sendLetter.film_id}`}
+                              underline="hover"
+                            >
+                              <CardMedia
+                                height="400px"
+                                component="img"
+                                image={`${filmsImgSmall}/${sendLetter.filmImage}`}
+                                sx={{ objectFit: 'contain' }}
+                                alt=""
+                              />
+                            </Link>
+                          </CardContent>
+                        ) : (
+                          <CardContent>
+                            <Link
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={`${getFilmDetail}/${sendLetter.film_id}/en`}
+                              underline="hover"
+                            >
+                              <CardMedia
+                                height="400px"
+                                component="img"
+                                image={`${filmsImgSmall}/${sendLetter.filmImage}`}
+                                sx={{ objectFit: 'contain' }}
+                                alt=""
+                              />
+                            </Link>
+                          </CardContent>
+                        )}
+
                         <CardActions>
                           <Button
                             variant="contained"
@@ -513,22 +524,42 @@ export const MyPage = () => {
                           titleTypographyProps={{ variant: 'h5' }}
                           sx={{ color: 'black', textAlign: 'center', pt: 2 }}
                         />
-                        <CardContent>
-                          <Link
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href={`${getFilmDetail}/${receivedLetterDetail.film_id}`}
-                            underline="hover"
-                          >
-                            <CardMedia
-                              height="400px"
-                              component="img"
-                              image={`${filmsImgSmall}/${receivedLetterDetail.filmImage}`}
-                              sx={{ objectFit: 'contain' }}
-                              alt=""
-                            />
-                          </Link>
-                        </CardContent>
+                        {i18n.language === 'ja' ? (
+                          <CardContent>
+                            <Link
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={`${getFilmDetail}/${receivedLetterDetail.film_id}`}
+                              underline="hover"
+                            >
+                              <CardMedia
+                                height="400px"
+                                component="img"
+                                image={`${filmsImgSmall}/${receivedLetterDetail.filmImage}`}
+                                sx={{ objectFit: 'contain' }}
+                                alt=""
+                              />
+                            </Link>
+                          </CardContent>
+                        ) : (
+                          <CardContent>
+                            <Link
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={`${getFilmDetail}/${receivedLetterDetail.film_id}/en`}
+                              underline="hover"
+                            >
+                              <CardMedia
+                                height="400px"
+                                component="img"
+                                image={`${filmsImgSmall}/${receivedLetterDetail.filmImage}`}
+                                sx={{ objectFit: 'contain' }}
+                                alt=""
+                              />
+                            </Link>
+                          </CardContent>
+                        )}
+
                         <CardActions>
                           <Button
                             variant="contained"
@@ -600,22 +631,42 @@ export const MyPage = () => {
                             titleTypographyProps={{ variant: 'h5' }}
                             sx={{ color: 'black', textAlign: 'center', pt: 2 }}
                           />
-                          <CardContent>
-                            <Link
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              href={`${getFilmDetail}/${notWatchfilmLetterDetail.film_id}`}
-                              underline="hover"
-                            >
-                              <CardMedia
-                                height="400px"
-                                component="img"
-                                image={`${filmsImgSmall}/${notWatchfilmLetterDetail.filmImage}`}
-                                sx={{ objectFit: 'contain' }}
-                                alt=""
-                              />
-                            </Link>
-                          </CardContent>
+                          {i18n.language === 'ja' ? (
+                            <CardContent>
+                              <Link
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href={`${getFilmDetail}/${notWatchfilmLetterDetail.film_id}`}
+                                underline="hover"
+                              >
+                                <CardMedia
+                                  height="400px"
+                                  component="img"
+                                  image={`${filmsImgSmall}/${notWatchfilmLetterDetail.filmImage}`}
+                                  sx={{ objectFit: 'contain' }}
+                                  alt=""
+                                />
+                              </Link>
+                            </CardContent>
+                          ) : (
+                            <CardContent>
+                              <Link
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href={`${getFilmDetail}/${notWatchfilmLetterDetail.film_id}/en`}
+                                underline="hover"
+                              >
+                                <CardMedia
+                                  height="400px"
+                                  component="img"
+                                  image={`${filmsImgSmall}/${notWatchfilmLetterDetail.filmImage}`}
+                                  sx={{ objectFit: 'contain' }}
+                                  alt=""
+                                />
+                              </Link>
+                            </CardContent>
+                          )}
+
                           <CardActions>
                             <Button
                               variant="contained"
@@ -807,22 +858,42 @@ export const MyPage = () => {
                           titleTypographyProps={{ variant: 'h7' }}
                           sx={{ color: 'black', textAlign: 'center', pt: 2 }}
                         />
-                        <CardContent>
-                          <Link
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href={`${getFilmDetail}/${sendLetter.film_id}`}
-                            underline="hover"
-                          >
-                            <CardMedia
-                              height="400px"
-                              component="img"
-                              image={`${filmsImgSmall}/${sendLetter.filmImage}`}
-                              sx={{ objectFit: 'contain' }}
-                              alt=""
-                            />
-                          </Link>
-                        </CardContent>
+                        {i18n.language === 'ja' ? (
+                          <CardContent>
+                            <Link
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={`${getFilmDetail}/${sendLetter.film_id}`}
+                              underline="hover"
+                            >
+                              <CardMedia
+                                height="400px"
+                                component="img"
+                                image={`${filmsImgSmall}/${sendLetter.filmImage}`}
+                                sx={{ objectFit: 'contain' }}
+                                alt=""
+                              />
+                            </Link>
+                          </CardContent>
+                        ) : (
+                          <CardContent>
+                            <Link
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={`${getFilmDetail}/${sendLetter.film_id}/en`}
+                              underline="hover"
+                            >
+                              <CardMedia
+                                height="400px"
+                                component="img"
+                                image={`${filmsImgSmall}/${sendLetter.filmImage}`}
+                                sx={{ objectFit: 'contain' }}
+                                alt=""
+                              />
+                            </Link>
+                          </CardContent>
+                        )}
+
                         <CardActions>
                           <Button
                             variant="contained"
@@ -881,22 +952,42 @@ export const MyPage = () => {
                           titleTypographyProps={{ variant: 'h7' }}
                           sx={{ color: 'black', textAlign: 'center', pt: 2 }}
                         />
-                        <CardContent>
-                          <Link
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href={`${getFilmDetail}/${receivedLetterDetail.film_id}`}
-                            underline="hover"
-                          >
-                            <CardMedia
-                              height="400px"
-                              component="img"
-                              image={`${filmsImgSmall}/${receivedLetterDetail.filmImage}`}
-                              sx={{ objectFit: 'contain' }}
-                              alt=""
-                            />
-                          </Link>
-                        </CardContent>
+                        {i18n.language === 'ja' ? (
+                          <CardContent>
+                            <Link
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={`${getFilmDetail}/${receivedLetterDetail.film_id}`}
+                              underline="hover"
+                            >
+                              <CardMedia
+                                height="400px"
+                                component="img"
+                                image={`${filmsImgSmall}/${receivedLetterDetail.filmImage}`}
+                                sx={{ objectFit: 'contain' }}
+                                alt=""
+                              />
+                            </Link>
+                          </CardContent>
+                        ) : (
+                          <CardContent>
+                            <Link
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={`${getFilmDetail}/${receivedLetterDetail.film_id}/en`}
+                              underline="hover"
+                            >
+                              <CardMedia
+                                height="400px"
+                                component="img"
+                                image={`${filmsImgSmall}/${receivedLetterDetail.filmImage}`}
+                                sx={{ objectFit: 'contain' }}
+                                alt=""
+                              />
+                            </Link>
+                          </CardContent>
+                        )}
+
                         <CardActions>
                           <Button
                             variant="contained"
@@ -970,22 +1061,42 @@ export const MyPage = () => {
                             titleTypographyProps={{ variant: 'h5' }}
                             sx={{ color: 'black', textAlign: 'center', pt: 2 }}
                           />
-                          <CardContent>
-                            <Link
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              href={`${getFilmDetail}/${notWatchfilmLetterDetail.film_id}`}
-                              underline="hover"
-                            >
-                              <CardMedia
-                                height="400px"
-                                component="img"
-                                image={`${filmsImgSmall}/${notWatchfilmLetterDetail.filmImage}`}
-                                sx={{ objectFit: 'contain' }}
-                                alt=""
-                              />
-                            </Link>
-                          </CardContent>
+                          {i18n.language === 'ja' ? (
+                            <CardContent>
+                              <Link
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href={`${getFilmDetail}/${notWatchfilmLetterDetail.film_id}`}
+                                underline="hover"
+                              >
+                                <CardMedia
+                                  height="400px"
+                                  component="img"
+                                  image={`${filmsImgSmall}/${notWatchfilmLetterDetail.filmImage}`}
+                                  sx={{ objectFit: 'contain' }}
+                                  alt=""
+                                />
+                              </Link>
+                            </CardContent>
+                          ) : (
+                            <CardContent>
+                              <Link
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href={`${getFilmDetail}/${notWatchfilmLetterDetail.film_id}/en`}
+                                underline="hover"
+                              >
+                                <CardMedia
+                                  height="400px"
+                                  component="img"
+                                  image={`${filmsImgSmall}/${notWatchfilmLetterDetail.filmImage}`}
+                                  sx={{ objectFit: 'contain' }}
+                                  alt=""
+                                />
+                              </Link>
+                            </CardContent>
+                          )}
+
                           <CardActions>
                             <Button
                               variant="contained"

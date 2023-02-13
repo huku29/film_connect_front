@@ -251,7 +251,7 @@ export const SearchEnglish = () => {
                         <Link
                           target="_blank"
                           rel="noopener noreferrer"
-                          href={`${getFilmDetail}/${film.id}`}
+                          href={`${getFilmDetail}/${film.id}/en`}
                           underline="hover"
                         >
                           {/* {`${film.title}の詳細を見る`} */}
@@ -373,7 +373,7 @@ export const SearchEnglish = () => {
                           <Link
                             target="_blank"
                             rel="noopener noreferrer"
-                            href={`${getFilmDetail}/${film.id}`}
+                            href={`${getFilmDetail}/${film.id}/en`}
                             underline="hover"
                           >
                             {t(`search.details`, { title: film.title })}
