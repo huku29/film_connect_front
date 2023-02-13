@@ -120,7 +120,7 @@ export const Header = () => {
               </IconButton>
               <Typography variant="h6" noWrap component="div" sx={{ pt: 1 }}>
                 <img
-                  src="https://film-connect.web.app/logo.png"
+                  src="https://filmconnect.jp/logo.png"
                   className="header-logo"
                   alt="header-logo"
                   width="200"
@@ -315,7 +315,7 @@ export const Header = () => {
               </IconButton>
               <Typography variant="h8" noWrap component="div" sx={{ ml: -2 }}>
                 <img
-                  src="https://film-connect.web.app/logo.png"
+                  src="https://filmconnect.jp/logo.png"
                   className="header-logo"
                   alt="header-logo"
                   width="150"

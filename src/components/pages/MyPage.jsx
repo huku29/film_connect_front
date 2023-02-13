@@ -549,7 +549,7 @@ export const MyPage = () => {
                             })}
                             // title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
                             hashtags={['映画で人と繋がりたい', 'FilmConnect']}
-                            url={'https://film-connect.web.app'}
+                            url={'https://filmconnect.jp'}
                           >
                             <TwitterIcon size={'55px'} round />
                           </TwitterShareButton>
@@ -637,7 +637,7 @@ export const MyPage = () => {
                               })}
                               // title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
                               hashtags={['映画で人と繋がりたい', 'FilmConnect']}
-                              url={'https://film-connect.web.app'}
+                              url={'https://filmconnect.jp'}
                             >
                               <TwitterIcon size={'55px'} round />
                             </TwitterShareButton>
@@ -917,7 +917,7 @@ export const MyPage = () => {
                             })}
                             // title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
                             hashtags={['映画で人と繋がりたい', 'FilmConnect']}
-                            url={'https://film-connect.web.app'}
+                            url={'https://filmconnect.jp'}
                           >
                             <TwitterIcon size={'55px'} round />
                           </TwitterShareButton>
@@ -1007,7 +1007,7 @@ export const MyPage = () => {
                               })}
                               // title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
                               hashtags={['映画で人と繋がりたい', 'FilmConnect']}
-                              url={'https://film-connect.web.app'}
+                              url={'https://filmconnect.jp'}
                             >
                               <TwitterIcon size={'55px'} round />
                             </TwitterShareButton>

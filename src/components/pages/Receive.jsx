@@ -233,13 +233,7 @@ export const Receive = () => {
                     </Button>
                   </CardActions>
                   <CardActions sx={{ ml: 3, my: -8 }}>
-                    {/* <TwitterShareButton
-                      title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
-                      hashtags={['映画で人と繋がりたい','FilmConnect']}
-                      url={'https://film-connect.web.app'}
-                    >
-                      <TwitterIcon size={'55px'} round />
-                    </TwitterShareButton> */}
+                   
                     <TwitterShareButton
                       title={t(`twitterShareContent`, {
                         film: movieData.movieTitle,
@@ -247,7 +241,7 @@ export const Receive = () => {
                       })}
                       // title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
                       hashtags={['映画で人と繋がりたい', 'FilmConnect']}
-                      url={'https://film-connect.web.app'}
+                      url={'https://filmconnect.jp'}
                     >
                       <TwitterIcon size={'55px'} round />
                     </TwitterShareButton>
@@ -403,7 +397,7 @@ export const Receive = () => {
                       })}
                       // title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
                       hashtags={['映画で人と繋がりたい', 'FilmConnect']}
-                      url={'https://film-connect.web.app'}
+                      url={'https://filmconnect.jp'}
                     >
                       <TwitterIcon size={'55px'} round />
                     </TwitterShareButton>
