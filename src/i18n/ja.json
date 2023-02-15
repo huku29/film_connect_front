@@ -31,7 +31,8 @@
     "rankingDescription1": "どの映画がレター形式で多く作成されたかランキングページで一目でわかります！",
     "rankingDescription2": "また多くの方が観たことない映画ランキングも見ることができます！",
     "rankingDescription3": "あなたの知っているマニアックな映画もこの機会におすすめましょう！",
-    "rankingDescription4": "多くの映画レターを作成し、ランキングに入りましょう！"
+    "rankingDescription4": "多くの映画レターを作成し、ランキングに入りましょう！",
+    "logoutAlert":"ログアウトしました"
   },
   "login": {
     "title": "ログイン",
