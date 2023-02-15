@@ -151,13 +151,11 @@ export const LoggedInHeader = () => {
           ) : (
             <Typography sx={{ ml: 'auto' }}>
               <Button
-                sx={{ fontSize: '3px'}}
                 onClick={() => changeLanguage('ja')}
               >
                 日本語
               </Button>
               <Button
-                sx={{ fontSize: '3px' }}
                 onClick={() => changeLanguage('en')}
               >
                 English
