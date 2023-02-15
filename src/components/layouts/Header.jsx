@@ -34,6 +34,8 @@ import { signOut } from 'firebase/auth'
 import { auth } from '@/firebase'
 import { contact, twitterOfficial } from '@/urls'
 import { useTranslation } from 'react-i18next'
+import { useAtom } from 'jotai'
+import { handleLogoutFlashMessage  } from '@/jotai/atoms'
 
 const drawerWidth = 240
 
@@ -70,6 +72,8 @@ export const Header = () => {
   const theme = useTheme()
   const [open, setOpen] = useState(false)
   const matches = useMediaQuery('(min-width:575px)')
+  const [,setLogoutFlash] = useAtom( handleLogoutFlashMessage )
+  
 
   /*ドロワーを開けるアニメーション*/
   const handleDrawerOpen = () => {
@@ -84,6 +88,7 @@ export const Header = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
+        setLogoutFlash(true)
       })
       .catch((error) => {
         // An error happened.

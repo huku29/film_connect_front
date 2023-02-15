@@ -31,7 +31,8 @@
     "rankingDescription1": "From the ranking page, you can see at a glance which films have been recommended the most.",
     "rankingDescription2": " You can see a ranking of films that many people haven't seen.",
     "rankingDescription3": "Recommend some of your favorite cult films!",
-    "rankingDescription4": "Write many recommendations and join the rankings!"
+    "rankingDescription4": "Write many recommendations and join the rankings!",
+    "logoutAlert":"Logged out"
   },
   "login": {
     "title": "Login Page",

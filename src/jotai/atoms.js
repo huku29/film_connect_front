@@ -31,6 +31,8 @@ export const handleFlashMessageAtom = atom(false)
 
 export const handleSendFlashMessage = atom(false)
 
+export const handleLogoutFlashMessage = atom(false)
+
 export const handleGetErrorMessageAtom = atom('')
 
 export const handleGetCreatedLettersRankingAtom = atom([])

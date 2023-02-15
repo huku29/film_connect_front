@@ -1,17 +1,38 @@
 import { BaseLayout } from '@/components/layouts'
-import { Stack, Typography, Box } from '@mui/material'
+import { Stack, Typography, Box, Snackbar, Alert } from '@mui/material'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTranslation } from 'react-i18next'
+import { useAtom } from 'jotai'
+import { handleLogoutFlashMessage } from '@/jotai/atoms'
+import { useEffect } from 'react'
 
 export const Top = () => {
   const matches = useMediaQuery('(min-width:825px)')
   const { t, i18n } = useTranslation()
+  const [logoutFlash, setLogoutFlash] = useAtom(handleLogoutFlashMessage)
+
+  useEffect(() => {
+    setLogoutFlash()
+  }, [])
 
   return (
     <BaseLayout>
       {matches ? (
         <Box>
+          <Snackbar
+            //レター送信に成功したらalertで表示させる
+            open={logoutFlash}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+            sx={{ height: '20%', maxWidth: '100%', bottom: { xs: 10, sm: 10 } }}
+          >
+            <Alert variant="filled" severity="success" sx={{}}>
+              {t(`top.logoutAlert`)}
+            </Alert>
+          </Snackbar>
           <Box
             sx={{
               textAlign: 'center',
@@ -145,6 +166,19 @@ export const Top = () => {
         // スマホ版
 
         <Box>
+          <Snackbar
+            //レター送信に成功したらalertで表示させる
+            open={logoutFlash}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            sx={{ height: '20%', maxWidth: '100%', bottom: { xs: 10, sm: 10 } }}
+          >
+            <Alert variant="filled" severity="success" sx={{}}>
+              {t(`top.logoutAlert`)}
+            </Alert>
+          </Snackbar>
           <Stack
             sx={{
               mt: 25,
@@ -258,15 +292,15 @@ export const Top = () => {
                 />
               </Typography>
               <Typography variant="h5" sx={{ p: 1 }}>
-              {t('top.receiveSomeoneRecommendedFilmLetters')}
-            </Typography>
-            <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
-              {t('top.receiveSomeoneRecommendedFilmLettersDescription1')}
-              <br />
-              {t('top.receiveSomeoneRecommendedFilmLettersDescription2')}
-              <br />
-              {t('top.receiveSomeoneRecommendedFilmLettersDescription3')}
-            </Typography>
+                {t('top.receiveSomeoneRecommendedFilmLetters')}
+              </Typography>
+              <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
+                {t('top.receiveSomeoneRecommendedFilmLettersDescription1')}
+                <br />
+                {t('top.receiveSomeoneRecommendedFilmLettersDescription2')}
+                <br />
+                {t('top.receiveSomeoneRecommendedFilmLettersDescription3')}
+              </Typography>
             </Stack>
             <Stack
               sx={{
@@ -290,16 +324,16 @@ export const Top = () => {
                 />
               </Typography>
               <Typography variant="h5" sx={{ p: 1 }}>
-              {t('top.ranking')}
-            </Typography>
-            <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
-              {t('top.rankingDescription1')}
-              <br />
-              {t('top.rankingDescription2')}
-              <br />
-              {t('top.rankingDescription3')}
-              <br />
-              {t('top.rankingDescription4')}
+                {t('top.ranking')}
+              </Typography>
+              <Typography variant="subtitle1" sx={{ p: 1, mt: 1, mb: 10 }}>
+                {t('top.rankingDescription1')}
+                <br />
+                {t('top.rankingDescription2')}
+                <br />
+                {t('top.rankingDescription3')}
+                <br />
+                {t('top.rankingDescription4')}
               </Typography>
               <Typography sx={{ mb: 5, textAlign: 'right' }}>
                 <img
