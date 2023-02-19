@@ -579,7 +579,7 @@ export const MyPage = () => {
                               twitterUser: receivedLetterDetail.twitterName,
                             })}
                             // title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
-                            hashtags={['映画で人と繋がりたい', 'FilmConnect']}
+                            hashtags={['映画','映画で人と繋がりたい', 'FilmConnect']}
                             url={'https://filmconnect.jp'}
                           >
                             <TwitterIcon size={'55px'} round />
@@ -687,7 +687,7 @@ export const MyPage = () => {
                                   notWatchfilmLetterDetail.twitterName,
                               })}
                               // title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
-                              hashtags={['映画で人と繋がりたい', 'FilmConnect']}
+                              hashtags={['映画','映画で人と繋がりたい', 'FilmConnect']}
                               url={'https://filmconnect.jp'}
                             >
                               <TwitterIcon size={'55px'} round />
@@ -1007,7 +1007,7 @@ export const MyPage = () => {
                               twitterUser: receivedLetterDetail.twitterName,
                             })}
                             // title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
-                            hashtags={['映画で人と繋がりたい', 'FilmConnect']}
+                            hashtags={['映画','映画で人と繋がりたい', 'FilmConnect']}
                             url={'https://filmconnect.jp'}
                           >
                             <TwitterIcon size={'55px'} round />
@@ -1117,7 +1117,7 @@ export const MyPage = () => {
                                   notWatchfilmLetterDetail.twitterName,
                               })}
                               // title={`「${movieData.movieTitle}」は@${movieData.twitterUserName}さんのおすすめ映画です！`}
-                              hashtags={['映画で人と繋がりたい', 'FilmConnect']}
+                              hashtags={['映画','映画で人と繋がりたい', 'FilmConnect']}
                               url={'https://filmconnect.jp'}
                             >
                               <TwitterIcon size={'55px'} round />
