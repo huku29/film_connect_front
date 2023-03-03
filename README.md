@@ -3,7 +3,7 @@
 ![main_ogp](https://user-images.githubusercontent.com/96228122/221386731-81b20e73-01ce-402f-a346-663179dff0a4.png)
 
 ## サービス URL
-  https://filmconnect.jp
+　　https://filmconnect.jp
 
 
 # サービス概要
@@ -84,14 +84,16 @@
 
 ## フロントエンド
 
+
   ・React  
   ・MUI
 
 ## バックエンド
 
-  ・ Ruby on Rails(API モード)
+　　・ Ruby on Rails(API モード)
 
 ## インフラ
+
 
   ・PostgreSQL  
   ・Heroku  
@@ -101,6 +103,7 @@
   ・Firebase Authentication  
   ・Twitter API  
   ・TMDB API
+
 
 ## ER図
 [![Image from Gyazo](https://i.gyazo.com/e834087550a6e31c859886f70fdbb40c.png)](https://gyazo.com/e834087550a6e31c859886f70fdbb40c)
