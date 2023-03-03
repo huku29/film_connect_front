@@ -84,8 +84,9 @@
 
 ## フロントエンド
 
-　　・React
-　　・MUI
+
+  ・React  
+  ・MUI
 
 ## バックエンド
 
@@ -93,14 +94,16 @@
 
 ## インフラ
 
-　　・PostgreSQL
-　　・Heroku
-　　・Firebase Hosting
+
+  ・PostgreSQL  
+  ・Heroku  
+  ・Firebase Hosting
 
 ## 外部サービス
-　　・Firebase Authentication
-　　・Twitter API
-　　・TMDB API
+  ・Firebase Authentication  
+  ・Twitter API  
+  ・TMDB API
+
 
 ## ER図
 [![Image from Gyazo](https://i.gyazo.com/e834087550a6e31c859886f70fdbb40c.png)](https://gyazo.com/e834087550a6e31c859886f70fdbb40c)
