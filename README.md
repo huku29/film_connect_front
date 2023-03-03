@@ -3,7 +3,7 @@
 ![main_ogp](https://user-images.githubusercontent.com/96228122/221386731-81b20e73-01ce-402f-a346-663179dff0a4.png)
 
 ## サービス URL
-　　https://filmconnect.jp
+  https://filmconnect.jp
 
 
 # サービス概要
@@ -90,7 +90,7 @@
 
 ## バックエンド
 
-　　・ Ruby on Rails(API モード)
+  ・ Ruby on Rails(API モード)
 
 ## インフラ
 
